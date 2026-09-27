@@ -58,17 +58,3 @@ To build from source: [Getting started](guide/getting-started.md).
 
 Current version: see [Changelog](changelog.md). Before putting a board on
 a network, read [Security](security.md).
-
-## Reading these docs
-
-The site is [Docsify](https://docsify.js.org): plain Markdown files,
-rendered in the browser, kept in the `tinydesk-site` folder apart from the
-code. To read it on your PC:
-
-```bash
-python -m http.server 3000 --directory site     # in tinydesk-site/
-```
-
-then open <http://localhost:3000>. Any static web server with HTTPS can
-host it; see [Maintaining these docs](maintaining.md) and the folder's
-`README.md`.

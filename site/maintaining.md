@@ -1,29 +1,13 @@
 # Maintaining these docs
 
-This site (the documentation and the web installer) lives in its own
-folder, `tinydesk-site`, outside the code repositories, and is served from
-a web server of your own. It is [Docsify](https://docsify.js.org):
-`index.html` loads Docsify from a CDN and renders the Markdown files in the
-browser; there is no build step. The folder's `README.md` explains the
-server set-up, filling the installer and publishing.
+These pages (the documentation and the web installer) are plain Markdown
+files kept apart from the code repositories. This page says what to update
+when the code changes, and how the pages are written.
 
-```text
-tinydesk-site/
-  site/        the pages (this folder is what the server serves)
-  tools/       check_links.py, fetch_release.py, publish.sh, publish.ps1
-  deploy/      nginx.conf, Caddyfile
-```
-
-## Preview
+Before a release, check every link and `#anchor` between the pages:
 
 ```bash
-python -m http.server 3000 --directory site     # in tinydesk-site/
-```
-
-Open <http://localhost:3000>. Pages reload on refresh. Before publishing:
-
-```bash
-python tools/check_links.py      # every link and #anchor between pages
+python tools/check_links.py
 ```
 
 ## Where things go
@@ -73,7 +57,7 @@ TinyDesk Shell have their own version numbers (both started at 0.1.0).
    `ports/esp32-4mb`, `third_party/tdsh`, `third_party/tdsh/projects/esp32`)
    and try the release locally:
    `python tools/make_release.py --site ../tinydesk-site/site`, then the
-   installer on <http://localhost:3000/install/>.
+   installer with the new images.
 3. If the shell changed, commit and push it in its own repository first,
    then commit the new submodule pointer in `tinydesk` (see
    [Contributing](contributing.md#working-on-the-shell)).
@@ -82,8 +66,8 @@ TinyDesk Shell have their own version numbers (both started at 0.1.0).
    every platform and attaches the images and PC programs to the GitHub
    Release.
 5. Here: `python tools/fetch_release.py --repo <you>/tinydesk`, add the
-   `changelog.md` entry, set the version in `_coverpage.md`, check the
-   links and publish (`tools/publish.sh` or `tools/publish.ps1`).
+   `changelog.md` entry, set the version in `_coverpage.md` and check the
+   links.
 
 ## Generated reference (optional)
 

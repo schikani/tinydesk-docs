@@ -80,4 +80,4 @@ shell on a thread).
 | `ports/windows/`, `ports/posix/` | desktop `main.c` and console HALs |
 | `third_party/tdsh/` | TinyDesk Shell, the git submodule (repository `tinydesk-shell`) |
 | `tests/`, `tools/` | unit tests (ctest), [tools](../tools.md) |
-| (separate) | this site: the `tinydesk-site` folder, served from its own web server |
+| (separate) | these docs and the web installer, kept apart from the code |
