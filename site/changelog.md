@@ -28,6 +28,32 @@ TinyDesk 0.1.0, with TinyDesk Shell 0.1.0.
   PSRAM, Linux, Windows; macOS and other POSIX systems from source.
 * **Editions:** TinyDesk Desktop and TinyDesk Shell, both with a web
   installer and PC downloads.
+* **About** shows both source repositories (`tinydesk` and
+  `tinydesk-shell`) and fits its content on every board; the name is
+  spelled TinyDesk in About, Software Update, `ota status` and the welcome
+  text, and free RAM is given in KB everywhere.
+* **Windows:** the Terminal's shell now has `ifconfig`, `ping`, `date`,
+  `cal`, `tz`, `write`, `hostpath` and `capabilities`, like the Linux
+  program (`ifconfig` was "command not found").
+* **Fix (Windows):** the desktop now follows the Windows Terminal window
+  when it is maximised or resized. A resize now only repaints; the terminal
+  setup it resent ("alternate screen on") made the Windows console fall
+  back to its old size.
+* **Docs:** [Shell scripts](shell/scripting.md), the `.tdsh` language
+  reference (it was only shown by the shell's test scripts).
+* **Web terminal** (`console/` on this site): opens a board's serial port in
+  Chrome or Edge with a real terminal (xterm.js over Web Serial), presets for
+  every board, no reset of ESP32 dev boards. The installer links to it; its
+  own Logs & Console cannot show the desktop.
+* **Dark theme by default** on every port, with a clearly visible teal
+  desktop pattern (light shade). Classic stays available in Settings;
+  saved settings keep their theme.
+* **Windows and Linux programs:** the desktop follows the terminal up to
+  400x150 (was 132x50), like the ESP32 with PSRAM does up to 256x96.
+* **Build date:** the date and time shown by About, Software Update and
+  `ota status` now come from the build that made the image. ESP-IDF compiled
+  them only in a fresh build directory before, so incremental builds kept an
+  old date (`ports/common/app_desc_stamp.cmake`).
 
 ## Development builds (before the first release)
 
