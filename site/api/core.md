@@ -231,11 +231,12 @@ Notes:
 ## Version
 
 ```c
-#define TD_VERSION "0.2.15"   /* the current version, see the changelog */
-#define TD_REPO_URL "github.com/schikani/tinydesk"
+#define TD_VERSION "0.1.0"
+#define TD_REPO_URL "https://github.com/schikani/tinydesk"
+#define TD_SHELL_REPO_URL "https://github.com/schikani/tinydesk-shell"
 ```
 
-`TD_VERSION` is the core version string. The ESP-IDF projects set their own firmware version (`PROJECT_VER`, overridable with the `TD_VERSION` environment variable at build time); that does not change this macro. `TD_REPO_URL` is shown by the About app and is currently a placeholder.
+`TD_VERSION` is the core version string. The ESP-IDF projects set their own firmware version (`PROJECT_VER`, overridable with the `TD_VERSION` environment variable at build time); that does not change this macro. The About app shows `TD_REPO_URL` and `TD_SHELL_REPO_URL`, the public desktop and shell repositories.
 
 ## System information
 

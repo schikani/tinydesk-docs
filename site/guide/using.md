@@ -101,4 +101,4 @@ set the system clock. Details: [Apps API](../api/apps.md#sessions).
 | Settings | theme, ASCII mode, icons, sizes, desktop pattern, links to Network / Date & time / Software update |
 | Software Update | install firmware from a URL or file, roll back (root) |
 | Date & time | from the taskbar clock: clock, time zone, SNTP |
-| Counter, About | demo app; version, chip, heap, uptime |
+| Counter, About | demo app; version, chip, heap, uptime and public source repository URLs |
