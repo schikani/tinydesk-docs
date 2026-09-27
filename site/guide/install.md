@@ -44,14 +44,13 @@ whenever you switch a board between the two editions: users, Wi-Fi
 networks and files then start fresh. On 4 MB ESP32 boards both editions use
 the same flash layout, so there the files survive a switch without erasing.
 
-The page must be served over `https` or from `localhost` (Web Serial
-requires it). This site is hosted on its own server; to run the installer
-on your PC, fill it from a release and serve the site folder:
+The installer needs a browser with Web Serial (Chrome or Edge on a PC).
 
-```bash
-python tools/fetch_release.py --repo schikani/tinydesk   # in tinydesk-site/
-python -m http.server 3000 --directory site               # then http://localhost:3000/install/
-```
+After installing, close the installer dialog and press **Open the web
+terminal** (or use PuTTY): see
+[Web terminal](terminals.md#web-terminal-in-the-browser). The installer's own
+**Logs & Console** cannot show the desktop: it prints the escape sequences
+as symbols.
 
 If the board is not detected: install its USB driver (CP210x or CH340 on
 ESP32 boards), use a data cable, and on some boards hold **BOOT** while

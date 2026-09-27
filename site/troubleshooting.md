@@ -12,6 +12,11 @@ redraws for a terminal it has not heard from. On the ESP32 check the speed
 prints its boot messages at 115200 before tinydesk starts; the desktop then
 clears the screen. Only an eFuse removes them.
 
+**Symbols instead of the desktop in the installer's Logs & Console.** That
+view is a plain log, not a terminal. Close the installer dialog and open the
+board in the [web terminal](guide/terminals.md#web-terminal-in-the-browser)
+or in PuTTY.
+
 **Borders show as `â”€` or other odd characters.** The terminal is not in
 UTF-8. PuTTY: *Window → Translation → Remote character set: UTF-8*. Or turn
 on *ASCII-only drawing* in Settings.
@@ -19,7 +24,8 @@ on *ASCII-only drawing* in Settings.
 **The screen goes blank after resizing the window** (only the parts under
 the mouse come back). Fixed in 0.2.13; on older firmware press Ctrl+L or
 use Start → Redraw screen. The desktop uses at most 80x25 on the ESP32-C6
-and 256x96 on the ESP32; a bigger window keeps the rest blank.
+and the 4 MB ESP32, 256x96 on the ESP32 with PSRAM and 400x150 in the
+Windows and Linux programs; a bigger window keeps the rest blank.
 
 **Mouse clicks do nothing.** PuTTY: leave *Terminal → Features → Disable
 xterm-style mouse reporting* unticked. With Shift held, clicks go to

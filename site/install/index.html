@@ -60,6 +60,9 @@
     button.big, a.big { display: inline-block; font: 600 17px "IBM Plex Sans", sans-serif; background: var(--teal); color: #fff; border: 0;
       border-radius: 6px; padding: 12px 26px; cursor: pointer; text-decoration: none; }
     button.big:hover, a.big:hover { background: var(--teal-dark); }
+    a.big.alt { background: transparent; color: var(--teal); border: 2px solid var(--teal); padding: 10px 22px; }
+    a.big.alt:hover { background: var(--teal-soft); }
+    .install .row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
     .note { background: var(--warn-bg); color: var(--warn); border-radius: 6px; padding: 10px 14px; margin-top: 12px; }
     code, pre { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 14px; }
     pre { background: var(--code-bg); border-radius: 6px; padding: 12px; overflow-x: auto; }
@@ -132,11 +135,14 @@ Hello root, from TinyDesk Shell on esp32.</pre>
       <h3 id="esp-title">TinyDesk Desktop on an ESP32-C6</h3>
       <ul id="esp-needs"></ul>
       <div class="install">
-        <esp-web-install-button id="installer">
-          <button slot="activate" class="big" id="install-label">Install</button>
-          <span slot="unsupported"><div class="note">This browser cannot talk to serial ports. Use <b>Chrome</b> or <b>Edge</b> on a computer.</div></span>
-          <span slot="not-allowed"><div class="note">Open this page over <b>https</b> (or from <code>localhost</code>).</div></span>
-        </esp-web-install-button>
+        <div class="row">
+          <esp-web-install-button id="installer">
+            <button slot="activate" class="big" id="install-label">Install</button>
+            <span slot="unsupported"><div class="note">This browser cannot talk to serial ports. Use <b>Chrome</b> or <b>Edge</b> on a computer.</div></span>
+            <span slot="not-allowed"><div class="note">Open this page over <b>https</b> (or from <code>localhost</code>).</div></span>
+          </esp-web-install-button>
+          <a class="big alt" id="console-link" href="../console/">Open the web terminal</a>
+        </div>
         <div class="ver" id="version">Reading the release...</div>
           <div class="note" id="nomanifest" hidden>The firmware for this board is not available in this preview yet.
             Choose another board or check back after the release is published.</div>
@@ -145,6 +151,9 @@ Hello root, from TinyDesk Shell on esp32.</pre>
         and when switching a board between the Desktop and the Shell edition: users, Wi-Fi networks and files then
         start fresh. (On 4 MB ESP32 boards both editions share one flash layout, so without erasing the files stay.) To update a Desktop board that is set up, use
         <b>Software Update</b> on the board instead, which keeps everything.</p>
+      <p class="note">After installing, open the board with <b>Open the web terminal</b> (or PuTTY). The installer’s own
+        <b>Logs &amp; Console</b> is a plain log view: it cannot answer the desktop’s terminal queries or send the mouse,
+        so the desktop shows up there as rows of symbols. Close the installer dialog first, so the port is free.</p>
       <h3>First start</h3>
       <ol id="esp-first"></ol>
     </div>
@@ -216,7 +225,8 @@ esptool.py --chip esp32 write_flash 0x0 tinydesk-shell-VERSION-esp32-factory.bin
       function first(edition, board) {
         var speed = board === 'esp32c6' ? 'any speed on the ESP32-C6’s USB port'
                   : (edition === 'desktop' ? '<b>921600</b> baud' : '<b>115200</b> baud');
-        var term = 'Open the board’s serial port in a terminal (UTF-8' + (edition === 'desktop' ? ', mouse support' : '') +
+        var term = 'Open the board in the <a href="' + consoleUrl(edition, board) + '">web terminal</a> (Chrome or Edge, nothing to install: ' +
+          'pick the board, press Connect and choose its port), or in a terminal of your own (UTF-8' + (edition === 'desktop' ? ', mouse support' : '') +
           '), e.g. PuTTY (<a href="../#/guide/terminals">settings</a>): ' + speed + '. Press a key.' +
           (board !== 'esp32c6' ? ' On ESP32 dev boards <code>tools\\tinydesk_putty.cmd</code> connects without resetting the board.' : '');
         var start = edition === 'desktop'
@@ -227,6 +237,11 @@ esptool.py --chip esp32 write_flash 0x0 tinydesk-shell-VERSION-esp32-factory.bin
           : 'Join Wi-Fi with <code>wifiadd &lt;ssid&gt; &lt;password&gt;</code> and <code>wificonnect</code>; set your pins with <code>board set</code> ' +
             '(<a href="../#/guide/board-config">Board configuration</a>).';
         return [term, start, next];
+      }
+
+      /* The web terminal, preset for this edition and board. */
+      function consoleUrl(edition, board) {
+        return '../console/#' + edition + '/' + (edition === 'shell' && board === 'esp32-4mb' ? 'esp32' : board);
       }
 
       function code(lines) { return '<pre><code>' + lines.join('\n') + '</code></pre>'; }
@@ -286,9 +301,12 @@ esptool.py --chip esp32 write_flash 0x0 tinydesk-shell-VERSION-esp32-factory.bin
 
       var state = { edition: 'desktop', platform: 'esp32c6' };
       var renderId = 0;
-      var fromHash = location.hash.replace('#', '').split('/');
-      if (NAME[fromHash[0]]) state.edition = fromHash[0];
-      if (['esp32c6', 'esp32', 'esp32-4mb', 'linux', 'windows', 'other'].indexOf(fromHash[1]) >= 0) state.platform = fromHash[1];
+      function readHash() {
+        var fromHash = location.hash.replace('#', '').split('/');
+        if (NAME[fromHash[0]]) state.edition = fromHash[0];
+        if (['esp32c6', 'esp32', 'esp32-4mb', 'linux', 'windows', 'other'].indexOf(fromHash[1]) >= 0) state.platform = fromHash[1];
+      }
+      readHash();
 
       /* One manifest per board: ESP Web Tools picks a build by chip family only.
        * TinyDesk Shell has one ESP32 firmware for every ESP32 board. */
@@ -313,6 +331,7 @@ esptool.py --chip esp32 write_flash 0x0 tinydesk-shell-VERSION-esp32-factory.bin
           document.getElementById('esp-needs').innerHTML = NEEDS[state.edition][state.platform].map(function (l) { return '<li>' + l + '</li>'; }).join('');
           document.getElementById('esp-first').innerHTML = first(state.edition, state.platform).map(function (l) { return '<li>' + l + '</li>'; }).join('');
           document.getElementById('install-label').textContent = 'Install ' + NAME[state.edition];
+          document.getElementById('console-link').href = consoleUrl(state.edition, state.platform);
           var inst = document.getElementById('installer');
           inst.hidden = true;
           document.getElementById('version').hidden = true;
@@ -357,6 +376,8 @@ esptool.py --chip esp32 write_flash 0x0 tinydesk-shell-VERSION-esp32-factory.bin
       Array.prototype.forEach.call(document.querySelectorAll('.platform'), function (b) {
         b.addEventListener('click', function () { state.platform = b.dataset.platform; render(); });
       });
+      /* a link to #edition/platform on this page selects that board too */
+      window.addEventListener('hashchange', function () { readHash(); render(); });
       render();
     })();
   </script>

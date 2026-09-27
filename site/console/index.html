@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TinyDesk web terminal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Open a TinyDesk board's serial port in the browser: a real terminal with mouse support, no PuTTY needed">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;600&display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xterm/xterm@6.0.0/css/xterm.css">
+  <style>
+    :root {
+      --bg: #0d1117; --bar: #0b1f4a; --panel: #1f2226; --text: #e4e7ea; --muted: #9aa4ad; --line: #33383e;
+      --teal: #5fafff; --teal-dark: #3f8fdf; --warn-bg: #3a2e12; --warn: #f0c060; --ok: #7ee2a8;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.45 "IBM Plex Sans", system-ui, sans-serif;
+      display: flex; flex-direction: column; }
+    header { background: var(--bar); color: #fff; padding: 8px 16px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
+    header h1 { font-size: 17px; margin: 0 8px 0 0; white-space: nowrap; }
+    header a { color: #cfe8ff; }
+    label { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; color: #dbe7ff; }
+    select, input { font: 14px "IBM Plex Sans", sans-serif; background: #0d1b40; color: #fff; border: 1px solid #3a5aa0;
+      border-radius: 5px; padding: 4px 6px; }
+    input[type=number] { width: 92px; }
+    button { font: 600 14px "IBM Plex Sans", sans-serif; background: #15306b; color: #fff; border: 1px solid #3a5aa0;
+      border-radius: 5px; padding: 5px 12px; cursor: pointer; }
+    button:hover:not(:disabled) { border-color: var(--teal); }
+    button:disabled { opacity: .5; cursor: default; }
+    button.primary { background: #0e7c86; border-color: #0e7c86; }
+    button.primary:hover { background: #0a5f67; }
+    .keys button { font-weight: 400; padding: 5px 8px; }
+    .spacer { flex: 1; }
+    #status { font-size: 14px; color: var(--muted); }
+    #status.ok { color: var(--ok); }
+    #status.err { color: var(--warn); }
+    #note { background: var(--warn-bg); color: var(--warn); padding: 8px 16px; font-size: 14px; }
+    #note[hidden] { display: none; }
+    #wrap { flex: 1; min-height: 0; padding: 10px; display: flex; }
+    #term { flex: 1; min-width: 0; min-height: 0; }
+    .xterm { height: 100%; }
+    .xterm .xterm-viewport { background: transparent !important; }
+    .xterm .xterm-screen { margin: 0 auto; }            /* centre a fixed-size grid */
+    .xterm .scrollbar, .xterm .xterm-viewport { overflow: hidden !important; }
+    .xterm .scrollbar { display: none !important; }     /* no scrollback on a desktop */
+    footer { font-size: 13px; color: var(--muted); padding: 4px 16px 8px; }
+    footer a { color: var(--teal); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>TinyDesk web terminal</h1>
+    <label>Board
+      <select id="board">
+        <option value="desktop/esp32c6">Desktop · ESP32-C6</option>
+        <option value="desktop/esp32">Desktop · ESP32 + PSRAM (WROVER)</option>
+        <option value="desktop/esp32-4mb">Desktop · ESP32, 4 MB (WROOM)</option>
+        <option value="shell/esp32c6">Shell · ESP32-C6</option>
+        <option value="shell/esp32">Shell · ESP32 (any)</option>
+        <option value="custom">Other / custom</option>
+      </select>
+    </label>
+    <label>Baud <input id="baud" type="number" min="300" step="1" value="115200"></label>
+    <label>Size
+      <select id="size">
+        <option value="fit">Fit the window</option>
+        <option value="80x25">80 × 25</option>
+        <option value="100x30">100 × 30</option>
+        <option value="132x43">132 × 43</option>
+      </select>
+    </label>
+    <button id="connect" class="primary" type="button">Connect</button>
+    <button id="disconnect" type="button" disabled>Disconnect</button>
+    <span id="status">Not connected</span>
+    <span class="spacer"></span>
+    <span class="keys">
+      <button type="button" data-send="\x1b[21~" title="Start menu">F10</button>
+      <button type="button" data-send="\x1b[17~" title="Next window">F6</button>
+      <button type="button" data-send="\x1b[23~" title="Full screen window (the browser keeps F11)">F11</button>
+      <button type="button" data-send="\x11" title="Close the focused window">Ctrl+Q</button>
+      <button type="button" id="redraw" title="Redraw the whole screen">Redraw</button>
+    </span>
+    <a href="../install/">Installer</a>
+    <a href="../#/guide/terminals">Help</a>
+  </header>
+  <div id="note" hidden></div>
+  <div id="wrap"><div id="term"></div></div>
+  <footer>Pick the board you flashed, press <b>Connect</b> and choose its serial port. The desktop draws itself at once;
+    click into the terminal to type. Chrome or Edge on a computer. Nothing leaves your PC: the page talks to the port directly.</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@xterm/xterm@6.0.0/lib/xterm.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@xterm/addon-fit@0.11.0/lib/addon-fit.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@xterm/addon-webgl@0.19.0/lib/addon-webgl.js"></script>
+  <script>
+  (function () {
+    'use strict';
+    /* What each firmware expects on its serial port. The ESP32-C6's USB
+     * Serial/JTAG ignores the speed; the classic ESP32 desktop runs its UART
+     * at 921600, the shell edition at 115200. The C6 and the 4 MB ESP32 draw
+     * at most 80x25, so their terminal is sized to that. */
+    var PRESETS = {
+      'desktop/esp32c6':   { baud: 115200, size: '80x25', desktop: true },
+      'desktop/esp32':     { baud: 921600, size: 'fit',   desktop: true },
+      'desktop/esp32-4mb': { baud: 921600, size: '80x25', desktop: true },
+      'shell/esp32c6':     { baud: 115200, size: 'fit',   desktop: false },
+      'shell/esp32':       { baud: 115200, size: 'fit',   desktop: false },
+      'custom':            { baud: 115200, size: 'fit',   desktop: true }
+    };
+    var REDRAW = '\x1b[5000~';          /* TinyDesk's "redraw everything" key */
+    var enc = new TextEncoder();
+    var $ = function (id) { return document.getElementById(id); };
+
+    var term = new Terminal({
+      fontFamily: '"IBM Plex Mono", "Cascadia Mono", Consolas, "DejaVu Sans Mono", Menlo, monospace',
+      fontSize: 16, lineHeight: 1, cursorBlink: false, scrollback: 0, allowProposedApi: true,
+      macOptionIsMeta: true, rightClickSelectsWord: false, drawBoldTextInBrightColors: false,
+      theme: {   /* Windows Terminal's Campbell colours for 0..15 */
+        background: '#0c0c0c', foreground: '#cccccc', cursor: '#cccccc',
+        black: '#0c0c0c', red: '#c50f1f', green: '#13a10e', yellow: '#c19c00', blue: '#0037da', magenta: '#881798',
+        cyan: '#3a96dd', white: '#cccccc', brightBlack: '#767676', brightRed: '#e74856', brightGreen: '#16c60c',
+        brightYellow: '#f9f1a5', brightBlue: '#3b78ff', brightMagenta: '#b4009e', brightCyan: '#61d6d6', brightWhite: '#f2f2f2'
+      }
+    });
+    var fit = new FitAddon.FitAddon();
+    term.loadAddon(fit);
+
+    var port = null, reader = null, writer = null, socket = null, closing = false;
+
+    function status(text, cls) { var s = $('status'); s.textContent = text; s.className = cls || ''; }
+    function note(html) { var n = $('note'); n.innerHTML = html || ''; n.hidden = !html; }
+    function preset() { return PRESETS[$('board').value] || PRESETS.custom; }
+
+    /* ------------------------------------------------------------ sizing */
+    function layout() {
+      var mode = $('size').value;
+      if (mode === 'fit') {
+        term.options.fontSize = 16;
+        try { fit.fit(); } catch (e) {}
+        return;
+      }
+      var want = mode.split('x').map(Number);
+      /* the largest font that shows the whole cols x rows grid */
+      for (var fs = 28; fs >= 8; fs--) {
+        term.options.fontSize = fs;
+        var d = fit.proposeDimensions();
+        if (d && d.cols >= want[0] && d.rows >= want[1]) break;
+      }
+      term.resize(want[0], want[1]);
+    }
+    var pending = 0;
+    window.addEventListener('resize', function () { clearTimeout(pending); pending = setTimeout(layout, 80); });
+
+    /* ------------------------------------------------------------ I/O */
+    function send(data) {
+      var bytes = typeof data === 'string' ? enc.encode(data) : data;
+      if (writer) writer.write(bytes).catch(function () {});
+      else if (socket && socket.readyState === 1) socket.send(bytes);
+    }
+    term.onData(function (d) { send(d); });
+    term.onBinary(function (d) {        /* legacy X10 mouse reports */
+      var b = new Uint8Array(d.length);
+      for (var i = 0; i < d.length; i++) b[i] = d.charCodeAt(i) & 255;
+      send(b);
+    });
+
+    function connected(label) {
+      status('Connected: ' + label, 'ok');
+      $('connect').disabled = true; $('disconnect').disabled = false;
+      term.focus();
+      /* A running desktop only sends changes: ask it for the whole screen. */
+      setTimeout(function () { send(preset().desktop ? REDRAW : '\r'); }, 250);
+    }
+    function disconnected(why) {
+      $('connect').disabled = false; $('disconnect').disabled = true;
+      status(why || 'Not connected', why ? 'err' : '');
+      reader = writer = port = socket = null;
+    }
+
+    async function connectSerial() {
+      if (!('serial' in navigator)) {
+        note('This browser cannot open serial ports. Use <b>Chrome</b> or <b>Edge</b> on a computer' +
+             (window.isSecureContext ? '.' : ', and open this page over <b>https</b> or from <code>localhost</code>.'));
+        return;
+      }
+      var baud = Number($('baud').value) || 115200;
+      try {
+        port = await navigator.serial.requestPort();
+      } catch (e) { return; }            /* the chooser was cancelled */
+      try {
+        await port.open({ baudRate: baud, bufferSize: 65536 });
+      } catch (e) {
+        disconnected('Cannot open the port: ' + e.message + ' (is PuTTY or another program using it?)');
+        return;
+      }
+      /* Release DTR and RTS together: on ESP32 dev boards they drive the
+       * reset and boot pins, and equal levels leave the chip running. */
+      try { await port.setSignals({ dataTerminalReady: false, requestToSend: false }); } catch (e) {}
+      writer = port.writable.getWriter();
+      var info = port.getInfo ? port.getInfo() : {};
+      connected((info.usbVendorId ? 'USB ' + info.usbVendorId.toString(16) + ':' + (info.usbProductId || 0).toString(16) + ', ' : '') + baud + ' baud');
+      closing = false;
+      /* A framing or overrun error ends one reader but not the port: keep
+       * reading while the port is readable; it stops being so when the board
+       * is unplugged. */
+      while (port && port.readable && !closing) {
+        reader = port.readable.getReader();
+        try {
+          for (;;) {
+            var r = await reader.read();
+            if (r.done) break;
+            term.write(r.value);
+          }
+        } catch (e) {
+          if (!closing) status('Connected (serial error: ' + e.name + ')', 'err');
+        } finally {
+          try { reader.releaseLock(); } catch (e) {}
+        }
+      }
+      if (!closing) await closeSerial('The board went away (unplugged or reset)');
+    }
+
+    async function closeSerial(why) {
+      closing = true;
+      try { if (reader) { await reader.cancel(); reader.releaseLock(); } } catch (e) {}
+      try { if (writer) { writer.releaseLock(); } } catch (e) {}
+      try { if (port) await port.close(); } catch (e) {}
+      disconnected(why);
+    }
+
+    /* For testing without Web Serial: ?ws=ws://host:port connects to a
+     * WebSocket that carries the raw serial bytes (a bridge on the PC). */
+    var wsUrl = new URLSearchParams(location.search).get('ws');
+    function connectSocket() {
+      socket = new WebSocket(wsUrl);
+      socket.binaryType = 'arraybuffer';
+      socket.onopen = function () { connected(wsUrl); };
+      socket.onmessage = function (m) { term.write(new Uint8Array(m.data)); };
+      socket.onclose = function () { disconnected(socket ? 'Bridge closed' : ''); };
+    }
+
+    /* ------------------------------------------------------------ UI */
+    function applyPreset() {
+      var p = preset();
+      $('baud').value = p.baud;
+      $('size').value = p.size;
+      layout();
+      try { history.replaceState(null, '', location.search + '#' + $('board').value); } catch (e) {}
+    }
+    $('board').addEventListener('change', applyPreset);
+    $('size').addEventListener('change', layout);
+    $('connect').addEventListener('click', function () { if (wsUrl) connectSocket(); else connectSerial(); });
+    $('disconnect').addEventListener('click', function () {
+      if (socket) { var s = socket; socket = null; s.close(); disconnected(''); } else closeSerial('');
+    });
+    $('redraw').addEventListener('click', function () { send(preset().desktop ? REDRAW : '\x0c'); term.focus(); });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-send]'), function (b) {
+      var seq = b.getAttribute('data-send').replace(/\\x([0-9a-f]{2})/gi, function (_, h) { return String.fromCharCode(parseInt(h, 16)); });
+      b.addEventListener('click', function () { send(seq); term.focus(); });
+    });
+    if ('serial' in navigator && navigator.serial.addEventListener) {
+      navigator.serial.addEventListener('disconnect', function (e) {
+        if (port && e.target === port) closeSerial('The board was unplugged');
+      });
+    }
+
+    var hash = location.hash.replace('#', '');
+    if (PRESETS[hash]) $('board').value = hash;
+    if (!('serial' in navigator) && !wsUrl) {
+      note('This browser cannot open serial ports. Use <b>Chrome</b> or <b>Edge</b> on a computer.');
+      $('connect').disabled = true;
+    } else if (!window.isSecureContext && !wsUrl) {
+      note('Serial ports only work on pages served over <b>https</b> or from <code>localhost</code>.');
+    }
+
+    function start() {
+      term.open($('term'));
+      /* The DOM renderer works everywhere. ?renderer=webgl draws box drawing
+       * and shade characters itself (faster on big screens, needs WebGL). */
+      if (new URLSearchParams(location.search).get('renderer') === 'webgl') {
+        try {
+          var gl = new WebglAddon.WebglAddon();
+          gl.onContextLoss(function () { gl.dispose(); });
+          term.loadAddon(gl);
+        } catch (e) {}
+      }
+      applyPreset();
+      term.writeln('\x1b[2mPick your board, press Connect and choose its serial port.\x1b[0m');
+    }
+    (document.fonts && document.fonts.load ? document.fonts.load('16px "IBM Plex Mono"') : Promise.resolve())
+      .then(start, start);
+  })();
+  </script>
+</body>
+</html>
