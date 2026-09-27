@@ -43,6 +43,9 @@ and in the Files app a green name marked `#!`.
 * From the shell: `tdsh run ~/Desktop/backup.tdsh`; a folder runs its
   `main.tdsh`.
 
+The script language (variables, `if`/`while`/`for`, functions, pipes,
+redirection, `test`) is described in [Shell scripts](../shell/scripting.md).
+
 ```text
 echo 'wificonnect; ssh start' > ~/Desktop/online.tdsh    # a script on the desktop
 ```
@@ -98,7 +101,7 @@ set the system clock. Details: [Apps API](../api/apps.md#sessions).
 | System Monitor | RAM (internal and PSRAM), tasks, CPU, frame time, serial traffic, screen size |
 | Task Manager | open windows (switch to / end) and system tasks with CPU %, state, stack |
 | Log Viewer | the system log (root) |
-| Settings | theme, ASCII mode, icons, sizes, desktop pattern, links to Network / Date & time / Software update |
+| Settings | theme (Dark by default, or Classic), ASCII mode, icons, sizes, desktop pattern (light shade by default), links to Network / Date & time / Software update |
 | Software Update | install firmware from a URL or file, roll back (root) |
 | Date & time | from the taskbar clock: clock, time zone, SNTP |
 | Counter, About | demo app; version, chip, heap, uptime and public source repository URLs |

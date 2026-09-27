@@ -5,6 +5,7 @@
   - [Board configuration (pins)](/guide/board-config.md)
   - [Getting started (build from source)](/guide/getting-started.md)
   - [Terminals and connections](/guide/terminals.md)
+  - [Web terminal](/console/index.html ':ignore')
   - [Using the desktop](/guide/using.md)
   - [Writing an app](/guide/writing-an-app.md)
   - [Troubleshooting](/troubleshooting.md)
@@ -24,6 +25,7 @@
   - [TLS](/api/tls.md)
 - Shell
   - [Commands](/shell/commands.md)
+  - [Scripts (.tdsh)](/shell/scripting.md)
   - [Configuration files](/shell/config-files.md)
 - Ports
   - [Architecture and porting](/ports/overview.md)

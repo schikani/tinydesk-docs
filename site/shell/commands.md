@@ -25,6 +25,9 @@ Examples use `$` as the prompt of any user and `#` for root.
 
 Exit status, as the code returns it: 0 success, 1 failure, 2 usage error.
 
+Commands can be combined into `.tdsh` scripts with variables, `if`, loops,
+functions, pipes and redirection: see [Shell scripts](scripting.md).
+
 ---
 
 ## mqtt
@@ -407,7 +410,7 @@ The flash has two app slots, `ota_0` and `ota_1` (see [partition tables](config-
 
 ```
 # ota status
-Firmware:  tinydesk 0.2.15, built Sep 24 2026 18:02:11, ESP-IDF v5.3.1
+Firmware:  TinyDesk 0.1.0, built Sep 28 2026 00:45:54, ESP-IDF v5.3.1
 Running:   ota_0
 Other slot: ota_1 has version 0.2.14 (ota rollback)
 Last:      Version 0.2.15 is installed. Restart to use it.
