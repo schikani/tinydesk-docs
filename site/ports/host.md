@@ -37,6 +37,15 @@ Terminal opens, with its files under `fs_root`. On Windows the unmodified
 TinyDesk Shell core builds against a compatibility header that adds per-thread
 `stdin`/`stdout` and `funopen()` to the C runtime.
 
+Besides the shell's own commands, both PC programs have `ifconfig`, `ping`,
+`date`, `cal`, `tz`, `write`, `hostpath` and `capabilities`. On Linux they
+come from TinyDesk Shell's POSIX port; on Windows from
+`ports/windows/tdsh_win/tdsh_win_commands.c`, where `ifconfig` lists the
+adapters that are up (name, MAC, IPv4 and IPv6 addresses) and `ping [-c N]
+host` sends IPv4 echo requests through the IP Helper API (no `ping.exe`
+child process). Without a `~/.tdsh_tz` file, `date` uses the PC's time zone,
+like the taskbar clock. There is no `nano` on Windows: use the Editor.
+
 ## Differences from the boards
 
 * No task list, PSRAM, OTA or network backend: the apps show "n/a" or
@@ -44,7 +53,9 @@ TinyDesk Shell core builds against a compatibility header that adds per-thread
 * TLS for MQTT is built when ESP-IDF's mbedTLS sources are found
   (`TD_MBEDTLS_DIR`, detected automatically); CA certificates come from the
   Windows ROOT store or the Linux system bundle.
-* The screen limit is 132x50 (`td_config.h` defaults).
+* The screen limit is 400x150 (`td_config.h` defaults): the desktop follows
+  the terminal window when it is resized or maximised, like on the ESP32 with
+  PSRAM.
 
 ## Simulator
 

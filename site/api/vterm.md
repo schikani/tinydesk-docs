@@ -89,7 +89,7 @@ typedef struct {
 
 Read the fields freely; change only `reply`, `reply_user`, `dirty`, `def_fg`/`def_bg` and `newline_mode` directly.
 
-Memory: a `td_vterm_t` is about `TD_VT_MAX_COLS * (TD_VT_MAX_ROWS + TD_VT_SCROLLBACK) * 4` bytes, about 129 KB with the host defaults (132x50, 200 lines), about 12 KB on the ESP32-C6 (80x25, 12 lines) and about 296 KB on the classic ESP32 with PSRAM (256x96, 200 lines). Always give it static storage. See [Core](core.md#terminal-emulator) for the limits.
+Memory: a `td_vterm_t` is about `TD_VT_MAX_COLS * (TD_VT_MAX_ROWS + TD_VT_SCROLLBACK) * 4` bytes, about 547 KB with the host defaults (400x150, 200 lines), about 12 KB on the ESP32-C6 (80x25, 12 lines) and about 296 KB on the classic ESP32 with PSRAM (256x96, 200 lines). Always give it static storage. See [Core](core.md#terminal-emulator) for the limits.
 
 ## Functions
 

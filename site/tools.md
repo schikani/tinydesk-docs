@@ -55,7 +55,7 @@ the actions in order and writes captures:
 | `shot` | write `out_<n>.bin` with everything received so far |
 
 `vtshot` replays a capture through the [terminal emulator](api/vterm.md)
-and prints the screen (at most 132 columns). With `--svg` it renders the
+and prints the screen (at most 400x150). With `--svg` it renders the
 screen as an SVG picture instead, with its colours (the 16 basic colours as
 Windows Terminal's Campbell scheme shows them); `--rows A-B` keeps only
 those rows and `--title` adds a window frame with a caption. The cover

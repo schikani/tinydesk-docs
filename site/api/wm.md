@@ -496,7 +496,7 @@ Colours are xterm 256-colour palette indexes: 0 to 15 are the ANSI colours (0 bl
 | Field | Used for |
 |---|---|
 | `name` | Theme name shown in Settings. |
-| `desktop_fg`, `desktop_bg` | Desktop background pattern. `desktop_bg` is also the background of desktop icons. |
+| `desktop_fg`, `desktop_bg` | Desktop background pattern (Dark: teal 24 on 234, so the pattern is clearly visible). `desktop_bg` is also the background of desktop icons. |
 | `win_fg`, `win_bg` | Window client area, labels, checkboxes, frame background. |
 | `frame_fg`, `frame_active_fg` | Border of unfocused / focused windows (single / double line). |
 | `title_fg`, `title_bg` | Title bar of the focused window. |
@@ -528,7 +528,7 @@ int td_theme_index(void);
 |---|---|
 | `td_theme()` | The active theme. Never `NULL`. Read it in `on_draw` rather than caching it, so a theme change shows at once. |
 | `td_theme_count()` | Number of built-in themes (2). |
-| `td_theme_get(index)` | Built-in theme 0 (Classic) or 1 (Dark); `NULL` for other indexes. |
+| `td_theme_get(index)` | Built-in theme 0 (`TD_THEME_CLASSIC`) or 1 (`TD_THEME_DARK`); `NULL` for other indexes. `TD_THEME_DEFAULT` (Dark) is active until a user's settings choose another. |
 | `td_theme_set(index)` | Activates a built-in theme and redraws. Invalid indexes are ignored. Themes are compiled in; there is no call to add one. |
 | `td_theme_index()` | Index of the active theme. |
 

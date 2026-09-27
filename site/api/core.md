@@ -257,8 +257,8 @@ In the table, "ESP-IDF value" lists `no PSRAM / PSRAM` where they differ; "-" me
 
 | Macro | Default | ESP-IDF value | Meaning |
 |---|---|---|---|
-| `TD_MAX_COLS` | 132 | 80 / 256 | Largest number of columns the screen buffers hold. Each `td_buffer_t` costs `TD_MAX_COLS * TD_MAX_ROWS * 8` bytes and the core has two (80x25: 32 KB total; 132x50: about 103 KB; 256x96: about 384 KB). |
-| `TD_MAX_ROWS` | 50 | 25 / 96 | Largest number of rows. |
+| `TD_MAX_COLS` | 400 | 80 / 256 | Largest number of columns the screen buffers hold. Each `td_buffer_t` costs `TD_MAX_COLS * TD_MAX_ROWS * 8` bytes and the core has two (80x25: 32 KB total; 256x96: about 384 KB; 400x150: about 938 KB). The default is sized for a maximised terminal on a large PC screen. |
+| `TD_MAX_ROWS` | 150 | 25 / 96 | Largest number of rows. |
 | `TD_DEFAULT_COLS` | 80 | - | Columns used until the terminal answers the size query (and if it never does). |
 | `TD_DEFAULT_ROWS` | 25 | - | Rows used until the terminal answers. |
 | `TD_MIN_COLS` | 40 | - | Smallest desktop width; smaller reported sizes are raised to it. Not overridable. |
