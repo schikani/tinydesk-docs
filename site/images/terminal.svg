@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 428" width="740" height="428" font-family="'DejaVu Sans Mono', Consolas, Menlo, 'Courier New', monospace" font-size="15">
+<rect width="740" height="428" rx="10" fill="#1b1f27"/>
+<circle cx="20" cy="15" r="5.5" fill="#ff5f57"/><circle cx="38" cy="15" r="5.5" fill="#febc2e"/><circle cx="56" cy="15" r="5.5" fill="#28c840"/>
+<text x="370" y="20" fill="#9aa4ad" font-size="13" text-anchor="middle">TinyDesk Shell on an ESP32 - serial port, 115200 baud</text>
+<g transform="translate(10 40)" shape-rendering="crispEdges">
+<rect x="0" y="0" width="720" height="18" fill="#0c0c0c"/>
+<text x="0" y="14" textLength="90" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#16c60c">root@esp32</text>
+<text x="90" y="14" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#cccccc">:</text>
+<text x="99" y="14" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3b78ff">~</text>
+<text x="108" y="14" textLength="612" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#cccccc"># version                                                           </text>
+<rect x="0" y="18" width="720" height="18" fill="#0c0c0c"/>
+<text x="0" y="32" textLength="720" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#cccccc">TinyDesk Shell 0.1.0 (esp-idf/freertos)                                         </text>
+<rect x="0" y="36" width="720" height="18" fill="#0c0c0c"/>
+<text x="0" y="50" textLength="90" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#16c60c">root@esp32</text>
+<text x="90" y="50" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#cccccc">:</text>
+<text x="99" y="50" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3b78ff">~</text>
+<text x="108" y="50" textLength="612" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#cccccc"># cat hello.tdsh                                                    </text>
+<rect x="0" y="54" width="720" height="18" fill="#0c0c0c"/>
+<text x="0" y="68" textLength="720" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#cccccc">echo "Hello from a .tdsh script"; uptime                                        </text>
+<rect x="0" y="72" width="720" height="18" fill="#0c0c0c"/>
+<text x="0" y="86" textLength="90" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#16c60c">root@esp32</text>
+<text x="90" y="86" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#cccccc">:</text>
+<text x="99" y="86" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3b78ff">~</text>
+<text x="108" y="86" textLength="612" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#cccccc"># tdsh run hello.tdsh                                               </text>
+<rect x="0" y="90" width="720" height="18" fill="#0c0c0c"/>
+<text x="0" y="104" textLength="720" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#cccccc">Hello from a .tdsh script                                                       </text>
+<rect x="0" y="108" width="720" height="18" fill="#0c0c0c"/>
+<text x="0" y="122" textLength="720" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#cccccc">0 days 00:00:10                                                                 </text>
+<rect x="0" y="126" width="720" height="18" fill="#0c0c0c"/>
+<text x="0" y="140" textLength="90" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#16c60c">root@esp32</text>
+<text x="90" y="140" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#cccccc">:</text>
+<text x="99" y="140" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3b78ff">~</text>
+<text x="108" y="140" textLength="612" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#cccccc"># ls ~ /                                                            </text>
+<rect x="0" y="144" width="720" height="18" fill="#0c0c0c"/>
+<text x="0" y="158" textLength="720" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#cccccc">~:                                                                              </text>
+<rect x="0" y="162" width="720" height="18" fill="#0c0c0c"/>
+<text x="0" y="176" textLength="63" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3b78ff">Desktop</text>
+<text x="63" y="176" textLength="126" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#cccccc">  hello.tdsh  </text>
+<text x="189" y="176" textLength="27" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3b78ff">mnt</text>
+<rect x="0" y="180" width="720" height="18" fill="#0c0c0c"/>
+<text x="0" y="194" textLength="720" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#cccccc">/:                                                                              </text>
+<rect x="0" y="198" width="720" height="18" fill="#0c0c0c"/>
+<text x="0" y="212" textLength="27" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3b78ff">etc</text>
+<text x="45" y="212" textLength="36" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3b78ff">home</text>
+<text x="99" y="212" textLength="36" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3b78ff">root</text>
+<text x="153" y="212" textLength="27" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3b78ff">tmp</text>
+<rect x="0" y="216" width="720" height="18" fill="#0c0c0c"/>
+<text x="0" y="230" textLength="90" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#16c60c">root@esp32</text>
+<text x="90" y="230" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#cccccc">:</text>
+<text x="99" y="230" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3b78ff">~</text>
+<text x="108" y="230" textLength="612" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#cccccc"># echo "6*7 = $((6*7))" | cat                                       </text>
+<rect x="0" y="234" width="720" height="18" fill="#0c0c0c"/>
+<text x="0" y="248" textLength="720" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#cccccc">6*7 = 42                                                                        </text>
+<rect x="0" y="252" width="720" height="18" fill="#0c0c0c"/>
+<text x="0" y="266" textLength="90" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#16c60c">root@esp32</text>
+<text x="90" y="266" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#cccccc">:</text>
+<text x="99" y="266" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3b78ff">~</text>
+<text x="108" y="266" textLength="612" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#cccccc"># heap                                                              </text>
+<rect x="0" y="270" width="720" height="18" fill="#0c0c0c"/>
+<text x="0" y="284" textLength="720" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#cccccc">Internal RAM: free=210972, largest=110592, minimum-free=151396 bytes            </text>
+<rect x="0" y="288" width="720" height="18" fill="#0c0c0c"/>
+<text x="0" y="302" textLength="720" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#cccccc">Shell tracked: live=0 blocks / 0 bytes, peak=21149 bytes                        </text>
+<rect x="0" y="306" width="720" height="18" fill="#0c0c0c"/>
+<text x="0" y="320" textLength="90" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#16c60c">root@esp32</text>
+<text x="90" y="320" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#cccccc">:</text>
+<text x="99" y="320" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3b78ff">~</text>
+<text x="108" y="320" textLength="612" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#cccccc"># board show                                                        </text>
+<rect x="0" y="324" width="720" height="18" fill="#0c0c0c"/>
+<text x="0" y="338" textLength="720" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#cccccc">Board configuration: 0 settings (device file /etc/board.conf)                   </text>
+<rect x="0" y="342" width="720" height="18" fill="#0c0c0c"/>
+<text x="0" y="356" textLength="720" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#cccccc">  (nothing configured: see `board set` and board.example.conf)                  </text>
+<rect x="0" y="360" width="720" height="18" fill="#0c0c0c"/>
+<text x="0" y="374" textLength="90" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#16c60c">root@esp32</text>
+<text x="90" y="374" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#cccccc">:</text>
+<text x="99" y="374" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3b78ff">~</text>
+<text x="108" y="374" textLength="612" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#cccccc">#                                                                   </text>
+</g>
+</svg>

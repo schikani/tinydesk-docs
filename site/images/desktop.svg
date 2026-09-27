@@ -1,0 +1,323 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 560" width="920" height="560" font-family="'DejaVu Sans Mono', Consolas, Menlo, 'Courier New', monospace" font-size="15">
+<rect width="920" height="560" rx="10" fill="#1b1f27"/>
+<g transform="translate(10 10)" shape-rendering="crispEdges">
+<rect x="0" y="0" width="900" height="18" fill="#1c1c1c"/>
+<text x="0" y="14" textLength="900" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░</text>
+<rect x="0" y="18" width="378" height="18" fill="#1c1c1c"/>
+<rect x="378" y="18" width="9" height="18" fill="#303030"/>
+<rect x="387" y="18" width="504" height="18" fill="#444444"/>
+<rect x="891" y="18" width="9" height="18" fill="#303030"/>
+<text x="0" y="32" textLength="45" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░</text>
+<text x="45" y="32" textLength="36" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">┌──┐</text>
+<text x="81" y="32" textLength="72" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░░░░</text>
+<text x="153" y="32" textLength="36" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">┌──┐</text>
+<text x="189" y="32" textLength="72" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░░░░</text>
+<text x="261" y="32" textLength="36" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">┌──┐</text>
+<text x="297" y="32" textLength="72" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░░░░</text>
+<text x="369" y="32" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">┌</text>
+<text x="378" y="32" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#585858">┌</text>
+<text x="387" y="32" textLength="504" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#949494"> Files                                            [-][x]</text>
+<text x="891" y="32" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#585858">┐</text>
+<rect x="0" y="36" width="378" height="18" fill="#1c1c1c"/>
+<rect x="378" y="36" width="522" height="18" fill="#303030"/>
+<text x="0" y="50" textLength="45" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░</text>
+<text x="45" y="50" textLength="36" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">│&gt;_│</text>
+<text x="81" y="50" textLength="72" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░░░░</text>
+<text x="153" y="50" textLength="36" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">│MQ│</text>
+<text x="189" y="50" textLength="72" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░░░░</text>
+<text x="261" y="50" textLength="36" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">│≡≡│</text>
+<text x="297" y="50" textLength="72" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░░░░</text>
+<text x="369" y="50" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">│</text>
+<text x="378" y="50" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#585858">│</text>
+<text x="387" y="50" textLength="504" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">/root/Desktop                                           </text>
+<text x="891" y="50" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#585858">│</text>
+<rect x="0" y="54" width="378" height="18" fill="#1c1c1c"/>
+<rect x="378" y="54" width="9" height="18" fill="#303030"/>
+<rect x="387" y="54" width="495" height="18" fill="#121212"/>
+<rect x="882" y="54" width="18" height="18" fill="#303030"/>
+<text x="0" y="68" textLength="45" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░</text>
+<text x="45" y="68" textLength="36" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">└──┘</text>
+<text x="81" y="68" textLength="72" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░░░░</text>
+<text x="153" y="68" textLength="36" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">└──┘</text>
+<text x="189" y="68" textLength="72" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░░░░</text>
+<text x="261" y="68" textLength="36" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">└──┘</text>
+<text x="297" y="68" textLength="72" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░░░░</text>
+<text x="369" y="68" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">└</text>
+<text x="378" y="68" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#585858">│</text>
+<text x="396" y="68" textLength="27" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#5fafff">../</text>
+<text x="423" y="68" textLength="468" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">                                                   ▲</text>
+<text x="891" y="68" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#585858">│</text>
+<rect x="0" y="72" width="378" height="18" fill="#1c1c1c"/>
+<rect x="378" y="72" width="9" height="18" fill="#303030"/>
+<rect x="387" y="72" width="495" height="18" fill="#121212"/>
+<rect x="882" y="72" width="18" height="18" fill="#303030"/>
+<text x="0" y="86" textLength="18" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░</text>
+<text x="18" y="86" textLength="90" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0"> Terminal </text>
+<text x="108" y="86" textLength="36" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░</text>
+<text x="144" y="86" textLength="54" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0"> MQTT </text>
+<text x="198" y="86" textLength="27" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░</text>
+<text x="225" y="86" textLength="108" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0"> Log Viewer </text>
+<text x="333" y="86" textLength="18" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░</text>
+<text x="351" y="86" textLength="27" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0"> Ab</text>
+<text x="378" y="86" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#585858">│</text>
+<text x="387" y="86" textLength="504" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0"> Welcome.txt                           417             ░</text>
+<text x="891" y="86" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#585858">│</text>
+<rect x="0" y="90" width="378" height="18" fill="#1c1c1c"/>
+<rect x="378" y="90" width="9" height="18" fill="#303030"/>
+<rect x="387" y="90" width="495" height="18" fill="#808080"/>
+<rect x="882" y="90" width="18" height="18" fill="#303030"/>
+<text x="0" y="104" textLength="378" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░</text>
+<text x="378" y="104" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#585858">│</text>
+<text x="387" y="104" textLength="504" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0"> notes.txt                              26             ░</text>
+<text x="891" y="104" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#585858">│</text>
+<rect x="0" y="108" width="378" height="18" fill="#1c1c1c"/>
+<rect x="378" y="108" width="9" height="18" fill="#303030"/>
+<rect x="387" y="108" width="495" height="18" fill="#121212"/>
+<rect x="882" y="108" width="18" height="18" fill="#303030"/>
+<text x="0" y="122" textLength="378" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░</text>
+<text x="378" y="122" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#585858">│</text>
+<text x="396" y="122" textLength="405" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#16c60c">online.tdsh                            23  #!</text>
+<text x="801" y="122" textLength="90" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">         ░</text>
+<text x="891" y="122" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#585858">│</text>
+<rect x="0" y="126" width="45" height="18" fill="#1c1c1c"/>
+<rect x="45" y="126" width="36" height="18" fill="#d0d0d0"/>
+<rect x="81" y="126" width="297" height="18" fill="#1c1c1c"/>
+<rect x="378" y="126" width="9" height="18" fill="#303030"/>
+<rect x="387" y="126" width="495" height="18" fill="#121212"/>
+<rect x="882" y="126" width="18" height="18" fill="#303030"/>
+<text x="0" y="140" textLength="45" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░</text>
+<text x="45" y="140" textLength="36" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#1c1c1c">┌──┐</text>
+<text x="81" y="140" textLength="72" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░░░░</text>
+<text x="153" y="140" textLength="36" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">┌──┐</text>
+<text x="189" y="140" textLength="72" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░░░░</text>
+<text x="261" y="140" textLength="36" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">┌──┐</text>
+<text x="297" y="140" textLength="72" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░░░░</text>
+<text x="369" y="140" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">┌</text>
+<text x="378" y="140" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#585858">│</text>
+<text x="387" y="140" textLength="504" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">                                                       ░</text>
+<text x="891" y="140" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#585858">│</text>
+<rect x="0" y="144" width="45" height="18" fill="#1c1c1c"/>
+<rect x="45" y="144" width="36" height="18" fill="#d0d0d0"/>
+<rect x="81" y="144" width="297" height="18" fill="#1c1c1c"/>
+<rect x="378" y="144" width="9" height="18" fill="#303030"/>
+<rect x="387" y="144" width="495" height="18" fill="#121212"/>
+<rect x="882" y="144" width="18" height="18" fill="#303030"/>
+<text x="0" y="158" textLength="45" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░</text>
+<text x="45" y="158" textLength="36" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#1c1c1c">│[]│</text>
+<text x="81" y="158" textLength="72" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░░░░</text>
+<text x="153" y="158" textLength="36" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">│MB│</text>
+<text x="189" y="158" textLength="72" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░░░░</text>
+<text x="261" y="158" textLength="36" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">│☼ │</text>
+<text x="297" y="158" textLength="72" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░░░░</text>
+<text x="369" y="158" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">│</text>
+<text x="378" y="158" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#585858">│</text>
+<text x="387" y="158" textLength="504" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">                                                       ░</text>
+<text x="891" y="158" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#585858">│</text>
+<rect x="0" y="162" width="45" height="18" fill="#1c1c1c"/>
+<rect x="45" y="162" width="36" height="18" fill="#d0d0d0"/>
+<rect x="81" y="162" width="297" height="18" fill="#1c1c1c"/>
+<rect x="378" y="162" width="9" height="18" fill="#303030"/>
+<rect x="387" y="162" width="495" height="18" fill="#121212"/>
+<rect x="882" y="162" width="18" height="18" fill="#303030"/>
+<text x="0" y="176" textLength="45" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░</text>
+<text x="45" y="176" textLength="36" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#1c1c1c">└──┘</text>
+<text x="81" y="176" textLength="72" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░░░░</text>
+<text x="153" y="176" textLength="36" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">└──┘</text>
+<text x="189" y="176" textLength="72" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░░░░</text>
+<text x="261" y="176" textLength="36" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">└──┘</text>
+<text x="297" y="176" textLength="72" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░░░░</text>
+<text x="369" y="176" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">└</text>
+<text x="378" y="176" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#585858">│</text>
+<text x="387" y="176" textLength="504" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">                                                       ░</text>
+<text x="891" y="176" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#585858">│</text>
+<rect x="0" y="180" width="27" height="18" fill="#1c1c1c"/>
+<rect x="27" y="180" width="63" height="18" fill="#005f87"/>
+<rect x="90" y="180" width="288" height="18" fill="#1c1c1c"/>
+<rect x="378" y="180" width="9" height="18" fill="#303030"/>
+<rect x="387" y="180" width="495" height="18" fill="#121212"/>
+<rect x="882" y="180" width="18" height="18" fill="#303030"/>
+<text x="0" y="194" textLength="27" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░</text>
+<text x="27" y="194" textLength="63" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#ffffff"> Files </text>
+<text x="90" y="194" textLength="45" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░</text>
+<text x="135" y="194" textLength="72" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0"> Modbus </text>
+<text x="207" y="194" textLength="27" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░</text>
+<text x="234" y="194" textLength="144" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0"> Settings  Welco</text>
+<text x="378" y="194" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#585858">│</text>
+<text x="387" y="194" textLength="504" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">                                                       ░</text>
+<text x="891" y="194" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#585858">│</text>
+<rect x="0" y="198" width="378" height="18" fill="#1c1c1c"/>
+<rect x="378" y="198" width="9" height="18" fill="#303030"/>
+<rect x="387" y="198" width="495" height="18" fill="#121212"/>
+<rect x="882" y="198" width="18" height="18" fill="#303030"/>
+<text x="0" y="212" textLength="378" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░</text>
+<text x="378" y="212" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#585858">│</text>
+<text x="387" y="212" textLength="504" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">                                                       ░</text>
+<text x="891" y="212" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#585858">│</text>
+<rect x="0" y="216" width="378" height="18" fill="#1c1c1c"/>
+<rect x="378" y="216" width="9" height="18" fill="#303030"/>
+<rect x="387" y="216" width="495" height="18" fill="#121212"/>
+<rect x="882" y="216" width="18" height="18" fill="#303030"/>
+<text x="0" y="230" textLength="378" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░</text>
+<text x="378" y="230" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#585858">│</text>
+<text x="387" y="230" textLength="504" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">                                                       ░</text>
+<text x="891" y="230" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#585858">│</text>
+<rect x="0" y="234" width="153" height="18" fill="#1c1c1c"/>
+<rect x="153" y="234" width="9" height="18" fill="#303030"/>
+<rect x="162" y="234" width="486" height="18" fill="#005faf"/>
+<rect x="648" y="234" width="9" height="18" fill="#303030"/>
+<rect x="657" y="234" width="225" height="18" fill="#121212"/>
+<rect x="882" y="234" width="18" height="18" fill="#303030"/>
+<text x="0" y="248" textLength="45" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░</text>
+<text x="45" y="248" textLength="36" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">┌──┐</text>
+<text x="81" y="248" textLength="72" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░░░░</text>
+<text x="153" y="248" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#5fafff">╔</text>
+<text x="162" y="248" textLength="486" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#ffffff"> *notes.txt - Editor                            [-][x]</text>
+<text x="648" y="248" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#5fafff">╗</text>
+<text x="657" y="248" textLength="234" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">                         ░</text>
+<text x="891" y="248" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#585858">│</text>
+<rect x="0" y="252" width="153" height="18" fill="#1c1c1c"/>
+<rect x="153" y="252" width="9" height="18" fill="#303030"/>
+<rect x="162" y="252" width="486" height="18" fill="#121212"/>
+<rect x="648" y="252" width="9" height="18" fill="#303030"/>
+<rect x="657" y="252" width="9" height="18" fill="#0c0c0c"/>
+<rect x="666" y="252" width="216" height="18" fill="#121212"/>
+<rect x="882" y="252" width="18" height="18" fill="#303030"/>
+<text x="0" y="266" textLength="45" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░</text>
+<text x="45" y="266" textLength="36" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">│¶_│</text>
+<text x="81" y="266" textLength="72" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░░░░</text>
+<text x="153" y="266" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#5fafff">║</text>
+<text x="162" y="266" textLength="486" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">Buy: resistors, USB cable                             </text>
+<text x="648" y="266" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#5fafff">║</text>
+<text x="666" y="266" textLength="225" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">                        ░</text>
+<text x="891" y="266" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#585858">│</text>
+<rect x="0" y="270" width="153" height="18" fill="#1c1c1c"/>
+<rect x="153" y="270" width="9" height="18" fill="#303030"/>
+<rect x="162" y="270" width="486" height="18" fill="#121212"/>
+<rect x="648" y="270" width="9" height="18" fill="#303030"/>
+<rect x="657" y="270" width="9" height="18" fill="#0c0c0c"/>
+<rect x="666" y="270" width="216" height="18" fill="#121212"/>
+<rect x="882" y="270" width="18" height="18" fill="#303030"/>
+<text x="0" y="284" textLength="45" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░</text>
+<text x="45" y="284" textLength="36" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">└──┘</text>
+<text x="81" y="284" textLength="72" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░░░░</text>
+<text x="153" y="284" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#5fafff">║</text>
+<text x="162" y="284" textLength="486" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">- 2x RS-485 transceivers                              </text>
+<text x="648" y="284" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#5fafff">║</text>
+<text x="666" y="284" textLength="225" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">                        ░</text>
+<text x="891" y="284" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#585858">│</text>
+<rect x="0" y="288" width="153" height="18" fill="#1c1c1c"/>
+<rect x="153" y="288" width="9" height="18" fill="#303030"/>
+<rect x="162" y="288" width="486" height="18" fill="#121212"/>
+<rect x="648" y="288" width="9" height="18" fill="#303030"/>
+<rect x="657" y="288" width="9" height="18" fill="#0c0c0c"/>
+<rect x="666" y="288" width="216" height="18" fill="#121212"/>
+<rect x="882" y="288" width="18" height="18" fill="#303030"/>
+<text x="0" y="302" textLength="27" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░</text>
+<text x="27" y="302" textLength="72" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0"> Editor </text>
+<text x="99" y="302" textLength="36" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░</text>
+<text x="135" y="302" textLength="18" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0"> S</text>
+<text x="153" y="302" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#5fafff">║</text>
+<text x="162" y="302" textLength="486" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">- ESP32-C6 DevKit                                     </text>
+<text x="648" y="302" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#5fafff">║</text>
+<text x="666" y="302" textLength="225" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">                        ▼</text>
+<text x="891" y="302" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#585858">│</text>
+<rect x="0" y="306" width="153" height="18" fill="#1c1c1c"/>
+<rect x="153" y="306" width="9" height="18" fill="#303030"/>
+<rect x="162" y="306" width="108" height="18" fill="#121212"/>
+<rect x="270" y="306" width="9" height="18" fill="#d0d0d0"/>
+<rect x="279" y="306" width="369" height="18" fill="#121212"/>
+<rect x="648" y="306" width="9" height="18" fill="#303030"/>
+<rect x="657" y="306" width="9" height="18" fill="#0c0c0c"/>
+<rect x="666" y="306" width="63" height="18" fill="#4e4e4e"/>
+<rect x="729" y="306" width="9" height="18" fill="#303030"/>
+<rect x="738" y="306" width="90" height="18" fill="#4e4e4e"/>
+<rect x="828" y="306" width="72" height="18" fill="#303030"/>
+<text x="0" y="320" textLength="126" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░░░░░░░░░░</text>
+<text x="126" y="320" textLength="27" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0"> Mo</text>
+<text x="153" y="320" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#5fafff">║</text>
+<text x="162" y="320" textLength="108" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">- 5 V supply</text>
+<text x="648" y="320" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#5fafff">║</text>
+<text x="657" y="320" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#767676">R</text>
+<text x="666" y="320" textLength="225" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">ename ] [ Delete ]       </text>
+<text x="891" y="320" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#585858">│</text>
+<rect x="0" y="324" width="153" height="18" fill="#1c1c1c"/>
+<rect x="153" y="324" width="9" height="18" fill="#303030"/>
+<rect x="162" y="324" width="486" height="18" fill="#121212"/>
+<rect x="648" y="324" width="9" height="18" fill="#303030"/>
+<rect x="657" y="324" width="9" height="18" fill="#0c0c0c"/>
+<rect x="666" y="324" width="234" height="18" fill="#303030"/>
+<text x="0" y="338" textLength="153" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░░░░░░░░░░░░░</text>
+<text x="153" y="338" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#5fafff">║</text>
+<text x="648" y="338" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#5fafff">║</text>
+<text x="657" y="338" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#767676">─</text>
+<text x="666" y="338" textLength="225" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#585858">─────────────────────────</text>
+<text x="891" y="338" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#444444">┘</text>
+<rect x="0" y="342" width="153" height="18" fill="#1c1c1c"/>
+<rect x="153" y="342" width="9" height="18" fill="#303030"/>
+<rect x="162" y="342" width="486" height="18" fill="#121212"/>
+<rect x="648" y="342" width="9" height="18" fill="#303030"/>
+<rect x="657" y="342" width="243" height="18" fill="#0c0c0c"/>
+<text x="0" y="356" textLength="45" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░</text>
+<text x="45" y="356" textLength="36" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">┌──┐</text>
+<text x="81" y="356" textLength="72" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░░░░</text>
+<text x="153" y="356" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#5fafff">║</text>
+<text x="648" y="356" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#5fafff">║</text>
+<text x="657" y="356" textLength="243" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#767676">░░░░░░░░░░░░░░░░░░░░░░░░░░░</text>
+<rect x="0" y="360" width="153" height="18" fill="#1c1c1c"/>
+<rect x="153" y="360" width="9" height="18" fill="#303030"/>
+<rect x="162" y="360" width="486" height="18" fill="#444444"/>
+<rect x="648" y="360" width="9" height="18" fill="#303030"/>
+<rect x="657" y="360" width="9" height="18" fill="#0c0c0c"/>
+<rect x="666" y="360" width="234" height="18" fill="#1c1c1c"/>
+<text x="0" y="374" textLength="45" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░</text>
+<text x="45" y="374" textLength="36" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">│((│</text>
+<text x="81" y="374" textLength="72" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░░░░</text>
+<text x="153" y="374" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#5fafff">║</text>
+<text x="162" y="374" textLength="486" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#949494"> Ln 4, Col 13  ^S Save  ^Z Undo  ^Y Redo  ^C Copy  ^X </text>
+<text x="648" y="374" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#5fafff">║</text>
+<text x="657" y="374" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#767676">░</text>
+<text x="666" y="374" textLength="234" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░░░░░░░░░░░░░░░░░░░░░░</text>
+<rect x="0" y="378" width="153" height="18" fill="#1c1c1c"/>
+<rect x="153" y="378" width="504" height="18" fill="#303030"/>
+<rect x="657" y="378" width="9" height="18" fill="#0c0c0c"/>
+<rect x="666" y="378" width="234" height="18" fill="#1c1c1c"/>
+<text x="0" y="392" textLength="45" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░</text>
+<text x="45" y="392" textLength="36" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0">└──┘</text>
+<text x="81" y="392" textLength="72" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░░░░</text>
+<text x="153" y="392" textLength="495" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#5fafff">╚══════════════════════════════════════════════════════</text>
+<text x="648" y="392" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#005faf">╝</text>
+<text x="657" y="392" textLength="9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#767676">░</text>
+<text x="666" y="392" textLength="234" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░░░░░░░░░░░░░░░░░░░░░░</text>
+<rect x="0" y="396" width="162" height="18" fill="#1c1c1c"/>
+<rect x="162" y="396" width="504" height="18" fill="#0c0c0c"/>
+<rect x="666" y="396" width="234" height="18" fill="#1c1c1c"/>
+<text x="0" y="410" textLength="18" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░</text>
+<text x="18" y="410" textLength="81" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0"> Network </text>
+<text x="99" y="410" textLength="45" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░</text>
+<text x="144" y="410" textLength="18" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0"> T</text>
+<text x="162" y="410" textLength="504" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#767676">ask ░░░░ Counter ░ online.tdsh ░░░░░░░░░░░░░░░░░░░░░░░░░</text>
+<text x="666" y="410" textLength="234" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░░░░░░░░░░░░░░░░░░░░░░</text>
+<rect x="0" y="414" width="900" height="18" fill="#1c1c1c"/>
+<text x="0" y="428" textLength="126" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░░░░░░░░░░</text>
+<text x="126" y="428" textLength="81" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#d0d0d0"> Manager </text>
+<text x="207" y="428" textLength="693" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░</text>
+<rect x="0" y="432" width="900" height="18" fill="#1c1c1c"/>
+<text x="0" y="446" textLength="900" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░</text>
+<rect x="0" y="450" width="900" height="18" fill="#1c1c1c"/>
+<text x="0" y="464" textLength="900" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░</text>
+<rect x="0" y="468" width="900" height="18" fill="#1c1c1c"/>
+<text x="0" y="482" textLength="900" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░</text>
+<rect x="0" y="486" width="900" height="18" fill="#1c1c1c"/>
+<text x="0" y="500" textLength="900" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░</text>
+<rect x="0" y="504" width="900" height="18" fill="#1c1c1c"/>
+<text x="0" y="518" textLength="900" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#3a3a3a">░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░</text>
+<rect x="0" y="522" width="144" height="18" fill="#121212"/>
+<rect x="144" y="522" width="144" height="18" fill="#005faf"/>
+<rect x="288" y="522" width="612" height="18" fill="#121212"/>
+<text x="0" y="536" textLength="144" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#bcbcbc">[Start]  Files  </text>
+<text x="144" y="536" textLength="144" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#ffffff"> *notes.txt - E </text>
+<text x="288" y="536" textLength="414" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#bcbcbc">                                  root  Wi-Fi </text>
+<text x="702" y="536" textLength="27" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#16c60c">███</text>
+<text x="729" y="536" textLength="171" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#bcbcbc">  15:35 26-09-2026 </text>
+</g>
+</svg>

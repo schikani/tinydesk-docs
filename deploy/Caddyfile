@@ -1,0 +1,15 @@
+# TinyDesk documentation and web installer on Caddy (it gets and renews the
+# HTTPS certificate by itself). Replace the name and the path, then:
+#   sudo cp Caddyfile /etc/caddy/Caddyfile && sudo systemctl reload caddy
+
+tinydesk.example.com {
+	root * /var/www/tinydesk
+	encode gzip
+	file_server
+
+	@pages path *.md /install/ /install/index.html /install/manifest-*.json /install/SHA256SUMS.txt
+	header @pages Cache-Control "no-cache"
+
+	@firmware path /install/firmware/*
+	header @firmware Cache-Control "public, max-age=604800"
+}

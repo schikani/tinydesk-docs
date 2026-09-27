@@ -1,0 +1,16 @@
+# Release files: put back with tools/fetch_release.py
+site/install/firmware/
+site/install/downloads/
+site/install/manifest-*.json
+site/install/SHA256SUMS.txt
+site/install/README.txt
+site/install/*.bin
+site/install/*.elf
+site/install/*.map
+
+__pycache__/
+*.pyc
+*.log
+.env
+.DS_Store
+Thumbs.db

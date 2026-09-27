@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TinyDesk documentation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TinyDesk: a windowed text desktop for microcontrollers, drawn in a compatible UTF-8 terminal, with ports for ESP32 boards, Linux and Windows">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <!-- Exact versions: a CDN update cannot change the site. Prism 1.29.0 is the
+       release Docsify 4.13.1 was built with, so the language files match. -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4.13.1/lib/themes/vue.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;600&display=swap">
+  <style>
+    /* tinydesk colours: the Classic theme's teal title bars on the blue
+       desktop, and the Dark theme's blues in dark mode. */
+    :root {
+      --theme-color: #0e7c86;
+      --content-max-width: 60em;
+      --td-bg: #ffffff; --td-text: #2c3e50; --td-muted: #5b6770; --td-line: #e1e6e9;
+      --td-sidebar: #f5f7f8; --td-code: #f1f4f6; --td-inline: #b5405a; --td-cover: #1f3f94;
+    }
+    :root[data-theme="dark"] {
+      --theme-color: #5fafff;
+      --td-bg: #16181b; --td-text: #dfe3e7; --td-muted: #9aa4ad; --td-line: #30353b;
+      --td-sidebar: #1c1f23; --td-code: #23272c; --td-inline: #ff9ab0; --td-cover: #0b1f4a;
+    }
+    body { font-family: "IBM Plex Sans", -apple-system, "Segoe UI", sans-serif; background: var(--td-bg); color: var(--td-text); }
+    .markdown-section { color: var(--td-text); }
+    .markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section strong { color: var(--td-text); }
+    .markdown-section .anchor, .markdown-section .anchor span, .markdown-section h1 a, .markdown-section h2 a,
+    .markdown-section h3 a, .markdown-section h4 a { color: var(--td-text) !important; }
+    .markdown-section th { color: var(--td-text); }
+    .markdown-section code, .markdown-section pre, .markdown-section pre > code {
+      font-family: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+    }
+    .markdown-section code { background: var(--td-code); color: var(--td-inline); white-space: pre-wrap; }
+    .markdown-section pre, .markdown-section pre > code { background: var(--td-code); color: var(--td-text); }
+    .markdown-section pre > code { font-size: 0.85em; white-space: pre; }
+    .markdown-section table { display: table; width: 100%; }
+    .markdown-section tr { border-top-color: var(--td-line); }
+    .markdown-section td, .markdown-section th { border-color: var(--td-line); }
+    .markdown-section tr:nth-child(2n) { background: var(--td-sidebar); }
+    .markdown-section blockquote { color: var(--td-muted); }
+    .sidebar, .sidebar-toggle { background: var(--td-sidebar); }
+    .sidebar { border-right: 1px solid var(--td-line); }
+    .sidebar ul li a { color: var(--td-muted); }
+    .sidebar ul li.active > a { color: var(--theme-color); }
+    .sidebar .search { border-bottom-color: var(--td-line); }
+    .search input { background: var(--td-bg); color: var(--td-text); }
+    .app-name-link { color: var(--td-text) !important; }
+    section.cover { background: var(--td-cover) !important; color: #fff; }
+    section.cover h1, section.cover blockquote p, section.cover ul { color: #fff; }
+    section.cover .cover-main > p:last-child a { border-color: #fff; color: #fff; }
+    section.cover .cover-main > p:last-child a:last-child { background: var(--theme-color); border-color: var(--theme-color); color: #fff; }
+    section.cover h1, section.cover h1 a, section.cover h1 span { color: #fff !important; -webkit-text-fill-color: #fff; }
+    section.cover h1 small { color: #9fc0ff !important; -webkit-text-fill-color: #9fc0ff; }
+    /* Desktop pictures: a console font that has the block and box characters
+       (IBM Plex Mono lacks the blocks, and a fallback font breaks the columns). */
+    .td-art { font-family: Consolas, "DejaVu Sans Mono", Menlo, "Courier New", monospace !important; }
+    .td-art { display: block; white-space: pre; overflow-x: auto; font-size: 13px; line-height: 1.25;
+      background: var(--td-code); color: var(--td-text); border-radius: 6px; padding: 12px 16px; }
+    /* Cover: the two pictures side by side, stacked on narrow screens. */
+    .cover-shots { display: flex; flex-wrap: wrap; gap: 22px; justify-content: center; align-items: center;
+      width: min(1180px, 94vw); margin: 18px auto 26px; position: relative; left: 50%; transform: translateX(-50%); }
+    .cover-shots figure { margin: 0; flex: 1 1 360px; max-width: 600px; }
+    .cover-shots img { display: block; width: 100%; height: auto; border-radius: 10px;
+      box-shadow: 0 10px 34px rgba(0, 0, 0, .45); }
+    .cover-shots figcaption { color: #cfe0ff; font-size: 14px; margin-top: 10px; }
+    .cover-shots figcaption b { color: #fff; }
+    .pagination-item-title, .pagination-item-label { color: var(--td-muted); }
+    .docsify-tabs__tab--active { color: var(--theme-color) !important; }
+    .docsify-tabs__content { background: transparent; }
+    /* Search: matched words in the result list and on the page opened from it. */
+    .search .search-keyword, mark.td-hl { background: #ffe27a; color: #1d1d1d; border-radius: 2px; padding: 0 1px;
+      font-style: normal; font-weight: 600; }
+    :root[data-theme="dark"] .search .search-keyword, :root[data-theme="dark"] mark.td-hl { background: #8a6d00; color: #fff; }
+    .td-hl-bar { background: var(--td-code); border-left: 4px solid #e0b000; border-radius: 4px; padding: 8px 12px;
+      margin: 0 0 1.2em; font-size: 0.9em; }
+    .td-hl-bar a { cursor: pointer; }
+    #td-theme { position: fixed; top: 12px; right: 16px; z-index: 30; background: var(--td-sidebar); color: var(--td-text);
+      border: 1px solid var(--td-line); border-radius: 6px; padding: 4px 10px; cursor: pointer; font: 13px "IBM Plex Sans", sans-serif; }
+  </style>
+  <script>
+    /* Light or dark: the viewer's last choice, else the system setting. */
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem('tinydesk-theme'); } catch (e) {}
+      if (!t) t = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+</head>
+<body>
+  <button id="td-theme" type="button" aria-label="Switch between light and dark">Dark / light</button>
+  <div id="app">Loading the TinyDesk documentation...</div>
+  <script>
+    document.getElementById('td-theme').addEventListener('click', function () {
+      var root = document.documentElement;
+      var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('tinydesk-theme', next); } catch (e) {}
+    });
+    window.$docsify = {
+      name: 'TinyDesk',
+      repo: '',                     // set to the GitHub URL once the repository is public
+      loadSidebar: true,
+      alias: { '/.*/_sidebar.md': '/_sidebar.md' },   // one sidebar for every folder
+      coverpage: true,
+      onlyCover: false,
+      subMaxLevel: 2,
+      auto2top: true,
+      relativePath: true,
+      search: { placeholder: 'Search the docs', noData: 'Nothing found', depth: 3 },
+      copyCode: { buttonText: 'Copy', successText: 'Copied' },
+      pagination: { previousText: 'Previous', nextText: 'Next', crossChapter: true, crossChapterText: true },
+      tabs: { persist: true, sync: true, theme: 'classic' },
+      plugins: [searchHighlight]
+    };
+
+    /* Search highlighting, as on docs.micropython.org: a search result opens
+     * its page with ?highlight=<words>; the page marks every match, scrolls to
+     * the first one (unless the link points at a heading) and offers
+     * "Hide search matches". The link can be shared. */
+    function searchHighlight(hook, vm) {
+      document.addEventListener('click', function (e) {
+        var a = e.target.closest ? e.target.closest('.matching-post a') : null;
+        var input = document.querySelector('.search input');
+        var q = input ? input.value.trim() : '';
+        if (!a || !q) return;
+        var href = a.getAttribute('href').replace(/([?&])highlight=[^&]*&?/, '$1').replace(/[?&]$/, '');
+        a.setAttribute('href', href + (href.indexOf('?') < 0 ? '?' : '&') + 'highlight=' + encodeURIComponent(q));
+      }, true);
+
+      function words(q) {
+        return q.split(/\s+/).filter(function (w) { return w.length > 1; })
+          .map(function (w) { return w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); });
+      }
+
+      function mark(root, rx) {
+        var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+          acceptNode: function (n) {
+            var p = n.parentNode;
+            if (!n.nodeValue.trim() || !p || /^(SCRIPT|STYLE|MARK|TEXTAREA)$/.test(p.nodeName) || p.closest('.td-hl-bar'))
+              return NodeFilter.FILTER_REJECT;
+            rx.lastIndex = 0;
+            return rx.test(n.nodeValue) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+          }
+        });
+        var nodes = [], n, first = null;
+        while ((n = walker.nextNode())) nodes.push(n);
+        nodes.forEach(function (node) {
+          var frag = document.createDocumentFragment(), text = node.nodeValue, last = 0, m;
+          rx.lastIndex = 0;
+          while ((m = rx.exec(text))) {
+            frag.appendChild(document.createTextNode(text.slice(last, m.index)));
+            var el = document.createElement('mark');
+            el.className = 'td-hl';
+            el.textContent = m[0];
+            frag.appendChild(el);
+            if (!first) first = el;
+            last = m.index + m[0].length;
+          }
+          frag.appendChild(document.createTextNode(text.slice(last)));
+          node.parentNode.replaceChild(frag, node);
+        });
+        return first;
+      }
+
+      function unmark(root) {
+        Array.prototype.forEach.call(root.querySelectorAll('mark.td-hl'), function (el) {
+          var parent = el.parentNode;
+          parent.replaceChild(document.createTextNode(el.textContent), el);
+          parent.normalize();
+        });
+      }
+
+      hook.doneEach(function () {
+        var q = vm.route.query.highlight;
+        var section = document.querySelector('.markdown-section');
+        if (!q || !section) return;
+        var list = words(q);
+        if (!list.length) return;
+        var first = mark(section, new RegExp('(' + list.join('|') + ')', 'gi'));
+        var bar = document.createElement('p');
+        bar.className = 'td-hl-bar';
+        bar.innerHTML = (first ? 'Search matches for <b></b> are highlighted. ' : 'No matches for <b></b> on this page. ') +
+          '<a role="button">Hide search matches</a>';
+        bar.querySelector('b').textContent = '\u201c' + q + '\u201d';
+        bar.querySelector('a').addEventListener('click', function () {
+          unmark(section);
+          bar.remove();
+          var h = location.hash.replace(/([?&])highlight=[^&]*&?/, '$1').replace(/[?&]$/, '');
+          history.replaceState(null, '', location.pathname + location.search + h);
+        });
+        section.insertBefore(bar, section.firstChild);
+        if (first && !vm.route.query.id) setTimeout(function () { first.scrollIntoView({ block: 'center' }); }, 50);
+      });
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4.13.1/lib/docsify.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4.13.1/lib/plugins/search.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-copy-code@2.1.1/dist/docsify-copy-code.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-pagination@2.10.1/dist/docsify-pagination.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-tabs@1.6.3/dist/docsify-tabs.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-c.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-ini.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-powershell.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-cmake.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-json.min.js"></script>
+</body>
+</html>
