@@ -54,20 +54,30 @@
     section.cover .cover-main > p:last-child a { border-color: #fff; color: #fff; }
     section.cover .cover-main > p:last-child a:last-child { background: var(--theme-color); border-color: var(--theme-color); color: #fff; }
     section.cover h1, section.cover h1 a, section.cover h1 span { color: #fff !important; -webkit-text-fill-color: #fff; }
-    section.cover h1 small { color: #9fc0ff !important; -webkit-text-fill-color: #9fc0ff; }
+    section.cover .cover-main { box-sizing: border-box; width: min(1180px, calc(100% - 48px));
+      flex: 0 1 auto; min-width: 0; margin: 48px auto; }
+    section.cover h1 small { display: block; position: static; margin-top: 8px;
+      font-size: 15px; color: #9fc0ff !important; -webkit-text-fill-color: #9fc0ff; }
     /* Desktop pictures: a console font that has the block and box characters
        (IBM Plex Mono lacks the blocks, and a fallback font breaks the columns). */
     .td-art { font-family: Consolas, "DejaVu Sans Mono", Menlo, "Courier New", monospace !important; }
     .td-art { display: block; white-space: pre; overflow-x: auto; font-size: 13px; line-height: 1.25;
       background: var(--td-code); color: var(--td-text); border-radius: 6px; padding: 12px 16px; }
     /* Cover: the two pictures side by side, stacked on narrow screens. */
-    .cover-shots { display: flex; flex-wrap: wrap; gap: 22px; justify-content: center; align-items: center;
-      width: min(1180px, 94vw); margin: 18px auto 26px; position: relative; left: 50%; transform: translateX(-50%); }
-    .cover-shots figure { margin: 0; flex: 1 1 360px; max-width: 600px; }
-    .cover-shots img { display: block; width: 100%; height: auto; border-radius: 10px;
+    .cover-shots { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px; width: 100%; margin: 26px auto; align-items: start; }
+    .cover-shots figure { margin: 0; min-width: 0; }
+    .cover-shots img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: contain;
+      background: #080a0d; border-radius: 10px;
       box-shadow: 0 10px 34px rgba(0, 0, 0, .45); }
     .cover-shots figcaption { color: #cfe0ff; font-size: 14px; margin-top: 10px; }
     .cover-shots figcaption b { color: #fff; }
+    .cover-shots figcaption a { color: #cfe0ff; text-decoration: underline; }
+    section.cover .capture-note { color: #cfe0ff; font-size: 13px; margin: -8px 0 24px; }
+    @media (max-width: 700px) {
+      section.cover .cover-main { width: calc(100% - 32px); margin: 32px auto; }
+      .cover-shots { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+    }
     .pagination-item-title, .pagination-item-label { color: var(--td-muted); }
     .docsify-tabs__tab--active { color: var(--theme-color) !important; }
     .docsify-tabs__content { background: transparent; }

@@ -1,17 +1,22 @@
-# TinyDesk <small>Developer preview</small>
+# TinyDesk <small>v0.1.0 · Developer preview</small>
 
-> An ESP32. A terminal. A desktop you can drag windows around.
+> A tiny board. A real desktop. Inside your terminal.
 
 <div class="cover-shots">
   <figure>
-    <img src="images/desktop.png" alt="TinyDesk Desktop: desktop icons and the taskbar, drawn in a terminal">
-    <figcaption><b>TinyDesk Desktop</b>: windows, apps and a mouse in a compatible terminal</figcaption>
+    <picture>
+      <source media="(prefers-reduced-motion: reduce)" srcset="media/desktop-demo-esp32.png">
+      <img src="media/desktop-demo-esp32.gif" alt="Editor, Files, System Monitor and Terminal opened, dragged and resized side by side on a physical ESP32, then About">
+    </picture>
+    <figcaption><b>TinyDesk Desktop</b>: four apps side by side on a real ESP32 · <a href="media/desktop-demo-esp32.mp4" target="_blank" rel="noopener">Watch the video</a></figcaption>
   </figure>
   <figure>
     <img src="images/terminal.png" alt="A TinyDesk Shell session on an ESP32 over its serial port">
     <figcaption><b>TinyDesk Shell</b>: the same shell on its own, on a serial console</figcaption>
   </figure>
 </div>
+
+<p class="capture-note">Captured from an ESP32 over USB serial at normal speed. The board runs the desktop.</p>
 
 - Windows, taskbar, start menu, mouse, and a real shell
 - Open Files, edit and save text, then run a command in Terminal
