@@ -7,7 +7,9 @@ that reaches users or changes an API (see [Maintaining these docs](maintaining.m
 Versions follow [Semantic Versioning](https://semver.org/): until 1.0.0 the
 API may still change between minor versions.
 
-## Unreleased
+## 0.1.1 (2026-09-28)
+
+TinyDesk 0.1.1, with TinyDesk Shell 0.1.1.
 
 * **PC programs: MQTT over TLS in the downloads.** The Windows and Linux
   programs of the 0.1.0 release were built without mbedTLS and refuse

@@ -182,8 +182,6 @@ esptool.py --chip esp32 write_flash 0x0 tinydesk-shell-VERSION-esp32-factory.bin
     (function () {
       /* The GitHub repository (one place to change). */
       var REPO = window.TINYDESK_RELEASE && window.TINYDESK_RELEASE.repository;
-      var TAG = window.TINYDESK_RELEASE && window.TINYDESK_RELEASE.publishedTag;
-      var LATEST = REPO && TAG ? REPO + '/releases/download/' + encodeURIComponent(TAG) + '/' : null;
 
       var root = document.documentElement, key = 'tinydesk-theme';
       try { var t = localStorage.getItem(key); if (t) root.setAttribute('data-theme', t); } catch (e) {}
@@ -259,9 +257,11 @@ esptool.py --chip esp32 write_flash 0x0 tinydesk-shell-VERSION-esp32-factory.bin
             if (r.ok) return;
             throw 0;
           }).catch(function () {
-            if (LATEST) {
-              a.href = LATEST + a.dataset.file;
-              a.nextElementSibling.textContent = a.dataset.file + ' from release ' + TAG;
+            if (REPO) {
+              /* Not on this site yet (a newer release than the installer's):
+               * the releases page has it. */
+              a.href = REPO + '/releases';
+              a.nextElementSibling.textContent = a.dataset.file + ' from the GitHub releases';
             } else {
               a.removeAttribute('href');
               a.setAttribute('aria-disabled', 'true');
@@ -349,7 +349,9 @@ esptool.py --chip esp32 write_flash 0x0 tinydesk-shell-VERSION-esp32-factory.bin
             var part = build.parts[0];
             if (part.offset !== 0 || !/^firmware\/[A-Za-z0-9_.-]+\.bin$/.test(part.path)) throw 0;
             return fetch(part.path, { method: 'HEAD', cache: 'no-store' }).then(function (r) {
-              if (!r.ok || Number(r.headers.get('Content-Length')) <= 0) throw 0;
+              /* Pages serves the images gzip-compressed, sometimes without a
+               * Content-Length: only a length of 0 means an empty file. */
+              if (!r.ok || r.headers.get('Content-Length') === '0') throw 0;
               return m;
             });
           }).then(function (m) {
