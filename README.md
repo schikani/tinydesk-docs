@@ -175,5 +175,6 @@ python -m unittest discover -s tools -p "test_*.py"
 MIT (see `LICENSE`), like the `tinydesk` and `tinydesk-shell` repositories.
 The pages load Docsify, its plugins, xterm.js, ESP Web Tools and fonts from
 public CDNs; those keep their own licences. The firmware and programs that
-the installer serves come from the `tinydesk` releases (MIT; third-party
-parts such as wolfSSH keep theirs, see that repository).
+the installer serves come from the `tinydesk` releases: the source is MIT,
+but the firmware images include wolfSSH and wolfSSL (GPL-3.0) and are
+therefore distributed under the GPL-3.0 as a whole (see that repository).
