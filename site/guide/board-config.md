@@ -145,12 +145,15 @@ values in use; `lan hw set` writes them here too.
 | `eth.spi_mhz` | 10 | SPI clock in MHz. |
 | `eth.poll_ms` | 100 | Poll period when `eth.int` is -1 (`lan poll` writes it). |
 
-### SD card (SPI, for `hwtest sd`)
+### SD card (SPI)
+
+For [`sd`](../shell/commands.md#sd) (the card at `/sd`) and `hwtest sd`.
 
 | Key | Default | Meaning |
 | --- | --- | --- |
-| `sd.cs` | -1 | Chip select; the test needs it. |
+| `sd.cs` | -1 | Chip select; the card needs it. |
 | `sd.miso`, `sd.mosi`, `sd.sclk`, `sd.spi_host` | the `eth.*` values | Only needed when the card is not on the Ethernet chip's bus. |
+| `sd.automount` | 0 | 1: mount the card at `/sd` at boot. |
 
 ### Console (classic ESP32 only)
 

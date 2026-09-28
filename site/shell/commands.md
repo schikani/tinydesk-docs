@@ -527,6 +527,46 @@ usage: ftp <start|stop|restart|status> [port]
 
 Default port 21. Errors include `ftp: permission denied: root, or any user on the local console/desktop` and `ftp: invalid port`.
 
+## sd
+
+The SD card as `/sd`: a card with a FAT file system (FAT12, FAT16 or FAT32;
+not exFAT, which large SDXC cards often come with: `sd format --yes` makes
+FAT32 on cards above about 1 GB) on the SPI bus, with the pins of the [board
+configuration](../guide/board-config.md#sd-card-spi) (`sd.cs`, and
+`sd.miso`/`sd.mosi`/`sd.sclk` or the W6100's `eth.*` bus, which the card
+then shares with Ethernet). Root only.
+
+```
+usage: sd [status] | sd mount | sd umount | sd format --yes
+```
+
+```
+# sd mount
+SD card SB16G mounted at /sd.
+# sd
+SD card:   mounted at /sd
+Pins:      SPI2 MISO 18 MOSI 23 SCLK 19 CS 22, 10000 kHz
+At boot:   not mounted (board set sd.automount 1)
+Card:      SB16G, SDHC/SDXC
+Size:      14 GB
+Free:      14 GB
+```
+
+While it is mounted the card is `/sd` everywhere: in the shell (`ls /sd`,
+`cd /sd`, `nano`, `cp`), over FTP and, for root, SFTP, and in the desktop's
+**Files** app as the folder `sd` at the top. Long file names work. The `sd`
+folder itself cannot be deleted or renamed in Files.
+
+- `sd mount` never formats; a card that has no FAT file system says so.
+- `sd umount` before removing the card (close files on it first).
+- `sd format --yes` erases the whole card and makes a new FAT file system,
+  then mounts it.
+- `board set sd.automount 1` mounts the card at every boot (a missing card
+  is logged, not an error).
+
+The mounted card uses a few KB of internal RAM (FAT buffers for up to five
+open files).
+
 ## hwtest
 
 Loopback tests for the board's SD card, TTL UART and RS-485 pair. Root only. The pins come from the [board configuration](../guide/board-config.md) (`sd.*`, `eth.*` for the shared SPI bus, `rs485.1.*`, `rs485.2.*`); a test whose pins are not configured is skipped. The TTL UART test uses the ESP32-C6's LP UART (GPIO5 TX, GPIO4 RX) and is skipped on other chips.
@@ -548,6 +588,8 @@ RS485-2   : not configured
 -----------------------------------------------
 ```
 
+`hwtest sd` mounts the card for the test and unmounts it afterwards; when
+it is already mounted (`sd mount`) it tests on it and leaves it mounted.
 A skipped test prints `[SKIP] <name>` and does not count as a failure in `hwtest all`. `hwtest rs485` needs both RS-485 UARTs: `modbus` RTU releases a line 15 s after its last request, until then the Modbus side holds the UART.
 
 ## lan

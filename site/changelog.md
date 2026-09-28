@@ -9,6 +9,12 @@ API may still change between minor versions.
 
 ## Unreleased
 
+* **SD card at `/sd`** (TinyDesk Shell's new `sd` command, root only):
+  `sd mount`, `sd umount`, `sd format --yes`, `sd status`, and
+  `sd.automount = 1` in the board configuration for mounting at boot. The
+  card is `/sd` in the shell, FTP and SFTP, and the folder `sd` in Files
+  (`td_fs_stdio_redirect()`). Tested on an ESP32-C6 with its SD card on the
+  W6100's SPI bus; long file names work.
 * **`ping` in the Terminal window** (TinyDesk Shell): the replies and the
   statistics now appear (only the `PING` line did), and `ping -c <count>`
   works on the boards as on the PC.
