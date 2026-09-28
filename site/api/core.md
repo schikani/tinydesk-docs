@@ -231,7 +231,7 @@ Notes:
 ## Version
 
 ```c
-#define TD_VERSION "0.1.1"
+#define TD_VERSION "0.1.2"
 #define TD_REPO_URL "https://github.com/schikani/tinydesk"
 #define TD_SHELL_REPO_URL "https://github.com/schikani/tinydesk-shell"
 ```

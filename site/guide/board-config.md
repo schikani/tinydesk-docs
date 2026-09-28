@@ -148,6 +148,10 @@ values in use; `lan hw set` writes them here too.
 ### SD card (SPI)
 
 For [`sd`](../shell/commands.md#sd) (the card at `/sd`) and `hwtest sd`.
+The firmware of a release has no pins built in: on a board with a card slot
+set them once and restart, for example `board set sd.cs 22` when the card
+shares the W6100's bus (the `eth.*` keys), otherwise also `sd.miso`,
+`sd.mosi` and `sd.sclk`.
 
 | Key | Default | Meaning |
 | --- | --- | --- |

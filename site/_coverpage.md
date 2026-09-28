@@ -1,4 +1,4 @@
-# TinyDesk <small>v0.1.1 · Developer preview</small>
+# TinyDesk <small>v0.1.2 · Developer preview</small>
 
 > A tiny board. A real desktop. Inside your terminal.
 
@@ -17,7 +17,7 @@
     <figcaption><b>TinyDesk Desktop</b>: four apps side by side on a real ESP32 · <a href="media/desktop-demo-esp32.mp4" target="_blank" rel="noopener">Watch the video</a></figcaption>
   </figure>
   <figure>
-    <img src="images/terminal.png" alt="TinyDesk Shell 0.1.1 on an ESP32 serial console: the welcome banner, then version, ls, shell arithmetic and heap">
+    <img src="images/terminal.png" alt="TinyDesk Shell 0.1.2 on an ESP32 serial console: the welcome banner, then version, ls, shell arithmetic and heap">
     <figcaption><b>TinyDesk Shell</b>: the same shell on its own, on a serial console</figcaption>
   </figure>
 </div>
