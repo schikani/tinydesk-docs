@@ -59,7 +59,7 @@ From a GitHub release (the `tinydesk` repository's release workflow makes
 a draft prerelease for every `v*` tag, after CI succeeds):
 
 ```bash
-python tools/fetch_release.py --repo schikani/tinydesk            # the latest release
+python tools/fetch_release.py --repo schikani/tinydesk            # the newest published release
 python tools/fetch_release.py --repo schikani/tinydesk --tag v0.1.0
 ```
 
@@ -87,11 +87,12 @@ images.
    into `site/install/` (with `fetch_release.py`) and deploys `site/`.
 3. The site is at `https://<owner>.github.io/tinydesk-docs/`.
 
-After publishing a TinyDesk release, run the workflow again. For a
-pre-release, enter its tag (for example `v0.1.0`) in the *Run workflow*
-form: GitHub's "latest release" skips pre-releases and drafts. Without any
-release the site still deploys; the installer then shows its "not
-available yet" notes.
+After publishing a TinyDesk release, run the workflow again. It takes the
+newest published release, pre-releases included; to pin one (for example
+to roll back), enter its tag in the *Run workflow* form or set the
+repository variable `INSTALLER_TAG`. Drafts are never used: publish the
+release first. Without any release the site still deploys; the installer
+then shows its "not available yet" notes.
 
 A custom domain: Settings → Pages → *Custom domain*, plus a `CNAME` DNS
 record pointing at `<owner>.github.io`; tick *Enforce HTTPS* (the installer

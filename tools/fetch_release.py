@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """fetch_release.py - put a TinyDesk release into the site's web installer.
 
-    python tools/fetch_release.py --repo schikani/tinydesk            # the latest GitHub release
+    python tools/fetch_release.py --repo schikani/tinydesk            # the newest published release
     python tools/fetch_release.py --repo schikani/tinydesk --tag v0.1.0
     python tools/fetch_release.py --from ../tinydesk/dist/tinydesk-0.1.0   # a local make_release.py output
 
@@ -39,17 +39,37 @@ def http_get(url, accept="application/octet-stream"):
         return r.read()
 
 
-def download_release(repo, tag, into):
-    api = "https://api.github.com/repos/%s/releases/%s" % (repo, "tags/" + tag if tag else "latest")
+def get_json(url):
+    return json.loads(http_get(url, "application/vnd.github+json"))
+
+
+def find_release(repo, tag):
+    """The release to install: the tagged one, else the one marked latest,
+    else the newest published pre-release (GitHub's "latest" skips
+    pre-releases, and every TinyDesk release starts as one). Drafts are
+    never visible here."""
+    base = "https://api.github.com/repos/%s/releases" % repo
     try:
-        release = json.loads(http_get(api, "application/vnd.github+json"))
+        if tag:
+            return get_json(base + "/tags/" + tag)
+        try:
+            return get_json(base + "/latest")
+        except urllib.error.HTTPError as e:
+            if e.code != 404:
+                raise
+        for release in get_json(base + "?per_page=20"):
+            if not release.get("draft"):
+                return release
+        sys.exit("no published release in %s (a draft must be published first); nothing was changed" % repo)
     except urllib.error.HTTPError as e:
         if e.code == 404:
-            # "latest" skips drafts and pre-releases; a draft is invisible here.
-            sys.exit("no published release %s in %s (a draft or pre-release needs --tag, "
-                     "and a draft must be published first); nothing was changed"
-                     % ("tagged " + tag if tag else "marked as latest", repo))
-        sys.exit("GitHub answered %d for %s; nothing was changed" % (e.code, api))
+            sys.exit("no published release %s in %s (a draft must be published first); nothing was changed"
+                     % ("tagged " + tag if tag else "at all", repo))
+        sys.exit("GitHub answered %d for %s; nothing was changed" % (e.code, e.url))
+
+
+def download_release(repo, tag, into):
+    release = find_release(repo, tag)
     print("release %s (%d files)" % (release.get("tag_name"), len(release.get("assets", []))))
     for asset in release.get("assets", []):
         name = asset["name"]
@@ -148,7 +168,7 @@ def main():
     src = ap.add_mutually_exclusive_group(required=True)
     src.add_argument("--repo", help="GitHub repository, e.g. schikani/tinydesk")
     src.add_argument("--from", dest="local", help="a folder made by make_release.py (dist/tinydesk-<version>)")
-    ap.add_argument("--tag", help="release tag (default: the latest release)")
+    ap.add_argument("--tag", help="release tag (default: the newest published release, pre-releases included)")
     ap.add_argument("--site", default=SITE, help="the site folder (default: ../site)")
     args = ap.parse_args()
 

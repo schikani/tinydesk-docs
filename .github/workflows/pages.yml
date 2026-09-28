@@ -9,8 +9,9 @@ name: GitHub Pages
 # browser's installer cannot fetch files from github.com.
 #
 # Runs on every push to main, and by hand (Actions -> GitHub Pages -> Run
-# workflow) after publishing a release; enter the tag there for a
-# pre-release, which GitHub's "latest release" skips.
+# workflow) after publishing a release. Without a tag (the form, the
+# dispatch payload or the INSTALLER_TAG variable) it takes the newest
+# published release, pre-releases included.
 
 on:
   push:
@@ -18,7 +19,7 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: "Release tag to put into the installer (empty: the latest published release)"
+        description: "Release tag to put into the installer (empty: the newest published release)"
         required: false
         default: ""
   # Sent by the tinydesk repository after a release, if you set that up:

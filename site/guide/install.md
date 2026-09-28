@@ -79,7 +79,7 @@ when switching editions. Compare the files with `SHA256SUMS.txt`.
 ## Linux and Windows
 
 Download the archive for your edition from the
-[latest release](https://github.com/schikani/tinydesk/releases/latest),
+[releases page](https://github.com/schikani/tinydesk/releases),
 unpack it and start the program from a terminal:
 
 <!-- tabs:start -->
