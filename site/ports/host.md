@@ -50,9 +50,14 @@ like the taskbar clock. There is no `nano` on Windows: use the Editor.
 
 * No task list, PSRAM, OTA or network backend: the apps show "n/a" or
   hide those parts.
-* TLS for MQTT is built when ESP-IDF's mbedTLS sources are found
-  (`TD_MBEDTLS_DIR`, detected automatically); CA certificates come from the
-  Windows ROOT store or the Linux system bundle.
+* MQTT over TLS needs an mbedTLS 3.x source tree: `TD_MBEDTLS_DIR`, or
+  ESP-IDF's copy, found automatically when ESP-IDF is installed. Without one
+  the program still builds and `mqtts` is refused ("not available in this
+  build"); `-DTD_REQUIRE_TLS=ON` makes that a configure error instead. CI
+  and the release workflow build against upstream mbedTLS v3.6.7 (the 3.6
+  LTS branch that ESP-IDF 5.3.1 ships as 3.6.0) with `TD_REQUIRE_TLS` on and
+  check that `mqtt connect mqtts://...` gets past the TLS check. CA
+  certificates come from the Windows ROOT store or the Linux system bundle.
 * The screen limit is 400x150 (`td_config.h` defaults): the desktop follows
   the terminal window when it is resized or maximised, like on the ESP32 with
   PSRAM.

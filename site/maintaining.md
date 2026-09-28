@@ -61,13 +61,15 @@ TinyDesk Shell have their own version numbers (both started at 0.1.0).
 3. If the shell changed, commit and push it in its own repository first,
    then commit the new submodule pointer in `tinydesk` (see
    [Contributing](contributing.md#working-on-the-shell)).
-4. Tag `v<version>` in `tinydesk` (and `v<shell version>` in the shell
-   repository): `.github/workflows/release.yml` builds both editions for
-   every platform and attaches the images and PC programs to the GitHub
-   Release.
-5. Here: `python tools/fetch_release.py --repo <you>/tinydesk`, add the
-   `changelog.md` entry, set the version in `_coverpage.md` and check the
-   links.
+4. Tag `v<version>` in `tinydesk`: its `.github/workflows/release.yml`
+   builds both editions for every platform and attaches the images and PC
+   programs to a draft pre-release. Tag `v<shell version>` (the shell's
+   `VERSION`) in `tinydesk-shell` too: its own release workflow publishes
+   the Shell edition there, with the same file names. Review each draft
+   on GitHub and publish it.
+5. Here: add the `changelog.md` entry, set the version in `_coverpage.md`,
+   push, and run the *GitHub Pages* workflow: it puts the newest published
+   `tinydesk` release into the installer.
 
 ## Generated reference (optional)
 

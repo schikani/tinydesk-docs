@@ -7,6 +7,17 @@ that reaches users or changes an API (see [Maintaining these docs](maintaining.m
 Versions follow [Semantic Versioning](https://semver.org/): until 1.0.0 the
 API may still change between minor versions.
 
+## Unreleased
+
+* **PC programs: MQTT over TLS in the downloads.** The Windows and Linux
+  programs of the 0.1.0 release were built without mbedTLS and refuse
+  `mqtts` ("not available in this build"); programs built from source with
+  ESP-IDF installed are not affected. CI and the release workflow now build
+  against mbedTLS v3.6.7, stop without it (`TD_REQUIRE_TLS`) and test that
+  TLS is built in.
+* **TinyDesk Shell releases** in its own repository, from its own release
+  workflow, with the same file names as the Shell edition here.
+
 ## 0.1.0 (2026-09-26): first public release
 
 TinyDesk 0.1.0, with TinyDesk Shell 0.1.0.
