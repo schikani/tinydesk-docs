@@ -122,6 +122,11 @@ classic ESP32's `undefined reference to MD5Init` (libsmb2) is handled by
 TinyDesk Shell's `tdsh_md5_rom.c`; if you see it, the shell submodule is
 out of date (`git submodule update --init`).
 
+**`ninja: error: mkdir(...): No such file or directory` on Windows**, often
+while building the bootloader. The checkout's path is too long for Windows'
+260-character limit once ESP-IDF adds its nested build folders. Clone into a
+short folder (`C:\src\tinydesk`) and build again.
+
 **`export.ps1` picks the wrong Python.** Activate ESP-IDF with
 `C:\Espressif\Initialize-Idf.ps1 -IdfId <id>` (the ESP-IDF shortcut does the
 same).

@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
-from fetch_release import verify
+from fetch_release import verify, stamp_versions
 
 
 class ReleaseValidation(unittest.TestCase):
@@ -21,6 +21,17 @@ class ReleaseValidation(unittest.TestCase):
         files = sorted(p for p in self.root.iterdir() if p.name != 'SHA256SUMS.txt')
         (self.root/'SHA256SUMS.txt').write_text(''.join(
             hashlib.sha256(p.read_bytes()).hexdigest()+'  '+p.name+'\n' for p in files))
+
+    def test_stamp_versions(self):
+        site = self.root/'site'
+        (site/'install').mkdir(parents=True)
+        (site/'_coverpage.md').write_text('# TinyDesk <small>v0.1.0 · Developer preview</small>\n', encoding='utf-8')
+        (site/'install'/'index.html').write_text('==\n              Version 0.1.0\n==\n', encoding='utf-8')
+        self.manifest.write_text(json.dumps({'version': '0.2.3', 'builds': []}))
+        (self.root/'manifest-shell-esp32.json').write_text(json.dumps({'version': '0.2.4', 'builds': []}))
+        stamp_versions(str(self.root), str(site))
+        self.assertIn('<small>v0.2.3 · Developer', (site/'_coverpage.md').read_text(encoding='utf-8'))
+        self.assertIn('Version 0.2.4\n', (site/'install'/'index.html').read_text(encoding='utf-8'))
 
     def test_valid(self):
         verify(str(self.root))

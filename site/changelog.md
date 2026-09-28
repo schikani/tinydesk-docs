@@ -7,6 +7,28 @@ that reaches users or changes an API (see [Maintaining these docs](maintaining.m
 Versions follow [Semantic Versioning](https://semver.org/): until 1.0.0 the
 API may still change between minor versions.
 
+## Unreleased
+
+* **`ping` in the Terminal window** (TinyDesk Shell): the replies and the
+  statistics now appear (only the `PING` line did), and `ping -c <count>`
+  works on the boards as on the PC.
+* **Documentation and web installer:**
+  * The cover shows the current version and puts *Install / Download*
+    (straight to the installer) right under the headline; `tools/fetch_release.py` writes the installed
+    release's version into the cover and the installer.
+  * Install: the Desktop edition's needs are given per board (the 4 MB
+    ESP32 runs without PSRAM, with an 80x25 screen and no SSH server or
+    OTA); updating is described per board, and the installer's advice
+    follows the chosen board (no Software Update on the 4 MB ESP32 or in
+    TinyDesk Shell).
+  * Brighter small text on the cover and in the web terminal; the
+    sidebar's section headings read like its links; "Installation" in the
+    sidebar.
+  * The installer shows the esptool command for the chosen board only (with
+    the release's file name), and only for ESP boards.
+  * Getting started and Troubleshooting: keep the checkout in a short
+    folder on Windows (`ninja: error: mkdir(...)`).
+
 ## 0.1.1 (2026-09-28)
 
 TinyDesk 0.1.1, with TinyDesk Shell 0.1.1.

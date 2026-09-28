@@ -45,19 +45,29 @@
     .sidebar, .sidebar-toggle { background: var(--td-sidebar); }
     .sidebar { border-right: 1px solid var(--td-line); }
     .sidebar ul li a { color: var(--td-muted); }
+    /* Section headings (Guides, API reference, ...): plain text items, shown
+       like the top-level links instead of Docsify's faint default. */
+    .sidebar > .sidebar-nav > ul > li { color: var(--td-text); font-weight: 600; }
+    .sidebar > .sidebar-nav > ul > li > a { color: var(--td-text); font-weight: 600; }
+    .sidebar > .sidebar-nav > ul > li > ul { font-weight: 400; }
     .sidebar ul li.active > a { color: var(--theme-color); }
     .sidebar .search { border-bottom-color: var(--td-line); }
     .search input { background: var(--td-bg); color: var(--td-text); }
     .app-name-link { color: var(--td-text) !important; }
     section.cover { background: var(--td-cover) !important; color: #fff; }
     section.cover h1, section.cover blockquote p, section.cover ul { color: #fff; }
-    section.cover .cover-main > p:last-child a { border-color: #fff; color: #fff; }
-    section.cover .cover-main > p:last-child a:last-child { background: var(--theme-color); border-color: var(--theme-color); color: #fff; }
+    /* The main actions, right under the headline. */
+    section.cover .cover-cta { margin: 22px 0 6px; }
+    section.cover .cover-cta a { display: inline-block; margin: 6px 12px 6px 0; padding: 10px 22px;
+      border: 1px solid #fff; border-radius: 2rem; color: #fff; font-size: 16px; text-decoration: none; }
+    section.cover .cover-cta a.primary { background: var(--theme-color); border-color: var(--theme-color);
+      font-weight: 600; font-size: 17px; }
+    section.cover .cover-cta a:hover { opacity: .9; }
     section.cover h1, section.cover h1 a, section.cover h1 span { color: #fff !important; -webkit-text-fill-color: #fff; }
     section.cover .cover-main { box-sizing: border-box; width: min(1180px, calc(100% - 48px));
       flex: 0 1 auto; min-width: 0; margin: 48px auto; }
     section.cover h1 small { display: block; position: static; margin-top: 8px;
-      font-size: 15px; color: #9fc0ff !important; -webkit-text-fill-color: #9fc0ff; }
+      font-size: 17px; color: #e3edff !important; -webkit-text-fill-color: #e3edff; }
     /* Desktop pictures: a console font that has the block and box characters
        (IBM Plex Mono lacks the blocks, and a fallback font breaks the columns). */
     .td-art { font-family: Consolas, "DejaVu Sans Mono", Menlo, "Courier New", monospace !important; }
@@ -70,10 +80,10 @@
     .cover-shots img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: contain;
       background: #080a0d; border-radius: 10px;
       box-shadow: 0 10px 34px rgba(0, 0, 0, .45); }
-    .cover-shots figcaption { color: #cfe0ff; font-size: 14px; margin-top: 10px; }
+    .cover-shots figcaption { color: #e3edff; font-size: 15px; margin-top: 10px; }
     .cover-shots figcaption b { color: #fff; }
     .cover-shots figcaption a { color: #cfe0ff; text-decoration: underline; }
-    section.cover .capture-note { color: #cfe0ff; font-size: 13px; margin: -8px 0 24px; }
+    section.cover .capture-note { color: #e3edff; font-size: 14px; margin: -8px 0 24px; }
     @media (max-width: 700px) {
       section.cover .cover-main { width: calc(100% - 32px); margin: 32px auto; }
       .cover-shots { grid-template-columns: minmax(0, 1fr); gap: 24px; }

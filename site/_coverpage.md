@@ -1,6 +1,12 @@
-# TinyDesk <small>v0.1.0 · Developer preview</small>
+# TinyDesk <small>v0.1.1 · Developer preview</small>
 
 > A tiny board. A real desktop. Inside your terminal.
+
+<p class="cover-cta">
+  <a class="primary" href="install/">Install / Download</a>
+  <a href="#/guide/getting-started">Build from source</a>
+  <a href="https://github.com/schikani/tinydesk">GitHub</a>
+</p>
 
 <div class="cover-shots">
   <figure>
@@ -25,7 +31,3 @@
 - Remote access is opt-in after changing the factory root password
 - Portable C11 core with a four-function port layer: ports for ESP32-C6, ESP32, Linux and Windows
 - TinyDesk Shell: the same shell as an app on the desktop, or on its own
-
-[Install](/guide/install.md)
-[Get started](/guide/getting-started.md)
-[GitHub](https://github.com/schikani/tinydesk)

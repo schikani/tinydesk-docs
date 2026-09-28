@@ -13,9 +13,9 @@ in two editions:
 | | TinyDesk Desktop | TinyDesk Shell |
 | --- | --- | --- |
 | What you get | windows, taskbar, start menu, mouse and the apps (Files, Editor, Network, MQTT, Modbus, Task Manager, ...), with the shell in the Terminal window | the shell alone on the console |
-| Shell features | all of them | all of them: users, files, `.tdsh` scripts, Wi-Fi, Ethernet, SSH/SFTP, FTP, SMB, `board`, `hwtest` |
+| Shell features | all of them, except the SSH server on the 4 MB ESP32 | all of them: users, files, `.tdsh` scripts, Wi-Fi, Ethernet, SSH/SFTP, FTP, SMB, `board`, `hwtest` |
 | Terminal | a VT terminal with mouse support (PuTTY, Windows Terminal, ...) | any serial terminal |
-| Resources | more flash and RAM (the ESP32 needs PSRAM) | less; runs on more boards |
+| Resources | more flash and RAM: on the classic ESP32, PSRAM gives large screens, SSH and OTA updates; without PSRAM (4 MB) the screen is at most 80x25, with no SSH server and no OTA | less; runs on more boards |
 | Repository | [`tinydesk`](https://github.com/schikani/tinydesk) | [`tinydesk-shell`](https://github.com/schikani/tinydesk-shell) |
 
 ## Platforms
@@ -62,12 +62,15 @@ A release has one image per board and edition, written at offset 0:
 
 ```bash
 pip install esptool
-esptool.py --chip esp32c6 write_flash 0x0 tinydesk-desktop-0.1.0-esp32c6-factory.bin
-esptool.py --chip esp32 -b 921600 write_flash 0x0 tinydesk-desktop-0.1.0-esp32-factory.bin
-esptool.py --chip esp32 -b 921600 write_flash 0x0 tinydesk-desktop-0.1.0-esp32-4mb-factory.bin
-esptool.py --chip esp32c6 write_flash 0x0 tinydesk-shell-0.1.0-esp32c6-factory.bin
-esptool.py --chip esp32 write_flash 0x0 tinydesk-shell-0.1.0-esp32-factory.bin
+esptool.py --chip esp32c6 write_flash 0x0 tinydesk-desktop-VERSION-esp32c6-factory.bin
+esptool.py --chip esp32 -b 460800 write_flash 0x0 tinydesk-desktop-VERSION-esp32-factory.bin
+esptool.py --chip esp32 -b 460800 write_flash 0x0 tinydesk-desktop-VERSION-esp32-4mb-factory.bin
+esptool.py --chip esp32c6 write_flash 0x0 tinydesk-shell-VERSION-esp32c6-factory.bin
+esptool.py --chip esp32 -b 460800 write_flash 0x0 tinydesk-shell-VERSION-esp32-factory.bin
 ```
+
+`VERSION` is the version in the release's file names (for example
+`tinydesk-desktop-0.1.1-esp32c6-factory.bin`).
 
 Add `-p <port>` if esptool picks the wrong one. The image covers everything
 below the file system (bootloader, partition table, NVS, the apps), so NVS
@@ -107,10 +110,16 @@ shell program in `~/.local/share/tdsh/rootfs`, apart from your real home.
 
 ## Updating
 
-A Desktop board that is set up updates itself: **Software Update** on the
-board, or `ota install <url>` ([Shell commands](../shell/commands.md#ota)),
-keeps users, networks and files. The web installer and the factory images
-are for new installs.
+| Board | How to update | What is kept |
+| --- | --- | --- |
+| Desktop on the ESP32-C6 or the ESP32 with PSRAM | **Software Update** on the board, or `ota install <url>` ([Shell commands](../shell/commands.md#ota)) | everything: users, networks, files, settings |
+| Desktop on the 4 MB ESP32 (no OTA) | flash the new release: the web installer *without* **Erase device**, or esptool as above | files in `/fs`; users, Wi-Fi networks and the root password start fresh |
+| TinyDesk Shell (any board) | flash the new release the same way | files in `/fs` |
+| Windows, Linux | unpack the new archive and start the new program | the desktop's files in `tinydesk_fs` (next to where you start it), the shell's in your profile |
+
+The factory images start the NVS partition fresh, which is where users,
+Wi-Fi networks and passwords live. Note them before updating a board
+without OTA.
 
 ## What is in a release
 

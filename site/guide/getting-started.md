@@ -101,6 +101,12 @@ idf.py -p /dev/ttyACM0 flash     # macOS: /dev/cu.usbmodem*
 Wi-Fi networks and settings. On Windows, `ports\esp32c6\build.ps1 -Port COM3`
 finds the ESP-IDF 5.3.1 installation itself.
 
+On Windows, keep the checkout in a short folder such as `C:\src\tinydesk`.
+ESP-IDF's build folders nest deeply, and a checkout far down a long path
+(for example inside `%TEMP%` or a deep profile folder) runs past Windows'
+260-character path limit: the build stops with `ninja: error: mkdir(...):
+No such file or directory`.
+
 Open the board's USB port (it shows up as "USB JTAG/serial debug unit") in
 a terminal and press a key: the desktop appears. The baud rate does not
 matter on USB Serial/JTAG.

@@ -1,6 +1,6 @@
 - [Home](/)
 - Guides
-  - [Install without ESP-IDF](/guide/install.md)
+  - [Installation](/guide/install.md)
   - [First login and users](/guide/first-login.md)
   - [Board configuration (pins)](/guide/board-config.md)
   - [Getting started (build from source)](/guide/getting-started.md)

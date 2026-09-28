@@ -13,7 +13,10 @@ SHA256SUMS.txt and puts them where site/install/index.html expects them:
     site/install/downloads/*.tar.gz, *.zip         the PC programs
     site/install/SHA256SUMS.txt, README.txt
 
-Files of the previous release there are replaced. Only the Python standard
+It also writes the release's version into the cover (site/_coverpage.md)
+and the installer's TinyDesk Shell picture, so the site never shows an
+older version than the one it installs. Files of the previous release
+there are replaced. Only the Python standard
 library is needed. Set GITHUB_TOKEN if GitHub's rate limit gets in the way.
 """
 import argparse
@@ -163,6 +166,35 @@ def install(folder, site):
           % (os.path.normpath(dest), counts["firmware"], counts["manifests"], counts["downloads"]))
 
 
+def manifest_version(folder, edition):
+    for name in sorted(os.listdir(folder)):
+        if name.startswith("manifest-%s-" % edition) and name.endswith(".json"):
+            with open(os.path.join(folder, name), encoding="utf-8") as f:
+                return json.load(f).get("version")
+    return None
+
+
+def stamp_versions(folder, site):
+    """The cover's "vX.Y.Z · Developer preview" and the Shell banner in the
+    installer follow the installed release."""
+    targets = [
+        (os.path.join(site, "_coverpage.md"), manifest_version(folder, "desktop"),
+         r"(<small>v)[0-9][0-9A-Za-z.+-]*( ·)"),
+        (os.path.join(site, "install", "index.html"), manifest_version(folder, "shell"),
+         r"(\r?\n {14}Version )[0-9][0-9A-Za-z.+-]*(\r?\n=)"),
+    ]
+    for path, version, pattern in targets:
+        if not version or not re.fullmatch(r"[0-9][0-9A-Za-z.+-]*", version) or not os.path.exists(path):
+            continue
+        with open(path, encoding="utf-8", newline="") as f:
+            text = f.read()
+        new, n = re.subn(pattern, lambda m: m.group(1) + version + m.group(2), text, count=1)
+        if n and new != text:
+            with open(path, "w", encoding="utf-8", newline="") as f:
+                f.write(new)
+            print("version %s written into %s" % (version, os.path.relpath(path, site)))
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     src = ap.add_mutually_exclusive_group(required=True)
@@ -175,11 +207,13 @@ def main():
     if args.local:
         verify(args.local)
         install(args.local, args.site)
+        stamp_versions(args.local, args.site)
         return
     with tempfile.TemporaryDirectory() as tmp:
         download_release(args.repo, args.tag, tmp)
         verify(tmp)
         install(tmp, args.site)
+        stamp_versions(tmp, args.site)
 
 
 if __name__ == "__main__":
