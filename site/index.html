@@ -84,7 +84,13 @@
     .cover-shots figcaption b { color: #fff; }
     .cover-shots figcaption a { color: #cfe0ff; text-decoration: underline; }
     section.cover .capture-note { color: #e3edff; font-size: 14px; margin: -8px 0 24px; }
+    /* A table wider than the text column scrolls in its own box instead of
+       being cut off (the page's main area hides overflow). */
+    @media (max-width: 1100px) {
+      .markdown-section table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    }
     @media (max-width: 700px) {
+      .markdown-section { max-width: 100%; padding: 24px 16px 40px; }
       section.cover .cover-main { width: calc(100% - 32px); margin: 32px auto; }
       .cover-shots { grid-template-columns: minmax(0, 1fr); gap: 24px; }
     }

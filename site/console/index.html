@@ -39,7 +39,7 @@
     #note { background: var(--warn-bg); color: var(--warn); padding: 8px 16px; font-size: 14px; }
     #note[hidden] { display: none; }
     #wrap { flex: 1; min-height: 0; padding: 10px; display: flex; }
-    #term { flex: 1; min-width: 0; min-height: 0; }
+    #term { flex: 1; min-width: 0; min-height: 0; overflow: auto; }   /* a grid that still does not fit scrolls here */
     .xterm { height: 100%; }
     .xterm .xterm-viewport { background: transparent !important; }
     .xterm .xterm-screen { margin: 0 auto; }            /* centre a fixed-size grid */
@@ -143,7 +143,7 @@
       }
       var want = mode.split('x').map(Number);
       /* the largest font that shows the whole cols x rows grid */
-      for (var fs = 28; fs >= 8; fs--) {
+      for (var fs = 28; fs >= 6; fs--) {       /* 6 px: 80 columns on a phone */
         term.options.fontSize = fs;
         var d = fit.proposeDimensions();
         if (d && d.cols >= want[0] && d.rows >= want[1]) break;
