@@ -26,6 +26,10 @@ API may still change between minor versions.
     sidebar.
   * The installer shows the esptool command for the chosen board only (with
     the release's file name), and only for ESP boards.
+  * First start and esptool: the SSH note and the erase advice follow the
+    chosen board (no SSH server in the 4 MB Desktop build; no erase needed
+    to switch editions on 4 MB boards). The cover's Shell picture is a new
+    capture of TinyDesk Shell 0.1.1 on an ESP32.
   * Phones: wide tables scroll in their own box instead of being cut off,
     the text uses the full width, and the web terminal fits an 80x25 board
     screen without scrolling the page sideways.

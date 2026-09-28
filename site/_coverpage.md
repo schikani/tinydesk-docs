@@ -17,7 +17,7 @@
     <figcaption><b>TinyDesk Desktop</b>: four apps side by side on a real ESP32 · <a href="media/desktop-demo-esp32.mp4" target="_blank" rel="noopener">Watch the video</a></figcaption>
   </figure>
   <figure>
-    <img src="images/terminal.png" alt="A TinyDesk Shell session on an ESP32 over its serial port">
+    <img src="images/terminal.png" alt="TinyDesk Shell 0.1.1 on an ESP32 serial console: the welcome banner, then version, ls, shell arithmetic and heap">
     <figcaption><b>TinyDesk Shell</b>: the same shell on its own, on a serial console</figcaption>
   </figure>
 </div>

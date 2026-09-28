@@ -173,6 +173,7 @@ Hello root, from TinyDesk Shell on esp32.</pre>
         table and the app. Install esptool (<code>pip install esptool</code>), download <span id="esptool-file"></span>
         and write it, with your board's port in place of <code>PORT</code>:</p>
       <pre><code id="esptool-cmd"></code></pre>
+      <p id="esptool-erase"></p>
     </div>
     <p>Check the files against <code>SHA256SUMS.txt</code>. Images are not signed; see
       <a href="../#/security">Security</a>. All options side by side: <a href="../#/guide/install">Install</a> in the documentation.</p>
@@ -220,8 +221,13 @@ Hello root, from TinyDesk Shell on esp32.</pre>
                         'the board’s USB-UART chip needs its driver (CP210x or CH340)']
         }
       };
-      var PASSWORD = 'Run <code>passwd</code> locally (old password: <code>TinyDesk</code>) before remote access. ' +
-        'Telnet starts disabled and is root-only. SSH is a separate encrypted shell. Enable services explicitly after setup.';
+      function password(edition, board) {
+        var ssh = edition === 'desktop' && board === 'esp32-4mb'
+          ? 'This Desktop build has no SSH server (not enough RAM without PSRAM); use Telnet on a trusted network, or the Shell edition for SSH. '
+          : (edition === 'desktop' ? 'SSH is a separate encrypted shell, not the desktop. ' : 'SSH gives an encrypted remote shell. ');
+        return 'Run <code>passwd</code> locally (old password: <code>TinyDesk</code>) before remote access. ' +
+          'Telnet starts disabled and is root-only. ' + ssh + 'Enable services explicitly after setup.';
+      }
       function first(edition, board) {
         var speed = board === 'esp32c6' ? 'any speed on the ESP32-C6’s USB port'
                   : (edition === 'desktop' ? '<b>921600</b> baud' : '<b>115200</b> baud');
@@ -230,8 +236,8 @@ Hello root, from TinyDesk Shell on esp32.</pre>
           '), e.g. PuTTY (<a href="../#/guide/terminals">settings</a>): ' + speed + '. Press a key.' +
           (board !== 'esp32c6' ? ' On ESP32 dev boards <code>tools\\tinydesk_putty.cmd</code> connects without resetting the board.' : '');
         var start = edition === 'desktop'
-          ? 'The desktop opens as <b>root</b>. ' + PASSWORD
-          : 'The shell starts as <b>root</b>; <code>help</code> lists the commands. ' + PASSWORD;
+          ? 'The desktop opens as <b>root</b>. ' + password(edition, board)
+          : 'The shell starts as <b>root</b>; <code>help</code> lists the commands. ' + password(edition, board);
         var next = edition === 'desktop'
           ? 'Open <b>Network</b> to join Wi-Fi and the <b>Terminal</b> for the shell. Next: <a href="../#/guide/first-login">First login and users</a>.'
           : 'Join Wi-Fi with <code>wifiadd &lt;ssid&gt; &lt;password&gt;</code> and <code>wificonnect</code>; set your pins with <code>board set</code> ' +
@@ -249,6 +255,11 @@ Hello root, from TinyDesk Shell on esp32.</pre>
         document.getElementById('esptool-file').innerHTML = '<code>' + file + '</code>';
         document.getElementById('esptool-cmd').textContent =
           'esptool.py --chip ' + chip + ' -p PORT' + speed + ' write_flash 0x0 ' + file;
+        document.getElementById('esptool-erase').innerHTML = state.platform === 'esp32-4mb'
+          ? 'For a completely clean board run <code>esptool.py -p PORT erase_flash</code> first. Switching this board between ' +
+            'the Desktop and the Shell edition needs no erase: both use the same flash layout, and the files stay.'
+          : 'Run <code>esptool.py -p PORT erase_flash</code> first for a first install and when switching this board between ' +
+            'the Desktop and the Shell edition (the two lay out the flash differently).';
       }
 
       /* How a board that is set up gets a new version. */

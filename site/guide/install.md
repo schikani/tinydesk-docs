@@ -76,8 +76,12 @@ Add `-p <port>` if esptool picks the wrong one. The image covers everything
 below the file system (bootloader, partition table, NVS, the apps), so NVS
 starts fresh: users, Wi-Fi networks and the SSH host key are recreated.
 Files in `/fs` are kept when the edition stays the same. Run
-`esptool.py erase_flash` first for a completely clean board, and always
-when switching editions. Compare the files with `SHA256SUMS.txt`.
+`esptool.py erase_flash` first for a completely clean board, and when
+switching a board between the two editions: the ESP32-C6 and the ESP32 with
+PSRAM lay out their flash differently in the two editions. On 4 MB ESP32
+boards both editions share one layout, so there the files survive a switch
+without erasing (as with the web installer). Compare the files with
+`SHA256SUMS.txt`.
 
 ## Linux and Windows
 
