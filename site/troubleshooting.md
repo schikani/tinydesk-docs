@@ -1,6 +1,6 @@
 # Troubleshooting
 
-Problems met while building and using tinydesk, and what fixed them.
+Problems met while building and using TinyDesk, and what fixes them.
 
 ## The screen
 
@@ -9,7 +9,7 @@ redraws for a terminal it has not heard from. On the ESP32 check the speed
 (921600); garbage characters mean a wrong baud rate.
 
 **A burst of junk characters when an ESP32 board starts.** The ESP32 ROM
-prints its boot messages at 115200 before tinydesk starts; the desktop then
+prints its boot messages at 115200 before TinyDesk starts; the desktop then
 clears the screen. Only an eFuse removes them.
 
 **Symbols instead of the desktop in the installer's Logs & Console.** That
@@ -22,8 +22,7 @@ UTF-8. PuTTY: *Window → Translation → Remote character set: UTF-8*. Or turn
 on *ASCII-only drawing* in Settings.
 
 **The screen goes blank after resizing the window** (only the parts under
-the mouse come back). Fixed in 0.2.13; on older firmware press Ctrl+L or
-use Start → Redraw screen. The desktop uses at most 80x25 on the ESP32-C6
+the mouse come back). Press Ctrl+L or use Start → Redraw screen. The desktop uses at most 80x25 on the ESP32-C6
 and the 4 MB ESP32, 256x96 on the ESP32 with PSRAM and 400x150 in the
 Windows and Linux programs; a bigger window keeps the rest blank.
 
@@ -31,7 +30,7 @@ Windows and Linux programs; a bigger window keeps the rest blank.
 xterm-style mouse reporting* unticked. With Shift held, clicks go to
 PuTTY's own text selection.
 
-**Alt+F4 closes PuTTY.** Use Ctrl+Q to close a tinydesk window.
+**Alt+F4 closes PuTTY.** Use Ctrl+Q to close a TinyDesk window.
 
 ## Connecting
 
@@ -72,24 +71,28 @@ lists it, `board set` changes it (restart afterwards). See
 **`ssh start` says "insufficient internal RAM".** TinyDesk Shell's SSH server wants
 96 KB of free internal RAM on the ESP32-C6 (64 KB on the ESP32). Close
 windows (each app allocates while open), disconnect MQTT over TLS (about
-17 KB), or start SSH right after boot; `heap` shows the free RAM. From 0.2.14
-the C6 boots with about 109 KB free.
+17 KB), or start SSH right after boot; `heap` shows the free RAM (About shows it
+too).
 
-**`ssh stop` says "server shutdown timed out"** and a later start fails.
-Fixed in 0.2.9.
-
-**SSH/SFTP clients warn that the host key changed.** From 0.2.10 every
-board has its own key: compare the fingerprint with `ssh hostkey`, then
+**SSH/SFTP clients warn that the host key changed.** Every board has its own
+key, made on its first start (a reflashed board with an erased flash makes a
+new one): compare the fingerprint with `ssh hostkey`, then
 remove the old entry (`ssh-keygen -R <ip>`, or accept in PuTTY/FileZilla).
 
-**FileZilla says "Could not open directory".** Fixed in TinyDesk Shell's SFTP start
-folder; update the firmware.
+**FileZilla says "Could not open directory".** The folder does not exist
+or the user may not read it: check it with `ls -l` on the board.
 
 ## MQTT, Modbus, updates
 
 **MQTT: "not enough memory for ca.crt" or "SSL - Memory allocation failed".**
-Fixed in 0.2.7 (certificate files are read at their size). With little RAM
-left, close windows before connecting over TLS.
+TLS needs about 17 KB of free RAM while connected, plus room for the
+certificate files. Close windows before connecting over TLS, and keep
+`ca.crt` to the CA certificates the broker needs.
+
+**MQTT over TLS: "TLS (mqtts) is not available in this build".** The
+Windows and Linux programs of TinyDesk 0.1.0 were built without mbedTLS.
+Use a newer download, or build the program with
+`-DTD_MBEDTLS_DIR=<mbedTLS source>` ([TLS](api/tls.md)).
 
 **MQTT over TLS: "certificate verify failed".** The broker's certificate is
 not signed by a CA the board knows: set `cafile` in `mqtt.conf` to the
@@ -99,8 +102,9 @@ broker's CA certificate ([config files](shell/config-files.md)).
 parity (`rtu1:19200:8E1`), the unit id, and the A/B wiring; test with
 `tools/rtu_slave.py` on a PC adapter.
 
-**`modbus` reads the wrong address.** Before 0.2.15 a leading zero meant
-octal (`010` was 8).
+**`modbus` reads the wrong address.** Addresses and values are decimal
+(`010` is ten); write hexadecimal with `0x` (`0x10` is 16). Some devices
+number registers from 1 (40001 = holding register 0).
 
 **An update goes back to the old version after a restart.** A new image
 runs on trial for 30 s; a crash, a watchdog reset or a power cut before

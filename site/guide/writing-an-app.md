@@ -1,6 +1,6 @@
 # Writing an app
 
-This tutorial builds a small tinydesk app step by step: a window with widgets, a timer tick, a start menu entry and a desktop icon. It starts from the two programs in `examples/` and ends with a complete stopwatch app that follows the RAM rules of the ESP32 port. Everything here runs on the host build too, which is the quickest way to try it.
+This tutorial builds a small TinyDesk app step by step: a window with widgets, a timer tick, a start menu entry and a desktop icon. It starts from the two programs in `examples/` and ends with a complete stopwatch app that follows the RAM rules of the ESP32 port. Everything here runs on the host build too, which is the quickest way to try it.
 
 Header: `tinydesk/td.h` (core, windows, widgets), plus `apps/td_apps.h` if you use the built-in app services
 Examples: `examples/hello_window.c`, `examples/counter_app.c`, `apps/counter.c`
@@ -34,7 +34,7 @@ int main(void)
         .flags = TD_WIN_MOVABLE,
     };
     td_window_t *win = td_win_create(&desc);
-    td_label(win, 2, 1, 0, "Hello from tinydesk!");
+    td_label(win, 2, 1, 0, "Hello from TinyDesk!");
     td_button(win, 10, 3, "Quit", on_quit, NULL);
 
     td_run();
@@ -56,7 +56,7 @@ Build it with the host CMake project (`cmake -B build && cmake --build build`) a
 
 ## 2. An app instead of a window
 
-A tinydesk app is a `launch` function in a `td_app_t`. Registering it puts it in the start menu (F10) and on the desktop as an icon. `examples/counter_app.c`:
+A TinyDesk app is a `launch` function in a `td_app_t`. Registering it puts it in the start menu (F10) and on the desktop as an icon. `examples/counter_app.c`:
 
 ```c
 static td_widget_t *s_label;
@@ -149,7 +149,7 @@ The stopwatch shows the elapsed time with tenths, has Start/Stop and Reset butto
 
 ```c
 /*
- * stopwatch.c - a tinydesk app: state allocated while the window is open,
+ * stopwatch.c - a TinyDesk app: state allocated while the window is open,
  * static text drawn in on_draw, three widgets and a 100 ms tick.
  */
 #include <stdlib.h>

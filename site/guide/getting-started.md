@@ -1,6 +1,6 @@
 # Getting started
 
-This page builds tinydesk from source for a desktop terminal, an ESP32-C6
+This page builds TinyDesk from source for a desktop terminal, an ESP32-C6
 and a classic ESP32. To try it on a board without installing anything, use
 the [prebuilt firmware](install.md) instead. The terminal side
 (PuTTY settings, Telnet, SSH) is on [Terminals and connections](terminals.md).
@@ -47,8 +47,11 @@ cmake --build build
 <!-- tabs:end -->
 
 The shell's files live in `./tinydesk_fs`; the Files app browses the same
-tree. If ESP-IDF is installed, the host build finds its mbedTLS sources and
-builds MQTT over TLS too (see [TLS](../api/tls.md)).
+tree. For MQTT over TLS the host build needs mbedTLS 3.x sources: it finds
+the copy inside ESP-IDF, or give it one with
+`-DTD_MBEDTLS_DIR=<path>` (for example a clone of
+[mbedTLS](https://github.com/Mbed-TLS/mbedtls) v3.6.7 with its submodules).
+See [TLS](../api/tls.md).
 
 Tests:
 

@@ -1,6 +1,6 @@
 # Security
 
-tinydesk is meant for a bench or a trusted local network. This page lists
+TinyDesk is meant for a bench or a trusted local network. This page lists
 what protects what, and where the limits are.
 
 ## Physical access
@@ -68,7 +68,7 @@ ESP-IDF certificate bundle) or copy the file over SFTP.
 
 ## Reporting a problem
 
-Report a security problem in tinydesk or TinyDesk Shell itself (not a
+Report a security problem in TinyDesk or TinyDesk Shell itself (not a
 configuration choice above) privately through GitHub: the repository's
 **Security → Report a vulnerability** page. Other bugs go to the issue
 tracker. Fixes are noted in the [changelog](changelog.md).

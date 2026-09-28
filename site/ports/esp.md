@@ -64,7 +64,7 @@ partitions and project `CMakeLists.txt`); see `ports/esp32` for an example.
 
 ### HAL and Telnet mux: `hal_mux.h`, `telnet.h`
 
-`hal_mux_init()` returns the tinydesk HAL on top of the link. While a
+`hal_mux_init()` returns the TinyDesk HAL on top of the link. While a
 Telnet client is logged in, reads and writes go to the client instead, the
 local link shows a notice, and the desktop switches to the user who logged
 in (and back afterwards).
@@ -130,11 +130,12 @@ Rules that keep it there:
   out of the shared RAM (about 14 KB back);
 * protocol buffers exist only while connected.
 
-Boot free RAM on the C6 is about 109 KB with 0.2.14 (SSH start needs 98,304 B).
+After boot the C6 has enough free internal RAM for the SSH server (it needs
+98,304 B); `heap` shows how much is free.
 
 On the classic ESP32 with PSRAM the 180 KB data segment is too small for
 the large screen buffers, so `ports/esp32/main/extram.lf` places the `.bss`
-of tinydesk and TinyDesk Shell in PSRAM (screen, terminal, shell session),
+of TinyDesk and TinyDesk Shell in PSRAM (screen, terminal, shell session),
 TinyDesk Shell's SSH heap is taken from PSRAM when SSH first starts (its
 start check then wants 64 KB of internal RAM), and malloc'd blocks over
 4 KB go to PSRAM. About 157 KB of internal RAM is free with Wi-Fi up.
@@ -158,7 +159,7 @@ port fit; SSH itself does not start there for lack of RAM.
 | `CONFIG_SPIRAM*`, `CONFIG_SPIRAM_ALLOW_BSS_SEG_EXTERNAL_MEMORY` (ESP32 with PSRAM) | PSRAM for malloc and static buffers |
 | `CONFIG_ESP_WIFI_*_BUFFER_NUM` (4 MB ESP32) | fewer Wi-Fi buffers in internal RAM |
 
-The tinydesk component (`ports/esp32c6/components/tinydesk/CMakeLists.txt`)
+The TinyDesk component (`ports/esp32c6/components/tinydesk/CMakeLists.txt`)
 chooses the screen and widget limits from `CONFIG_SPIRAM`. Versions come
 from `PROJECT_VER` in each project's `CMakeLists.txt` (or the `TD_VERSION`
 environment variable), shown by About and Software Update.

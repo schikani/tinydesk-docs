@@ -1,6 +1,6 @@
 # Platform services (sysinfo)
 
-`td_sysinfo_t` is how a port tells tinydesk about the platform and hands it optional services: memory and task figures, the system clock and time zone, a filesystem, network control, firmware updates, user accounts and settings storage. The apps only reach the platform through this structure, so they build unchanged on the ESP32 and on the desktop hosts. Every member may be left `NULL` (or 0); the apps then show "n/a", hide a control or show a message.
+`td_sysinfo_t` is how a port tells TinyDesk about the platform and hands it optional services: memory and task figures, the system clock and time zone, a filesystem, network control, firmware updates, user accounts and settings storage. The apps only reach the platform through this structure, so they build unchanged on the ESP32 and on the desktop hosts. Every member may be left `NULL` (or 0); the apps then show "n/a", hide a control or show a message.
 
 Header: `include/tinydesk/td_sysinfo.h` (included by `tinydesk/td.h`)
 Sources: `src/td.c` (storage); implementations in `ports/esp32c6/main/main.c`, `net_esp.c`, `ota_esp.c` (also used by the classic ESP32 port in `ports/esp32`), `ports/common/host_main.c` and `ports/common/td_fs_stdio.c`
@@ -21,7 +21,7 @@ const td_sysinfo_t *td_sysinfo(void);
 `td_sysinfo()` returns the installed structure, or an empty one (all members `NULL`) when none was installed. It never returns `NULL`, so `td_sysinfo()->fs` is always safe to read; the members themselves must be checked.
 
 ```c
-static td_sysinfo_t s_info;           /* static: tinydesk keeps the pointer */
+static td_sysinfo_t s_info;           /* static: TinyDesk keeps the pointer */
 
 static uint32_t my_free_heap(void) { return board_free_ram(); }
 
@@ -312,7 +312,7 @@ Implementation: `ports/esp32c6/main/net_esp.c` (`net_esp_ops()`), on top of Tiny
 enum { TD_OTA_IDLE, TD_OTA_CHECKING, TD_OTA_INSTALLING, TD_OTA_DONE, TD_OTA_FAILED };
 
 typedef struct {
-    char version[32];          /* running firmware, e.g. "0.2.0" */
+    char version[32];          /* running firmware, e.g. "0.1.0" */
     char built[32];            /* "Sep 24 2026 10:12:03" */
     char sdk[32];              /* "v5.3.1" */
     char running[17];          /* slot names, e.g. "ota_0" */

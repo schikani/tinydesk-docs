@@ -1,6 +1,6 @@
 # Screen
 
-The screen module is the drawing layer under the window manager. The desktop is composed into a grid of character cells (`td_buffer_t`) with clipped drawing primitives, and the diff renderer turns the difference between the new grid and the one the terminal already shows into as few ANSI escape bytes as possible. The module also holds the UTF-8 helpers used throughout tinydesk and the ASCII-only fallback for terminals without box-drawing glyphs.
+The screen module is the drawing layer under the window manager. The desktop is composed into a grid of character cells (`td_buffer_t`) with clipped drawing primitives, and the diff renderer turns the difference between the new grid and the one the terminal already shows into as few ANSI escape bytes as possible. The module also holds the UTF-8 helpers used throughout TinyDesk and the ASCII-only fallback for terminals without box-drawing glyphs.
 
 Header: `include/tinydesk/td_screen.h`
 Source: `src/screen.c` (buffers, rectangles), `src/draw.c` (primitives, ASCII mode), `src/render.c` (renderer), `src/utf8.c` (UTF-8)

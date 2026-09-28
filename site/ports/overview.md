@@ -1,6 +1,6 @@
 # Architecture and porting
 
-tinydesk is a single-threaded core that turns a byte stream in (keys, mouse,
+TinyDesk is a single-threaded core that turns a byte stream in (keys, mouse,
 terminal replies) into a byte stream out (escape sequences). Everything a
 platform must provide is a four-function HAL; everything else a platform
 *may* provide (heap numbers, a file system, networking, firmware updates,

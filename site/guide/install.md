@@ -26,7 +26,7 @@ in two editions:
 | ESP32 with PSRAM and 16 MB flash (e.g. ESP32-WROVER-IE N16R8) | web installer or esptool; USB-UART at 921600 baud, screens up to 256x96 | web installer or esptool; USB-UART at 115200 baud |
 | ESP32 with 4 MB flash, no PSRAM (e.g. ESP32-WROOM-32 DevKitC) | web installer or esptool; 921600 baud; screen at most 80x25, no OTA updates, no SSH server | the same firmware as above; SSH works |
 | Linux x86_64 | `tinydesk-desktop-linux-x86_64.tar.gz` | `tinydesk-shell-linux-x86_64.tar.gz` |
-| Windows x64 | `tinydesk-desktop-windows-x64.zip` (run it in Windows Terminal) | not yet: use the Linux program in WSL, or the Desktop edition |
+| Windows x64 | `tinydesk-desktop-windows-x64.zip` (run it in Windows Terminal) | `tinydesk-shell-windows-x64.zip` (`tdsh.exe`, run it in Windows Terminal) |
 | macOS, other CPUs, other systems | build from source ([Getting started](getting-started.md)) | build from source (`cmake -DTDSH_BUILD_HOST=ON`) |
 | Another microcontroller | [port it](../ports/overview.md): four functions | port the shell's platform API |
 
@@ -121,7 +121,7 @@ release is a flat set of files:
 | --- | --- |
 | `tinydesk-<edition>-<version>-<board>-factory.bin` | the whole firmware in one image, for `write_flash 0x0` |
 | `manifest-<edition>-<board>.json` | the ESP Web Tools manifest of that board (it names `firmware/<image>`) |
-| `tinydesk-desktop-linux-x86_64.tar.gz`, `tinydesk-desktop-windows-x64.zip`, `tinydesk-shell-linux-x86_64.tar.gz` | the PC programs, with a README and the licences |
+| `tinydesk-desktop-linux-x86_64.tar.gz`, `tinydesk-desktop-windows-x64.zip`, `tinydesk-shell-linux-x86_64.tar.gz`, `tinydesk-shell-windows-x64.zip` | the PC programs, with a README and the licences |
 | `SHA256SUMS.txt`, `README.txt` | checksums and short instructions |
 
 Boards: `esp32c6`, `esp32` (PSRAM, 16 MB) and `esp32-4mb` for the Desktop

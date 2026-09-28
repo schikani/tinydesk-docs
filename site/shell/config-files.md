@@ -1,6 +1,6 @@
 # Files and settings
 
-This page lists the files tinydesk reads or writes, the NVS keys it and TinyDesk Shell use, and the flash partition tables.
+This page lists the files TinyDesk reads or writes, the NVS keys it and TinyDesk Shell use, and the flash partition tables.
 
 ## Paths
 
@@ -22,7 +22,7 @@ On the ESP32 the LittleFS partition `storage` is mounted at `/fs`. On Windows an
 | [`~/.tdshrc.tdsh`](#tdshrctdsh) | TinyDesk Shell (created with comments only), the user | TinyDesk Shell, when the local console starts a session |
 | [`/etc/board.conf`](#etcboardconf) | `board set`, `board init`, the user | TinyDesk Shell and the ports, at start-up |
 | [`~/Desktop`](#the-desktop-folder) | the desktop (created with `Welcome.txt`), the user | the desktop, every 3 s |
-| [NVS keys](#nvs-keys) | tinydesk, TinyDesk Shell | tinydesk, TinyDesk Shell |
+| [NVS keys](#nvs-keys) | TinyDesk, TinyDesk Shell | TinyDesk, TinyDesk Shell |
 | [Partition tables](#partition-tables) | the build | the bootloader |
 
 ---
@@ -114,7 +114,7 @@ subscribe kitchen/#
 `mqtt config init [file]` and the MQTT app's **Config...** button write this text (`td_mqtt_config_template`) when the file does not exist yet:
 
 ```
-# MQTT client settings (tinydesk). One setting per line; '#' starts a comment.
+# MQTT client settings (TinyDesk). One setting per line; '#' starts a comment.
 # Used by 'mqtt connect' with no broker, 'mqtt connect -c <file>' and the
 # MQTT app (type the file name, e.g. ~/mqtt.conf, as the broker).
 
@@ -210,7 +210,7 @@ The current code writes only the per-user file; nothing writes the device defaul
 
 ## ~/.tdshrc.tdsh
 
-The user's boot script, a shell script (extension `.tdsh`) with one command per line. The shell runs it when the **local console** starts a session for the user: in tinydesk, the Terminal window's console, when it starts, after a login at its `login:` prompt, and after `login <user>` there. It is not run for SSH sessions, and not when the desktop switches the console to another user (for example after a Telnet desktop login).
+The user's boot script, a shell script (extension `.tdsh`) with one command per line. The shell runs it when the **local console** starts a session for the user: in TinyDesk, the Terminal window's console, when it starts, after a login at its `login:` prompt, and after `login <user>` there. It is not run for SSH sessions, and not when the desktop switches the console to another user (for example after a Telnet desktop login).
 
 Typical content:
 
@@ -272,7 +272,7 @@ After a user switch the desktop shows the new user's folder.
 
 ## NVS keys
 
-Keys in the ESP32's `nvs` partition used by tinydesk and TinyDesk Shell:
+Keys in the ESP32's `nvs` partition used by TinyDesk and TinyDesk Shell:
 
 | Namespace | Key | Type | Owner | Content |
 |---|---|---|---|---|
@@ -284,7 +284,7 @@ Keys in the ESP32's `nvs` partition used by tinydesk and TinyDesk Shell:
 | `ush_net` | `wifi_auto` | u8 | TinyDesk Shell (unchanged) | `network autowifi`: `0` off (default), `1` on. |
 | `ush_net` | `mode` | u8 | TinyDesk Shell (unchanged) | `network mode`: auto, lan, wifi or both. |
 
-TinyDesk Shell keeps its user database and boot user in namespace `ush_users`; tinydesk does not change those.
+TinyDesk Shell keeps its user database and boot user in namespace `ush_users`; TinyDesk does not change those.
 
 Wi-Fi passwords and the host key are stored in NVS in plain form: the ports' `sdkconfig` files enable neither flash encryption nor NVS encryption.
 

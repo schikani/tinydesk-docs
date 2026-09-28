@@ -1,12 +1,12 @@
 # Shell commands
 
-This page lists the shell commands that tinydesk adds to TinyDesk Shell (`mqtt`, `modbus`, `ota`) and the shell commands that matter most on the desktop: `board`, `hwtest`, `lan`, `ssh`, `ftp` and the Wi-Fi commands. `help` in the Terminal lists all commands.
+This page lists the shell commands that TinyDesk adds to TinyDesk Shell (`mqtt`, `modbus`, `ota`) and the shell commands that matter most on the desktop: `board`, `hwtest`, `lan`, `ssh`, `ftp` and the Wi-Fi commands. `help` in the Terminal lists all commands.
 
 Commands run on the TinyDesk Shell task: in the desktop's Terminal window (the local console), or in an SSH or Telnet session. Their output goes to that session.
 
 Examples use `$` as the prompt of any user and `#` for root.
 
-"Local console" below means the desktop's Terminal window. On the ESP32 ports tinydesk runs the TinyDesk Shell console loop in its own `tdsh` task and registers it as the local console, whether the desktop is shown on the local screen or over Telnet.
+"Local console" below means the desktop's Terminal window. On the ESP32 ports TinyDesk runs the TinyDesk Shell console loop in its own `tdsh` task and registers it as the local console, whether the desktop is shown on the local screen or over Telnet.
 
 ## Overview
 
@@ -399,7 +399,7 @@ usage:
   ota check <url|file>          show the version of an update
   ota install <url|file>        install it (then: ota restart)
   ota cancel | restart | rollback
-url: http://... or https://... to a tinydesk .bin; file: a .bin on this device.
+url: http://... or https://... to a TinyDesk .bin; file: a .bin on this device.
 ```
 
 `ota` alone is `ota status`. A file is a shell path (for example `~/tinydesk.bin`, copied with SFTP, FTP or SMB). HTTPS is checked against the ESP-IDF certificate bundle; plain HTTP is allowed.
@@ -412,8 +412,8 @@ The flash has two app slots, `ota_0` and `ota_1` (see [partition tables](config-
 # ota status
 Firmware:  TinyDesk 0.1.0, built Sep 28 2026 00:45:54, ESP-IDF v5.3.1
 Running:   ota_0
-Other slot: ota_1 has version 0.2.14 (ota rollback)
-Last:      Version 0.2.15 is installed. Restart to use it.
+Other slot: ota_1 has version 0.1.0 (ota rollback)
+Last:      Version 0.1.1 is installed. Restart to use it.
 ```
 
 `Running:` adds ` (on trial: confirms itself 30 s after start-up)` for an unconfirmed update. `Other slot: ota_1 is empty` when it holds no app. `Last:` appears after a check or install in this boot.
@@ -422,13 +422,13 @@ Last:      Version 0.2.15 is installed. Restart to use it.
 
 ```
 # ota check https://example.com/tinydesk.bin
-Version 0.2.16 is available (installed: 0.2.15).
+Version 0.1.1 is available (installed: 0.1.0).
 # ota install https://example.com/tinydesk.bin
     0%  0 of 1284 KB  0 KB/s
    10%  129 of 1284 KB  92 KB/s
    ...
   100%  1284 of 1284 KB  95 KB/s
-Version 0.2.16 is installed. Restart to use it.
+Version 0.1.1 is installed. Restart to use it.
 # ota restart
 ```
 
@@ -440,7 +440,7 @@ Messages: `That is version X, the one installed.`, `ota: an update is already ru
 
 - `ota cancel` asks a running job to stop and prints `Cancelling...`.
 - `ota restart` restarts the device after 200 ms.
-- `ota rollback` goes back to the other slot and restarts: `Going back to 0.2.14 and restarting...`, or, for a firmware still on trial, `Going back to the previous version and restarting...` (it marks itself invalid). Without a usable other version: `ota: there is no previous version to go back to`.
+- `ota rollback` goes back to the other slot and restarts: `Going back to 0.1.0 and restarting...`, or, for a firmware still on trial, `Going back to the previous version and restarting...` (it marks itself invalid). Without a usable other version: `ota: there is no previous version to go back to`.
 
 ---
 
@@ -552,7 +552,7 @@ A skipped test prints `[SKIP] <name>` and does not count as a failure in `hwtest
 
 ## lan
 
-TinyDesk Shell's W6100 Ethernet command. tinydesk changes where the hardware settings live: `lan hw` shows the `eth.*` keys of the [board configuration](../guide/board-config.md), `lan hw set ...` and `lan poll <ms>` write them to `/etc/board.conf`, and a board without `eth.chip = w6100` has no Ethernet (`lan enable` says so and touches no pin). The IP settings (`lan dhcp`, `lan static`, `lan dns`) stay in NVS as before.
+TinyDesk Shell's W6100 Ethernet command. TinyDesk changes where the hardware settings live: `lan hw` shows the `eth.*` keys of the [board configuration](../guide/board-config.md), `lan hw set ...` and `lan poll <ms>` write them to `/etc/board.conf`, and a board without `eth.chip = w6100` has no Ethernet (`lan enable` says so and touches no pin). The IP settings (`lan dhcp`, `lan static`, `lan dns`) stay in NVS as before.
 
 ```
 $ lan hw
@@ -592,7 +592,7 @@ Errors: `board: permission denied: root required`, `board: keys are a-z 0-9 . _ 
 
 ## Wi-Fi networks
 
-The saved-network database (NVS `ush_wifi` / `db`, up to 12 networks) now records an owner per network (database version 2). A version 1 database is converted on first load; its networks become shared.
+The saved-network database (NVS `ush_wifi` / `db`, up to 12 networks) records an owner per network. A database from development builds, saved before owners existed, is converted on first load; its networks become shared.
 
 | Network | Added by | Who may use it | Who may change or remove it |
 |---|---|---|---|

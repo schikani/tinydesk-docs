@@ -1,6 +1,6 @@
 # Apps
 
-tinydesk ships a set of optional apps (Terminal, Files, Editor, Network, MQTT, Modbus, System Monitor, and more) and the services they share: the app registry, the desktop user session, the text clipboard, per-user settings, the taskbar clock, the Desktop folder and the log buffer. A port links the app sources it wants and registers them after `td_init()`, usually all at once with `td_apps_register_all()`.
+TinyDesk ships a set of optional apps (Terminal, Files, Editor, Network, MQTT, Modbus, System Monitor, and more) and the services they share: the app registry, the desktop user session, the text clipboard, per-user settings, the taskbar clock, the Desktop folder and the log buffer. A port links the app sources it wants and registers them after `td_init()`, usually all at once with `td_apps_register_all()`.
 
 Header: `apps/td_apps.h` (the app registry itself is in `include/tinydesk/td_wm.h`)
 Sources: `apps/*.c`; registry in `src/wm.c`

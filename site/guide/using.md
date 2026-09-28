@@ -66,17 +66,17 @@ item. See [Window manager](../api/wm.md#ui-sizes).
 
 ## Clipboard (copy and paste with the PC)
 
-* **PC to tinydesk:** paste in the terminal as usual (PuTTY: Shift+Insert or
-  Shift+right-click). tinydesk turns on *bracketed paste*, so the text
+* **PC to TinyDesk:** paste in the terminal as usual (PuTTY: Shift+Insert or
+  Shift+right-click). TinyDesk turns on *bracketed paste*, so the text
   arrives as one paste: the Editor inserts it as one undo step, a text box
   takes the first line, the Terminal types it into the shell. Up to 8 KB
   (`TD_PASTE_MAX`).
-* **tinydesk to PC:** in PuTTY, Shift+drag selects text and copies it to the
+* **TinyDesk to PC:** in PuTTY, Shift+drag selects text and copies it to the
   Windows clipboard; Shift+Alt+drag selects a rectangle (e.g. only the
   Editor's text). The Editor's Copy/Cut also sends OSC 52, which Windows
   Terminal, xterm, WezTerm and kitty put on the PC clipboard; PuTTY 0.83
   ignores it.
-* Inside tinydesk, the Editor's Ctrl+C / Ctrl+X / Ctrl+V use a clipboard
+* Inside TinyDesk, the Editor's Ctrl+C / Ctrl+X / Ctrl+V use a clipboard
   that is emptied when the desktop user changes.
 
 ## Users

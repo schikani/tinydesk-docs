@@ -37,7 +37,7 @@ fixed commit (a "detached HEAD"). To change it:
 ```bash
 cd third_party/tdsh
 git switch main                      # leave the detached HEAD
-# edit, build tinydesk, test on a board
+# edit, build TinyDesk, test on a board
 git commit -am "board: ..."          # commit in the shell repository
 git push                             # publish the shell change first
 cd ../..
@@ -46,7 +46,7 @@ git commit -m "Update TinyDesk Shell: ..."
 git push
 ```
 
-Push the shell before tinydesk: a tinydesk commit that points at an
+Push the shell before `tinydesk`: a `tinydesk` commit that points at an
 unpublished shell commit cannot be cloned by anyone else.
 
 The shell's changes are listed in its own `CHANGELOG.md`.
@@ -58,7 +58,7 @@ The shell's changes are listed in its own `CHANGELOG.md`.
 | Host build, warnings are errors | `cmake -B build -G Ninja && cmake --build build` |
 | Unit tests | `ctest --test-dir build --output-on-failure` |
 | Simulator smoke test | `build/tdsim wait=300 key=Enter wait=1500 'type=echo ok\r' wait=800 shot` |
-| Shell tests (Linux/WSL) | `cmake -S third_party/tdsh -B build-shell -G Ninja -DTDSH_BUILD_HOST=ON && cmake --build build-shell && ctest --test-dir build-shell` |
+| Shell tests (Linux, or Windows with MinGW: they build `tdsh.exe`) | `cmake -S third_party/tdsh -B build-shell -G Ninja -DTDSH_BUILD_HOST=ON && cmake --build build-shell && ctest --test-dir build-shell` |
 | ESP32-C6 firmware | `cd ports/esp32c6 && idf.py build` |
 | Classic ESP32 firmware | `cd ports/esp32 && idf.py build` |
 | Docs | update the pages listed in [Maintaining these docs](maintaining.md) and the [changelog](changelog.md) |

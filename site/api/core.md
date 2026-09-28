@@ -1,6 +1,6 @@
 # Core
 
-The core ties tinydesk together: it owns the two screen buffers, the renderer and the input parser, and runs the cooperative main loop that reads input, dispatches events, runs timers and sends the changed cells to the terminal. A port supplies only a small hardware abstraction layer (`td_hal_t`); everything else is portable C11. This page also lists every compile-time limit in `td_config.h`.
+The core ties TinyDesk together: it owns the two screen buffers, the renderer and the input parser, and runs the cooperative main loop that reads input, dispatches events, runs timers and sends the changed cells to the terminal. A port supplies only a small hardware abstraction layer (`td_hal_t`); everything else is portable C11. This page also lists every compile-time limit in `td_config.h`.
 
 Header: `include/tinydesk/td.h` (umbrella), `include/tinydesk/td_hal.h`, `include/tinydesk/td_config.h`
 Source: `src/td.c`
@@ -40,7 +40,7 @@ Example of a HAL for a byte-stream link. The `uart_*` / `board_*` functions stan
 ```c
 #include "tinydesk/td.h"
 
-/* Your driver (not part of tinydesk). */
+/* Your driver (not part of TinyDesk). */
 int uart_getc_nonblocking(void);                     /* -1 if empty */
 int uart_write_timeout(const uint8_t *buf, int len, uint32_t timeout_ms);
 uint32_t board_millis(void);
@@ -102,7 +102,7 @@ Runs the main loop: calls `td_step()` and then `hal->sleep_ms(ctx, TD_LOOP_SLEEP
 bool td_step(void);
 ```
 
-One pass of the main loop, for embedding tinydesk in another loop. It never sleeps; the caller decides how long to wait between passes (the ESP-IDF ports call `hal->sleep_ms(hal->ctx, TD_LOOP_SLEEP_MS)` themselves so they can do other work between passes). Returns false once `td_quit()` has been called.
+One pass of the main loop, for embedding TinyDesk in another loop. It never sleeps; the caller decides how long to wait between passes (the ESP-IDF ports call `hal->sleep_ms(hal->ctx, TD_LOOP_SLEEP_MS)` themselves so they can do other work between passes). Returns false once `td_quit()` has been called.
 
 A pass does the following:
 
@@ -163,7 +163,7 @@ Gotcha: a program that sends its own `ESC [ 6 n` to the *host* terminal would ha
 
 ## Link supervision
 
-tinydesk is designed for links where the far end may not be there (a USB-serial port with no terminal open, a dropped Telnet session). The renderer detects this from the HAL `write` callback:
+TinyDesk is designed for links where the far end may not be there (a USB-serial port with no terminal open, a dropped Telnet session). The renderer detects this from the HAL `write` callback:
 
 - **Dropped frame.** When `write` returns `<= 0`, the rest of the frame is discarded instead of stalling the UI. The core then counts a dropped frame, sets `link_up` to false and invalidates the front buffer so the next successful frame resends everything.
 - **While the link is down**, no normal frames are rendered and the size is not polled. Every `TD_LINK_RETRY_MS` a resync (setup sequence, size query, full redraw) is attempted. The first frame that is accepted completely sets `link_up` back to true.
@@ -244,12 +244,12 @@ Notes:
 
 ## Compile-time configuration
 
-Every static pool in the core is sized in `td_config.h`. Each value except `TD_MIN_COLS` and `TD_MIN_ROWS` is wrapped in `#ifndef`, so it can be overridden from the build system (for example `-DTD_MAX_COLS=100`). Override a value consistently for every translation unit that includes the tinydesk headers, because several of them size public structures (`td_buffer_t`, `td_renderer_t`, `td_vterm_t`).
+Every static pool in the core is sized in `td_config.h`. Each value except `TD_MIN_COLS` and `TD_MIN_ROWS` is wrapped in `#ifndef`, so it can be overridden from the build system (for example `-DTD_MAX_COLS=100`). Override a value consistently for every translation unit that includes the TinyDesk headers, because several of them size public structures (`td_buffer_t`, `td_renderer_t`, `td_vterm_t`).
 
 The host build (top-level `CMakeLists.txt`, used for the Windows and POSIX ports) uses the defaults. The ESP-IDF component (`ports/esp32c6/components/tinydesk/CMakeLists.txt`) is shared by the ESP32-C6 and classic ESP32 projects and sets `PUBLIC` compile definitions, with different screen limits depending on `CONFIG_SPIRAM`:
 
 - **Without PSRAM** (the ESP32-C6 port): the buffers live in internal RAM, which TinyDesk Shell, Wi-Fi and SSH also need, so the screen is limited to 80x25.
-- **With PSRAM** (the classic ESP32 port on an ESP32-WROVER, `CONFIG_SPIRAM=y`; its tinydesk statics are placed in PSRAM by `ports/esp32/main/extram.lf`): large enough for a maximised PuTTY.
+- **With PSRAM** (the classic ESP32 port on an ESP32-WROVER, `CONFIG_SPIRAM=y`; its TinyDesk statics are placed in PSRAM by `ports/esp32/main/extram.lf`): large enough for a maximised PuTTY.
 
 In the table, "ESP-IDF value" lists `no PSRAM / PSRAM` where they differ; "-" means the default is used.
 

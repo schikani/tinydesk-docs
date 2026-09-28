@@ -146,8 +146,8 @@ Hello root, from TinyDesk Shell on esp32.</pre>
           <a class="big alt" id="console-link" href="../console/">Open the web terminal</a>
         </div>
         <div class="ver" id="version">Reading the release...</div>
-          <div class="note" id="nomanifest" hidden>The firmware for this board is not available in this preview yet.
-            Choose another board or check back after the release is published.</div>
+          <div class="note" id="nomanifest" hidden>The firmware for this board is not on this site right now.
+            Choose another board, or download its image from the <a class="releases" href="#">releases</a>.</div>
       </div>
       <p>The installer checks the chip and writes the firmware. Choose <b>Erase device</b> for a first install,
         and when switching a board between the Desktop and the Shell edition: users, Wi-Fi networks and files then
@@ -291,10 +291,11 @@ esptool.py --chip esp32 write_flash 0x0 tinydesk-shell-VERSION-esp32-factory.bin
             '<p>Unpack it and run it in any terminal:</p>' +
             code(['tar xzf tinydesk-shell-linux-x86_64.tar.gz', 'cd tinydesk-shell-linux-x86_64', './tdsh']) +
             '<p>Its files live in <code>~/.local/share/tdsh/rootfs</code>, apart from your real home. It also runs in WSL on Windows.</p>',
-          windows: '<div class="note">TinyDesk Shell has no native Windows program yet.</div>' +
-            '<p>Choose one of these instead:</p><ul>' +
-            '<li><b>WSL</b> (Windows Subsystem for Linux): install the Linux download inside WSL.</li>' +
-            '<li><b>TinyDesk Desktop for Windows</b>: it contains the same shell in its Terminal window.</li></ul>',
+          windows: download('tinydesk-shell-windows-x64.zip', 'Download for Windows (x64)') +
+            '<p>Unzip it and start <code>tdsh.exe</code> in <b>Windows Terminal</b> (the classic console window works too; Windows 10 or later):</p>' +
+            code(['cd tinydesk-shell-windows-x64', '.\\tdsh.exe']) +
+            '<p>Its files live in <code>%LOCALAPPDATA%\\tdsh\\rootfs</code>, apart from your real files; you are your Windows user. ' +
+            'TinyDesk Desktop for Windows has the same shell in its Terminal window.</p>',
           other: '<p>Build the shell’s POSIX port from source (CMake and a C11 compiler):</p>' +
             code(['git clone https://github.com/schikani/tinydesk-shell.git', 'cd tinydesk-shell',
                   'cmake -S . -B build -DTDSH_BUILD_HOST=ON && cmake --build build', './build/tdsh_host'])

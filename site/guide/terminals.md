@@ -40,13 +40,13 @@ query, so the desktop cannot appear there. Use the web terminal instead.
 | Terminal → Features | leave "Disable xterm-style mouse reporting" **unticked** |
 
 Keys PuTTY handles itself: **Alt+F4** closes PuTTY (use **Ctrl+Q** to close a
-tinydesk window), **Shift+drag** is PuTTY's own text selection (copies to the
+TinyDesk window), **Shift+drag** is PuTTY's own text selection (copies to the
 Windows clipboard), **Shift+Insert** and **Shift+right-click** paste. PuTTY
 sends Ctrl+F4 as plain F4.
 
 ## Screen size
 
-tinydesk asks the terminal for its size every second and redraws the whole
+TinyDesk asks the terminal for its size every second and redraws the whole
 screen when it changes. The desktop uses at most the board's limit and the
 top-left corner of a bigger window:
 

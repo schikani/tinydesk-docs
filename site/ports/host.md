@@ -1,6 +1,6 @@
 # Desktop hosts (Windows, Linux)
 
-The desktop build runs tinydesk in a console window for development and
+The desktop build runs TinyDesk in a console window for development and
 testing, with TinyDesk Shell on its own thread and the Files app on a folder of the
 host file system.
 
@@ -39,8 +39,8 @@ TinyDesk Shell core builds against a compatibility header that adds per-thread
 
 Besides the shell's own commands, both PC programs have `ifconfig`, `ping`,
 `date`, `cal`, `tz`, `write`, `hostpath` and `capabilities`. On Linux they
-come from TinyDesk Shell's POSIX port; on Windows from
-`ports/windows/tdsh_win/tdsh_win_commands.c`, where `ifconfig` lists the
+come from TinyDesk Shell's POSIX port; on Windows from its Windows port,
+`ports/windows/tdsh_win_commands.c` in the shell repository, where `ifconfig` lists the
 adapters that are up (name, MAC, IPv4 and IPv6 addresses) and `ping [-c N]
 host` sends IPv4 echo requests through the IP Helper API (no `ping.exe`
 child process). Without a `~/.tdsh_tz` file, `date` uses the PC's time zone,

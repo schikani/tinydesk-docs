@@ -17,8 +17,17 @@ API may still change between minor versions.
   TLS is built in.
 * **TinyDesk Shell releases** in its own repository, from its own release
   workflow, with the same file names as the Shell edition here.
+* **TinyDesk Shell for Windows: `tdsh.exe`.** A native Windows program of
+  the Shell edition (`tinydesk-shell-windows-x64.zip`), for Windows
+  Terminal: line editing, history and Tab completion, `ifconfig` and
+  `ping`. Its files are in `%LOCALAPPDATA%\tdsh\rootfs`; the user is your
+  Windows user name. The Desktop edition's Windows program now uses the same
+  Windows port from TinyDesk Shell.
+* **Documentation:** version numbers from before the first release removed
+  from the troubleshooting page and the `ota` examples; "TinyDesk" written
+  the same way everywhere.
 
-## 0.1.0 (2026-09-26): first public release
+## 0.1.0 (2026-09-28): first public release
 
 TinyDesk 0.1.0, with TinyDesk Shell 0.1.0.
 
@@ -143,7 +152,7 @@ These builds were never published; their notes are kept for reference.
   ESP Web Tools manifest, checksums), a browser installer page
   (`docs/install/`) and a GitHub Actions release workflow.
 * Docs: Install, First login and users, Security, Troubleshooting; cover
-  page, tinydesk colours, light/dark switch, previous/next links, OS tabs;
+  page, TinyDesk colours, light/dark switch, previous/next links, OS tabs;
   pinned CDN versions.
 * `tdsim factory-root` simulates a fresh board.
 
