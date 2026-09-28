@@ -169,3 +169,11 @@ mirrors the folder (files removed locally are removed on the server);
 python tools/check_links.py
 python -m unittest discover -s tools -p "test_*.py"
 ```
+
+## Licence
+
+MIT (see `LICENSE`), like the `tinydesk` and `tinydesk-shell` repositories.
+The pages load Docsify, its plugins, xterm.js, ESP Web Tools and fonts from
+public CDNs; those keep their own licences. The firmware and programs that
+the installer serves come from the `tinydesk` releases (MIT; third-party
+parts such as wolfSSH keep theirs, see that repository).

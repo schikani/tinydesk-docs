@@ -6,7 +6,7 @@
 | --- | --- | --- |
 | [`tinydesk`](https://github.com/schikani/tinydesk) | the desktop core (`src/`, `include/`), apps, protocols, the ESP-IDF and host ports, tools | MIT |
 | [`tinydesk-shell`](https://github.com/schikani/tinydesk-shell) | TinyDesk Shell (`tdsh`): the portable shell core, its ESP-IDF services (Wi-Fi, Ethernet, SSH, FTP, SMB, users, board configuration) and its POSIX host port | MIT; third-party parts (wolfSSH GPLv3, ...) keep their licences |
-| [`tinydesk-docs`](https://github.com/schikani/tinydesk-docs) | these pages, the web installer and the web terminal (plain static files, published with GitHub Pages) | no licence file yet |
+| [`tinydesk-docs`](https://github.com/schikani/tinydesk-docs) | these pages, the web installer and the web terminal (plain static files, published with GitHub Pages) | MIT; the scripts and styles it loads from CDNs (Docsify, xterm.js, ESP Web Tools) keep their licences |
 
 `tinydesk` includes the shell as a **git submodule** at `third_party/tdsh`:
 a pointer to one exact commit of `tinydesk-shell`. The ports use it as
