@@ -5,7 +5,7 @@
   - [Board configuration (pins)](/guide/board-config.md)
   - [Getting started (build from source)](/guide/getting-started.md)
   - [Terminals and connections](/guide/terminals.md)
-  - [Web terminal](/console/index.html ':ignore')
+  - <a href="console/index.html">Web terminal</a>
   - [Using the desktop](/guide/using.md)
   - [Writing an app](/guide/writing-an-app.md)
   - [Troubleshooting](/troubleshooting.md)

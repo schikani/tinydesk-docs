@@ -1,0 +1,75 @@
+name: GitHub Pages
+
+# Builds site/ (the documentation and the web installer) and publishes it
+# with GitHub Pages. Settings -> Pages -> Source must be "GitHub Actions".
+#
+# The installer's firmware and PC programs are not in git: this workflow
+# copies them from a TinyDesk release on every run (tools/fetch_release.py
+# checks SHA256SUMS.txt first). They have to be on the site itself: the
+# browser's installer cannot fetch files from github.com.
+#
+# Runs on every push to main, and by hand (Actions -> GitHub Pages -> Run
+# workflow) after publishing a release; enter the tag there for a
+# pre-release, which GitHub's "latest release" skips.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag to put into the installer (empty: the latest published release)"
+        required: false
+        default: ""
+  # Sent by the tinydesk repository after a release, if you set that up:
+  # POST /repos/<owner>/tinydesk-docs/dispatches {"event_type": "tinydesk-release", "client_payload": {"tag": "v0.1.0"}}
+  repository_dispatch:
+    types: [tinydesk-release]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+env:
+  RELEASE_REPO: schikani/tinydesk
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check the links
+        run: python3 tools/check_links.py
+
+      - name: Put the release into the installer
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          TAG: ${{ github.event.inputs.tag || github.event.client_payload.tag || vars.INSTALLER_TAG || '' }}
+        run: |
+          if python3 tools/fetch_release.py --repo "$RELEASE_REPO" ${TAG:+--tag "$TAG"}; then
+            echo "Installer filled from ${TAG:-the latest release}."
+          else
+            echo "::warning::No release put into the installer (${TAG:-no published release yet}). The installer shows its 'not available yet' notes."
+          fi
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

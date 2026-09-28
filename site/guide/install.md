@@ -1,7 +1,7 @@
 # Install
 
 Every release has ready-made firmware and programs, so trying TinyDesk
-needs no toolchain. The **[installer page](../install/index.html ':ignore')**
+needs no toolchain. The **<a href="install/index.html">installer page</a>**
 walks through the choices below. Building from source is on
 [Getting started](getting-started.md).
 
@@ -35,7 +35,7 @@ build from source with ESP-IDF's mbedTLS for that ([TLS](../api/tls.md)).
 
 ## ESP boards from the browser
 
-Open the **[installer page](../install/index.html ':ignore')** in Chrome or
+Open the **<a href="install/index.html">installer page</a>** in Chrome or
 Edge on a computer, choose the edition and the board, plug the board in,
 press **Install** and pick its port.
 [ESP Web Tools](https://esphome.github.io/esp-web-tools/) checks the chip

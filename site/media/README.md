@@ -1,7 +1,7 @@
 # Desktop demo
 
-[Video (MP4)](desktop-demo-esp32.mp4) · [Looping GIF](desktop-demo-esp32.gif) ·
-[Poster (PNG)](desktop-demo-esp32.png)
+<a href="media/desktop-demo-esp32.mp4">Video (MP4)</a> · <a href="media/desktop-demo-esp32.gif">Looping GIF</a> ·
+<a href="media/desktop-demo-esp32.png">Poster (PNG)</a>
 
 Recorded on 28 September 2026 from a physical ESP32-WROVER-IE
 (ESP32-D0WD-V3 rev 3.0, 16 MB flash, 8 MB PSRAM) running TinyDesk 0.1.0

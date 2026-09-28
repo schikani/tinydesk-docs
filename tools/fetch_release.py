@@ -24,6 +24,7 @@ import re
 import shutil
 import sys
 import tempfile
+import urllib.error
 import urllib.request
 
 SITE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "site")
@@ -40,7 +41,15 @@ def http_get(url, accept="application/octet-stream"):
 
 def download_release(repo, tag, into):
     api = "https://api.github.com/repos/%s/releases/%s" % (repo, "tags/" + tag if tag else "latest")
-    release = json.loads(http_get(api, "application/vnd.github+json"))
+    try:
+        release = json.loads(http_get(api, "application/vnd.github+json"))
+    except urllib.error.HTTPError as e:
+        if e.code == 404:
+            # "latest" skips drafts and pre-releases; a draft is invisible here.
+            sys.exit("no published release %s in %s (a draft or pre-release needs --tag, "
+                     "and a draft must be published first); nothing was changed"
+                     % ("tagged " + tag if tag else "marked as latest", repo))
+        sys.exit("GitHub answered %d for %s; nothing was changed" % (e.code, api))
     print("release %s (%d files)" % (release.get("tag_name"), len(release.get("assets", []))))
     for asset in release.get("assets", []):
         name = asset["name"]

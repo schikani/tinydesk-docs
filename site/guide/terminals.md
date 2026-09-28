@@ -7,7 +7,7 @@ the network, and the SSH/SFTP shell.
 
 ## Web terminal (in the browser)
 
-The **[web terminal](../console/index.html ':ignore')** opens a board's serial
+The **<a href="console/index.html">web terminal</a>** opens a board's serial
 port in Chrome or Edge, with nothing to install. It is a real terminal
 ([xterm.js](https://xtermjs.org/)) talking to the port through Web Serial:
 it answers the desktop's size queries, sends the mouse and follows the

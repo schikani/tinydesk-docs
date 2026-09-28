@@ -1,9 +1,9 @@
 # TinyDesk documentation site and web installer
 
-This folder is the TinyDesk website: the documentation and the web
+This repository is the TinyDesk website: the documentation and the web
 installer, as plain static files. It is **kept apart from the code
-repositories** (`tinydesk`, `tinydesk-shell`) and is meant to be served from
-your own web server.
+repositories** (`tinydesk`, `tinydesk-shell`). GitHub Pages publishes it
+(`.github/workflows/pages.yml`); any other static HTTPS host works too.
 
 ```text
 tinydesk-site/
@@ -13,6 +13,9 @@ tinydesk-site/
     images/               the cover pictures (desktop.png, terminal.png)
     install/index.html    the web installer (editions x platforms)
     install/manifest-*.json, firmware/, downloads/    filled from a release
+  .github/workflows/
+    pages.yml             publishes site/ with GitHub Pages, release files included
+    checks.yml            link check and tool tests on every push
   tools/
     check_links.py        checks every link and #anchor between the pages
     fetch_release.py      puts a release (GitHub or local) into site/install/
@@ -27,9 +30,13 @@ Nothing is built: the server only hands out files. The pages load Docsify,
 its plugins, fonts and ESP Web Tools from public CDNs (pinned versions, see
 `site/index.html` and `site/install/index.html`).
 
-**Current status:** local preview only. The repository is private at
-`schikani/tinydesk-docs`; no public site has been deployed. The screenshots
-are real terminal captures supplied by the maintainer.
+The screenshots and the demo are real terminal captures from TinyDesk
+boards.
+
+Links that leave the Docsify pages (the installer, the web terminal, media
+files) are plain HTML links relative to the site root, such as
+`<a href="install/index.html">`, so the site works both at a domain root
+and under a GitHub project path (`/tinydesk-docs/`).
 
 ## 1. Preview on your PC
 
@@ -72,7 +79,25 @@ release in `site/install/`.
 `make_release.py` unless you pass `--allow-board-conf`; do not publish such
 images.
 
-## 3. Set up the web server (once)
+## 3. Publish with GitHub Pages
+
+1. Settings → Pages → *Build and deployment* → Source: **GitHub Actions**.
+2. Push to `main`, or run Actions → *GitHub Pages* → **Run workflow**. The
+   workflow checks the links, copies the latest published TinyDesk release
+   into `site/install/` (with `fetch_release.py`) and deploys `site/`.
+3. The site is at `https://<owner>.github.io/tinydesk-docs/`.
+
+After publishing a TinyDesk release, run the workflow again. For a
+pre-release, enter its tag (for example `v0.1.0`) in the *Run workflow*
+form: GitHub's "latest release" skips pre-releases and drafts. Without any
+release the site still deploys; the installer then shows its "not
+available yet" notes.
+
+A custom domain: Settings → Pages → *Custom domain*, plus a `CNAME` DNS
+record pointing at `<owner>.github.io`; tick *Enforce HTTPS* (the installer
+needs HTTPS).
+
+## 4. Or: your own web server
 
 Any static web server works. Requirements:
 
@@ -103,7 +128,7 @@ sudo systemctl reload caddy                                      # certificates 
 Point a DNS name at the server first (an `A`/`AAAA` record for
 `tinydesk.example.com`), and open ports 80 and 443.
 
-## 4. Publish
+### Publish to it
 
 ```bash
 SERVER=me@myserver DEST=/var/www/tinydesk tools/publish.sh       # Linux, macOS, WSL
@@ -121,19 +146,21 @@ mirrors the folder (files removed locally are removed on the server);
 
 | Task | What to do |
 | --- | --- |
-| Edit a page | change the Markdown in `site/`, preview, `python tools/check_links.py`, publish |
+| Edit a page | change the Markdown in `site/`, preview, `python tools/check_links.py`, push (Pages redeploys) |
 | Add a page | create the `.md` file and add it to `site/_sidebar.md` |
-| New release | `fetch_release.py` (or `make_release.py --site`), bump the version in `site/_coverpage.md`, add the entry to `site/changelog.md`, publish |
+| New release | bump the version in `site/_coverpage.md`, add the entry to `site/changelog.md`, push, then run the *GitHub Pages* workflow (with the tag for a pre-release); on your own server: `fetch_release.py` and publish |
 | New cover pictures | replace `site/images/desktop.png` and `terminal.png` (the `tinydesk` repository's `tools/vtshot --svg` renders a capture as SVG) |
-| Roll back a release | `fetch_release.py --repo ... --tag <older tag>`, publish |
+| Roll back a release | run the *GitHub Pages* workflow with the older tag (own server: `fetch_release.py --tag <older tag>`, publish) |
 
-## Before hosting
+## Notes
 
-Choose the public HTTPS address and replace `tinydesk.example.com` in the
-deployment templates. It is an example domain, not a running service.
-The installer already points to `schikani/tinydesk` for release assets.
-Release firmware and PC archives stay out of Git; import them with
-`tools/fetch_release.py` after reviewing the release checksums.
+* `tinydesk.example.com` in `deploy/` is an example domain for your own
+  server, not a running service.
+* The installer points to `schikani/tinydesk` for release assets
+  (`site/release-config.js`; the Pages workflow's `RELEASE_REPO`).
+* Release firmware and PC archives stay out of git. The Pages workflow and
+  `tools/fetch_release.py` check them against the release's
+  `SHA256SUMS.txt` before they reach the site.
 
 ## Checks
 

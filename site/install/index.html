@@ -89,7 +89,7 @@
     </div>
   </header>
   <main>
-    <p class="note">Developer preview for local review. Choose the exact board below.
+    <p class="note">Developer preview. Choose the exact board below.
       An Install button appears only when its firmware is available.</p>
     <h2><span class="step">1</span>Choose an edition</h2>
     <div class="editions">
@@ -194,7 +194,7 @@ esptool.py --chip esp32 write_flash 0x0 tinydesk-shell-VERSION-esp32-factory.bin
       });
       Array.prototype.forEach.call(document.querySelectorAll('a.releases'), function (a) {
         if (REPO) a.href = REPO + '/releases';
-        else { a.removeAttribute('href'); a.title = 'Public release URL pending local review'; }
+        else { a.removeAttribute('href'); a.title = 'No release has been published yet'; }
       });
 
       var NAME = { desktop: 'TinyDesk Desktop', shell: 'TinyDesk Shell' };
