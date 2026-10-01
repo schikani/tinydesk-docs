@@ -100,6 +100,7 @@ writes `dist/tinydesk-<version>/`:
 | Output | Contents |
 | --- | --- |
 | `tinydesk-<edition>-<version>-<board>-factory.bin` | one merged image for `esptool write_flash 0x0` |
+| `tinydesk-<edition>-<version>-<board>-app.bin`, `update-<edition>-<board>.json` | for a board with two app slots (an `ota_data_initial.bin` in its `flash_args`): the app image alone (what `ota install` writes) and the update feed: `version`, `date`, `image` (`firmware/<app image>`), `size`, `sha256`, `notes` (the release page). The site's `fetch_release.py` checks the feed against its image and puts both next to the installer. |
 | `manifest-<edition>-<board>.json` | [ESP Web Tools](https://esphome.github.io/esp-web-tools/) manifest for that board, `new_install_prompt_erase` on; it names the image as `firmware/<image>`. One per board because ESP Web Tools picks a build by chip family only, and two ESP32 builds could not share a manifest. |
 | `tinydesk-desktop-linux-x86_64.tar.gz`, `tinydesk-shell-linux-x86_64.tar.gz`, `tinydesk-desktop-windows-x64.zip`, `tinydesk-shell-windows-x64.zip` | with `--host-*`: the PC program, a README and the licences, in a folder of the same name |
 | `SHA256SUMS.txt`, `README.txt` | checksums of everything, short instructions |

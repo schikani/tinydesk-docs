@@ -33,6 +33,26 @@ class ReleaseValidation(unittest.TestCase):
         self.assertIn('<small>v0.2.3 · Developer', (site/'_coverpage.md').read_text(encoding='utf-8'))
         self.assertIn('Version 0.2.4\n', (site/'install'/'index.html').read_text(encoding='utf-8'))
 
+    def feed(self, **change):
+        data = (self.root/'test.bin').read_bytes()
+        feed = {'version': '0.1.4', 'image': 'firmware/test.bin', 'size': len(data),
+                'sha256': hashlib.sha256(data).hexdigest()}
+        feed.update(change)
+        (self.root/'update-desktop-esp32c6.json').write_text(json.dumps(feed))
+        self.sums()
+
+    def test_feed_valid(self):
+        self.feed()
+        verify(str(self.root))
+
+    def test_feed_wrong_checksum(self):
+        self.feed(sha256='0' * 64)
+        with self.assertRaises(SystemExit): verify(str(self.root))
+
+    def test_feed_missing_image(self):
+        self.feed(image='firmware/other.bin')
+        with self.assertRaises(SystemExit): verify(str(self.root))
+
     def test_valid(self):
         verify(str(self.root))
 

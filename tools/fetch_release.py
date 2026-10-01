@@ -9,7 +9,8 @@ It downloads (or copies) the release files, checks them against
 SHA256SUMS.txt and puts them where site/install/index.html expects them:
 
     site/install/manifest-<edition>-<board>.json   ESP Web Tools manifests
-    site/install/firmware/*.bin                    the factory images they name
+    site/install/update-<edition>-<board>.json     update feeds (Software Update reads them)
+    site/install/firmware/*.bin                    the factory images and the app images
     site/install/downloads/*.tar.gz, *.zip         the PC programs
     site/install/SHA256SUMS.txt, README.txt
 
@@ -81,6 +82,25 @@ def download_release(repo, tag, into):
             f.write(http_get(asset["browser_download_url"]))
 
 
+def check_feed(folder, name, listed):
+    """An update feed (update-<edition>-<board>.json): boards install the
+    image it names, so it must be one of the checked files, with that size
+    and checksum."""
+    with open(os.path.join(folder, name), encoding="utf-8") as f:
+        feed = json.load(f)
+    image = feed.get("image", "")
+    if not feed.get("version") or not re.fullmatch(r"firmware/[A-Za-z0-9_.-]+\.bin", image):
+        sys.exit("invalid update feed: %s; nothing was changed" % name)
+    binary = image.split("/")[-1]
+    path = os.path.join(folder, binary)
+    if binary not in listed or not os.path.exists(path):
+        sys.exit("update feed names a missing image: %s; nothing was changed" % name)
+    with open(path, "rb") as f:
+        data = f.read()
+    if feed.get("size") != len(data) or feed.get("sha256", "").lower() != hashlib.sha256(data).hexdigest():
+        sys.exit("update feed does not match its image: %s; nothing was changed" % name)
+
+
 def verify(folder):
     sums = os.path.join(folder, "SHA256SUMS.txt")
     if not os.path.exists(sums):
@@ -111,9 +131,11 @@ def verify(folder):
         sys.exit("%d file(s) do not match SHA256SUMS.txt; nothing was changed" % bad)
     manifests = []
     for name in os.listdir(folder):
-        if name.endswith((".bin", ".zip", ".tar.gz")) or name.startswith("manifest-"):
+        if name.endswith((".bin", ".zip", ".tar.gz")) or name.startswith(("manifest-", "update-")):
             if name not in listed:
                 sys.exit("unchecked release asset: %s; nothing was changed" % name)
+        if name.startswith("update-") and name.endswith(".json"):
+            check_feed(folder, name, listed)
         if name.startswith("manifest-") and name.endswith(".json"):
             manifests.append(name)
             with open(os.path.join(folder, name), encoding="utf-8") as f:
@@ -144,7 +166,7 @@ def install(folder, site):
         p = os.path.join(dest, name)
         if name in ("firmware", "downloads") and os.path.isdir(p):
             shutil.rmtree(p)
-        elif re.match(r"manifest.*\.json$|SHA256SUMS\.txt$|README\.txt$", name):
+        elif re.match(r"(manifest|update)-.*\.json$|SHA256SUMS\.txt$|README\.txt$", name):
             os.remove(p)
     os.makedirs(os.path.join(dest, "firmware"))
     os.makedirs(os.path.join(dest, "downloads"))
@@ -157,7 +179,7 @@ def install(folder, site):
         elif name.endswith((".tar.gz", ".zip")):
             shutil.copy2(src, os.path.join(dest, "downloads", name))
             counts["downloads"] += 1
-        elif name.startswith("manifest-") and name.endswith(".json"):
+        elif name.startswith(("manifest-", "update-")) and name.endswith(".json"):
             shutil.copy2(src, os.path.join(dest, name))
             counts["manifests"] += 1
         elif name in ("SHA256SUMS.txt", "README.txt"):

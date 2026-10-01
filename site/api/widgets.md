@@ -11,8 +11,18 @@ All functions must be called from the UI task. None are thread-safe.
 
 | Macro | Default | ESP32-C6 build | Classic ESP32 build (PSRAM) | Meaning |
 |---|---|---|---|---|
-| `TD_MAX_WIDGETS` | 64 | 40 | 64 | Widgets in all open windows together. |
+| `TD_MAX_WIDGETS` | 128 | 96 | 128 | Widgets in all open windows together (the last 4 only for a message box). |
 | `TD_TEXT_MAX` | 64 | 48 | 48 | Bytes of a widget's text, including the NUL. |
+
+When the pool is full a widget function returns NULL (every widget function
+accepts NULL and does nothing), and the window is marked `incomplete`, as is
+a window whose `on_tick` timer could not start (`TD_MAX_TIMERS`). The last 4
+widgets and the last window slot are kept for message boxes (`TD_WIN_MODAL`).
+A window opened by an app's `launch` that ends up incomplete, or an app
+whose window got no slot, is closed again right after `launch` returns, with the message *Too many windows are open. Close
+one, then try again.*, so no window opens with missing buttons or lists. An
+app that reads widget fields itself (`w->count`, `w->scroll`) must check the
+pointer first.
 
 The ESP values are set in `ports/esp32c6/components/tinydesk/CMakeLists.txt`; the defaults are in `include/tinydesk/td_config.h`.
 
@@ -182,6 +192,7 @@ Keys: printable ASCII characters (0x20 to 0x7E) are inserted at the cursor; Back
 
 - Only ASCII can be typed. `td_widget_set_text()` accepts any text, but the cursor works in bytes, so keep text box contents ASCII.
 - `td_widget_set_text()` on a text box moves the cursor to the end and is limited by `TD_TEXT_MAX`, not by `maxlen`.
+- For longer text, give the box a buffer of the app's own: `td_textbox_set_buffer(w, buf, cap)` (it must live as long as the window; its contents become the text and `maxlen` becomes `cap - 1`). Read a widget's text with `td_widget_text(w)`, which works either way (`w->text` is empty for such a box). Software Update's URL field uses a 200-byte buffer.
 - Text boxes in a `TD_WIN_RAW_KEYS` window get no keys.
 
 ### td_widgets_paste

@@ -159,6 +159,12 @@ shares the W6100's bus (the `eth.*` keys), otherwise also `sd.miso`,
 | `sd.miso`, `sd.mosi`, `sd.sclk`, `sd.spi_host` | the `eth.*` values | Only needed when the card is not on the Ethernet chip's bus. |
 | `sd.automount` | 0 | 1: mount the card at `/sd` at boot. |
 
+### Updates
+
+| Key | Default | Meaning |
+| --- | --- | --- |
+| `update.url` | the official feed | The update feed *Check for official updates* and the daily check read (`http://` or `https://`, a full URL to an `update-desktop-<board>.json`), for example your own server. |
+
 ### Console (classic ESP32 only)
 
 Read by `ports/esp32/main/link_uart.c` at start-up. The ESP32-C6 uses its

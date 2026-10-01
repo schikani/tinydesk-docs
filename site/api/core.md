@@ -231,7 +231,7 @@ Notes:
 ## Version
 
 ```c
-#define TD_VERSION "0.1.2"
+#define TD_VERSION "0.1.3"
 #define TD_REPO_URL "https://github.com/schikani/tinydesk"
 #define TD_SHELL_REPO_URL "https://github.com/schikani/tinydesk-shell"
 ```
@@ -291,9 +291,9 @@ In the table, "ESP-IDF value" lists `no PSRAM / PSRAM` where they differ; "-" me
 
 | Macro | Default | ESP-IDF value | Meaning |
 |---|---|---|---|
-| `TD_MAX_WINDOWS` | 12 | - | Windows open at once. See [Window manager](wm.md). |
-| `TD_MAX_WIDGETS` | 64 | 40 / 64 | Widgets across all windows. See [Widgets](widgets.md). |
-| `TD_MAX_TIMERS` | 16 | - | Timers, shared by `td_timer_start()` callers and windows with `on_tick`. See [Input](input.md#timers). |
+| `TD_MAX_WINDOWS` | 16 | - | Windows open at once; the last slot is kept for a message box. See [Window manager](wm.md). |
+| `TD_MAX_WIDGETS` | 128 | 96 / 128 | Widgets across all windows; the last 4 are kept for a message box. See [Widgets](widgets.md). |
+| `TD_MAX_TIMERS` | 24 | - | Timers, shared by `td_timer_start()` callers and windows with `on_tick`. See [Input](input.md#timers). |
 | `TD_MAX_APPS` | 16 | - | Registered apps. See [Apps API](apps.md). |
 | `TD_PATH_MAX` | 160 | 160 | Longest real path (file system root + the path the shell sees) the apps and `td_drag_item_t` handle. The PC build sets 512, because its root is `<working directory>/tinydesk_fs`. A path that does not fit is refused, never cut. |
 | `TD_TITLE_MAX` | 32 | - | Window title buffer, bytes including the NUL. |

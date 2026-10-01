@@ -7,6 +7,51 @@ that reaches users or changes an API (see [Maintaining these docs](maintaining.m
 Versions follow [Semantic Versioning](https://semver.org/): until 1.0.0 the
 API may still change between minor versions.
 
+## 0.1.3 (2026-10-01)
+
+TinyDesk 0.1.3, with TinyDesk Shell 0.1.3.
+
+* **Official updates in Software Update** (ESP32-C6, ESP32 with PSRAM):
+  *Check for official updates* reads the update feed of the newest release
+  next to the web installer, puts its image into the URL field and shows
+  its version, date, size and release page; *Install* installs it. With
+  *Check for official updates daily and notify me* (on by default) the board
+  checks 2 minutes after start-up and then daily, and says once per version
+  that a newer one is out. In the shell: `ota official`, `ota notify`. The
+  board key `update.url` reads another feed. Releases carry the app images
+  (`tinydesk-desktop-<version>-<board>-app.bin`) and the feeds
+  (`update-desktop-<board>.json`). Text boxes can hold text longer than a
+  widget's own (`td_textbox_set_buffer()`, `td_widget_text()`).
+
+Reported on Reddit with an ESP32-2432S028R (4 MB, no PSRAM):
+
+* **Crash when opening the Log Viewer with several windows open.** The
+  widget pool (shared by all windows) ran out, and the Log Viewer used the
+  list it had not got. A window that does not get all its widgets, its tick
+  timer or a window slot is now closed again with *Too many windows are
+  open. Close one, then try again.*; the last window slot and 4 widgets are
+  kept so that message can always be shown. The pools are larger: 16
+  windows, 96 widgets on boards without PSRAM (was 40) and 128 with it,
+  24 timers. Tested by opening all 13 apps one after another on all three
+  boards.
+* The cover's TinyDesk Shell picture shows a session without a version
+  number (it went out of date with every release).
+* **Software Update on the 4 MB ESP32** said "not available on this
+  platform" and that "the ESP32 build updates itself". It now says why (one
+  app slot) and how to update instead: the web installer without *Erase
+  device*. A port can give that text in `td_sysinfo_t.no_ota_text`.
+* **Empty Task Manager with many windows open:** the task list needed new
+  memory on every refresh. It now keeps its buffers, and says *Not enough
+  memory to list the tasks* when it cannot get them; the Task Manager, MQTT
+  and Modbus say *Not enough memory* instead of not opening at all.
+* **nano in the Terminal window:** it assumed an 80x24 screen, so in a
+  smaller window its status line (where Ctrl+C shows the cursor position)
+  and help lines were cut off. nano now asks the terminal for its size
+  (on the boards and in the Linux program).
+* **The factory password is named where it is needed:** `passwd` says that
+  the old password is `TinyDesk` while root still has it, and the
+  messages that keep Telnet, SSH and FTP off until it is changed name it.
+
 ## 0.1.2 (2026-09-28)
 
 TinyDesk 0.1.2, with TinyDesk Shell 0.1.2.

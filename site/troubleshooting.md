@@ -56,6 +56,19 @@ Mosquitto) for private networks, or mark the Wi-Fi network as *Private*.
 with an antenna connector (ESP32-WROVER-IE, `-IE`/`-U` variants) an external
 antenna is needed.
 
+**`passwd` says "Incorrect old password", or Telnet/SSH cannot be
+enabled.** Until it is changed, root's password is the factory password
+**`TinyDesk`** (capital T and D): type that at *Old password*, then the new
+one twice. `passwd` says so while root still has it. Remote access stays off
+until the factory password is changed.
+
+**"Too many windows are open. Close one, then try again."** The windows
+share pools of window slots, buttons and lists, and timers. Close a window
+you do not need (Ctrl+Q). **"Not enough memory. Close a window, then try
+again."** means the board's RAM is short (each open app keeps its state).
+TinyDesk 0.1.2 and older could instead restart the board, or open a window
+that stayed empty (the Task Manager), when many windows were open.
+
 **Root cannot log in over Telnet, SSH or FTP.** The factory password is
 `TinyDesk` (capital T and D) unless someone changed it. If nobody knows
 it, run `rootrecover` on the board's own console

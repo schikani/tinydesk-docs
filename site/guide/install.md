@@ -70,7 +70,7 @@ esptool.py --chip esp32 -b 460800 write_flash 0x0 tinydesk-shell-VERSION-esp32-f
 ```
 
 `VERSION` is the version in the release's file names (for example
-`tinydesk-desktop-0.1.2-esp32c6-factory.bin`).
+`tinydesk-desktop-0.1.3-esp32c6-factory.bin`).
 
 Add `-p <port>` if esptool picks the wrong one. The image covers everything
 below the file system (bootloader, partition table, NVS, the apps), so NVS
@@ -134,6 +134,7 @@ release is a flat set of files:
 | --- | --- |
 | `tinydesk-<edition>-<version>-<board>-factory.bin` | the whole firmware in one image, for `write_flash 0x0` |
 | `manifest-<edition>-<board>.json` | the ESP Web Tools manifest of that board (it names `firmware/<image>`) |
+| `tinydesk-desktop-<version>-<board>-app.bin`, `update-desktop-<board>.json` | for the boards that update themselves (`esp32c6`, `esp32`): the app image alone and the update feed that Software Update's *Check for official updates* reads |
 | `tinydesk-desktop-linux-x86_64.tar.gz`, `tinydesk-desktop-windows-x64.zip`, `tinydesk-shell-linux-x86_64.tar.gz`, `tinydesk-shell-windows-x64.zip` | the PC programs, with a README and the licences |
 | `SHA256SUMS.txt`, `README.txt` | checksums and short instructions |
 

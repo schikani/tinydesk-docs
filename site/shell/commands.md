@@ -391,11 +391,13 @@ Errors: `modbus: bad port`, `modbus: bind: ...` (port in use), `modbus: count mu
 
 Firmware update (OTA). Available on the ESP32-C6 and the classic ESP32 ports (both build `ports/esp32c6/main/ota_esp.c`). Who: **root only** (`TDSH_CMD_ROOT_ONLY`).
 
-Help line: `ota <status|check|install|cancel|restart|rollback> ...`
+Help line: `ota <status|official|notify|check|install|cancel|restart|rollback> ...`
 
 ```
 usage:
   ota status                    installed version, slots, last result
+  ota official                  look up the newest official release
+  ota notify [on|off]           daily check and notice (on: tell again)
   ota check <url|file>          show the version of an update
   ota install <url|file>        install it (then: ota restart)
   ota cancel | restart | rollback
@@ -405,6 +407,33 @@ url: http://... or https://... to a TinyDesk .bin; file: a .bin on this device.
 `ota` alone is `ota status`. A file is a shell path (for example `~/tinydesk.bin`, copied with SFTP, FTP or SMB). HTTPS is checked against the ESP-IDF certificate bundle; plain HTTP is allowed.
 
 The flash has two app slots, `ota_0` and `ota_1` (see [partition tables](config-files.md#partition-tables)). An update is written to the slot that is not running, checked (image format, chip, SHA-256) and made the boot slot. The next start runs it on trial: it confirms itself 30 s after start-up, or at a requested restart (`reboot`, `ota restart`, Start > Exit) after at least 5 s of uptime. If it crashes or resets before that, the bootloader goes back to the previous version.
+
+### ota official, ota notify
+
+`ota official` reads the update feed of the official releases, next to the
+web installer (`https://schikani.github.io/tinydesk-docs/install/update-desktop-<board>.json`,
+`<board>` `esp32c6` or `esp32`), and prints the newest release and the URL
+of its app image; `ota install <that URL>` installs it:
+
+```
+# ota official
+TinyDesk 0.1.4 is available (installed: 0.1.3). Install it?
+Newest:    TinyDesk 0.1.4 of 2026-10-02, 1864 KB
+Image:     https://schikani.github.io/tinydesk-docs/install/firmware/tinydesk-desktop-0.1.4-esp32c6-app.bin
+Notes:     https://github.com/schikani/tinydesk/releases/tag/v0.1.4
+Install:   ota install https://schikani.github.io/tinydesk-docs/install/firmware/tinydesk-desktop-0.1.4-esp32c6-app.bin
+```
+
+Other answers: `TinyDesk 0.1.3, the newest release, is installed.`, `No
+update information for this board on the server (404).`, `Cannot reach the
+update server: <esp error>`. The board key `update.url` (a full feed URL)
+reads another feed instead, for example your own server.
+
+`ota notify` shows whether the daily check is on (the default); `ota notify
+off` turns it off, `ota notify on` turns it on and forgets which version you
+were told about, so the newest one is announced again. The setting is the
+Software Update app's *Check for official updates daily and notify me*
+(NVS namespace `td_update`).
 
 ### ota status
 

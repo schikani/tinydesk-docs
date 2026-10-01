@@ -124,7 +124,7 @@ The ESP32-C6 is the tight one: TinyDesk Shell's SSH server refuses to start unle
 Rules that keep it there:
 
 * apps allocate their state when their window opens and free it on close;
-* the widget pool is `TD_MAX_WIDGETS` (40) for all windows together, so
+* the widget pool is `TD_MAX_WIDGETS` (96, about 14 KB) for all windows together, so
   apps draw static labels in `on_draw` instead of using label widgets;
 * `CONFIG_FREERTOS_PLACE_FUNCTIONS_INTO_FLASH=y` moves FreeRTOS kernel code
   out of the shared RAM (about 14 KB back);

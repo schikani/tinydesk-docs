@@ -65,6 +65,7 @@ typedef struct {
 
     const td_net_ops_t *net;
     const td_ota_ops_t *ota;   /* NULL: no updates on this platform */
+    const char *no_ota_text;   /* with ota NULL: why, and how to update instead */
 
     bool (*user_exists)(const char *user);
     bool (*authenticate)(const char *user, const char *password);
@@ -182,7 +183,8 @@ Without them the desktop always belongs to root (unless the terminal backend rep
 
 ### Filesystem, network, updates
 
-`fs`, `net` and `ota` point to the ops tables described below. Each may be `NULL`: Files and the Editor then show "No filesystem on this platform.", the Network app and the taskbar network indicator are absent or show "n/a", and Software Update says "Firmware updates are not available on this platform."
+`fs`, `net` and `ota` point to the ops tables described below. Each may be `NULL`: Files and the Editor then show "No filesystem on this platform.", the Network app and the taskbar network indicator are absent or show "n/a", and Software Update shows `no_ota_text` (one line per `
+`: why there are no updates and how to update instead; the 4 MB ESP32 port sets it), or, when that is `NULL` too, "Updates over the network are for the boards."
 
 ## Filesystem
 
@@ -333,12 +335,32 @@ typedef struct {
 } td_ota_status_t;
 
 typedef struct {
+    bool valid;                /* a check succeeded */
+    bool newer;                /* and it is newer than the installed version */
+    char version[24];
+    char date[12];             /* "2026-10-02" */
+    char url[200];             /* its app image: give it to start() */
+    uint32_t size;             /* bytes, 0 unknown */
+    char notes[128];           /* the release page */
+    char error[96];            /* why the last check failed, "" when it did not */
+    uint32_t checks;           /* finished checks so far (to see a new result) */
+} td_ota_release_t;
+
+typedef struct {
     void (*info)(td_ota_info_t *out);
     bool (*start)(const char *source, bool check_only);
     void (*status)(td_ota_status_t *out);
     void (*cancel)(void);
     void (*restart)(void);
     bool (*roll_back)(void);   /* boot the other slot's version */
+
+    /* Official releases (optional, NULL: none). */
+    bool (*check_official)(bool quiet);
+    void (*official)(td_ota_release_t *out);
+    bool (*auto_check)(void);
+    void (*set_auto_check)(bool on);
+    void (*notified)(char *out, int cap);
+    void (*set_notified)(const char *version);
 } td_ota_ops_t;
 ```
 
@@ -365,6 +387,17 @@ States:
 | `restart` | Restart the device (to run the new version). |
 | `roll_back` | Boot the other slot's version. Return `false` if that is not possible; on success it normally does not return. |
 
-When `ota` is set, all six members must be set; the app calls them without checking. The app only lets root start, cancel or roll back; everyone can look.
+Official releases (optional; Software Update shows *Check for official updates* and *Check daily and notify me* only when the port sets them):
+
+| Member | What it must do |
+|---|---|
+| `check_official` | Look up the newest official release in the background; `false` if a job is already running. With `quiet` (the daily check) `status()` stays as it is; otherwise it works like a check (`TD_OTA_CHECKING`, then a `message`). |
+| `official` | Copy the result: `valid` once a check succeeded (kept when a later one fails, which only sets `error`), `newer`, `version`, `date`, `url` (the app image, for `start()`), `size`, `notes`; `checks` counts finished checks. |
+| `auto_check`, `set_auto_check` | The *check daily and notify me* setting (default on). |
+| `notified`, `set_notified` | The version the user was last told about, so each version is announced once. |
+
+The ESP port reads `update-desktop-<board>.json` from the web installer's site (or the board key `update.url`), keeps the setting in NVS (`td_update`) and resolves the feed's `image` relative to the feed. Software Update checks 2 minutes after start-up and then every 24 hours (every 30 minutes while checks fail).
+
+When `ota` is set, the first six members must be set; the app calls them without checking. The app only lets root start, cancel or roll back; everyone can look.
 
 Implementation: `ports/esp32c6/main/ota_esp.c` (`ota_esp_ops()`), shared with the `ota` shell command. An update is written to the slot that is not running, checked (image format, chip, SHA-256) and made the boot slot. HTTPS is checked against the ESP-IDF certificate bundle. The new version runs on trial after the restart until `ota_esp_boot_ok()` confirms it (30 s after start-up, or on a requested restart); a crash before that makes the bootloader go back. The hosts have no `ota`.

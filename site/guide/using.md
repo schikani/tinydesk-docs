@@ -102,6 +102,6 @@ set the system clock. Details: [Apps API](../api/apps.md#sessions).
 | Task Manager | open windows (switch to / end) and system tasks with CPU %, state, stack |
 | Log Viewer | the system log (root) |
 | Settings | theme (Dark by default, or Classic), ASCII mode, icons, sizes, desktop pattern (light shade by default), links to Network / Date & time / Software update |
-| Software Update | install firmware from a URL or file, roll back (root) |
+| Software Update | check for official updates (and, with *notify me*, daily, with a notice when one is out), install firmware from a URL or file, roll back (root) |
 | Date & time | from the taskbar clock: clock, time zone, SNTP |
 | Counter, About | demo app; version, chip, heap, uptime and public source repository URLs |

@@ -134,7 +134,7 @@ Clearing the pointer matters: window slots are reused, and a stale pointer to a 
 
 ## RAM rules on the ESP32
 
-The ESP32-C6 has no PSRAM. Its internal RAM is shared with Wi-Fi, TinyDesk Shell and the SSH server, so the C6 build shrinks tinydesk's pools (`ports/esp32c6/components/tinydesk/CMakeLists.txt`): 40 widgets for all windows together (`TD_MAX_WIDGETS`), 48-byte widget texts (`TD_TEXT_MAX`), an 80 x 25 screen. The built-in apps follow these rules, and yours should too:
+The ESP32-C6 has no PSRAM. Its internal RAM is shared with Wi-Fi, TinyDesk Shell and the SSH server, so the C6 build shrinks tinydesk's pools (`ports/esp32c6/components/tinydesk/CMakeLists.txt`): 96 widgets for all windows together (`TD_MAX_WIDGETS`, about 144 bytes each), 48-byte widget texts (`TD_TEXT_MAX`), an 80 x 25 screen. The built-in apps follow these rules, and yours should too:
 
 1. **Allocate state while the window is open.** Put everything the window needs in one structure, `malloc` it in `launch` and `free` it in `on_close`. A closed app should cost only a few static pointers. Files, the Editor, MQTT and the Task Manager all do this.
 2. **Keep the widget count small.** Widgets come from one pool shared by every open window. Draw text that never changes (captions, column headings, hints) in `on_draw` with `td_text()` instead of creating label widgets, and use widgets only for what the user interacts with or what changes. A message box also takes widgets from the pool (one per line and button).
