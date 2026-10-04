@@ -167,7 +167,7 @@ Messages: 12 received, 3 published
 Subscribed: devices/+/status (qos 1)
 ```
 
-The first line is `not connected`, `connecting`, `logging in`, `connected` or `reconnecting`. The third line is the last status text or error. During the TLS handshake the first line also reads `not connected` (the state has no name in the command), while the third line says `TLS handshake with ...`.
+The first line is `not connected`, `connecting`, `TLS handshake`, `logging in`, `connected` or `reconnecting`. The third line is the last status text or error.
 
 ### mqtt sub, mqtt unsub
 
