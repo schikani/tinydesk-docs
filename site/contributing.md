@@ -76,11 +76,14 @@ every push and pull request.
   your own network. `.gitignore` covers the usual files; check
   `git status` before committing.
 * Core code (`src/`, `include/`) stays C11 with screen allocation at initialization and bounded paste-buffer growth at runtime and no platform headers; platform code lives in `ports/`.
-* C code is formatted with `clang-format` (version 16 or later) and the
-  `.clang-format` file in the root of `tinydesk` and `tinydesk-shell`:
-  4 spaces, braces on their own lines, one statement per line, each
-  `case` label on its own line. Run `clang-format -i` on the files you
-  change; ESP-IDF's `esp-clang` tools include it.
+* C code is formatted with clang-format 16 and the `.clang-format` file
+  in the root of `tinydesk` and `tinydesk-shell`: 4 spaces, braces on
+  their own lines, one statement per line, each `case` label on its own
+  line. Run `clang-format -i` on the files you change. One way to get
+  it: `pip install clang-format==16.0.6`. ESP-IDF 5.3.1's `esp-clang`
+  tool (installed on request: `idf_tools.py install esp-clang`) includes
+  clang-format 16.0.1. Newer versions format a few lines differently,
+  and CI checks the formatting with 16.0.6.
 
 ## Licence of contributions
 
