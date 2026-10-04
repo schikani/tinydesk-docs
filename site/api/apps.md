@@ -317,7 +317,7 @@ The time zone is per user (read with `get_tz`); the system clock and automatic n
 
 The desktop belongs to one user at a time, mirroring TinyDesk Shell: root sees the whole filesystem and has its home in `<root>/root`; any other user has `<root>/home/<user>` and cannot leave it. The Desktop folder, the Files app, the settings and the Terminal's shell all follow the current user. User accounts come from the port (`user_exists` and `authenticate` in [sysinfo.md](sysinfo.md#user-accounts)); without them the desktop is root's.
 
-The user changes when someone logs in through Start > Switch user... (added when the port has `authenticate`), when a Telnet client logs in (on the ESP32 ports, `ports/esp32c6/main/hal_mux.c` calls `td_session_switch()`), and when `login` / `logout` in the Terminal change the shell's user (checked once a second through the backend's `user` callback).
+The user changes when someone logs in through Start > Switch user... (added when the port has `authenticate`), when a Telnet client logs in (on the ESP32 ports, `ports/esp_idf/app/hal_mux.c` calls `td_session_switch()`), and when `login` / `logout` in the Terminal change the shell's user (checked once a second through the backend's `user` callback).
 
 ### td_session_init
 
@@ -397,7 +397,7 @@ The program the Terminal app talks to, for example an embedded shell running in 
 | `set_user` | no | Ask the program to continue as another existing user (after `td_session_switch(user, true)`). |
 | `ctx` | | Passed to every callback. |
 
-The ports supply this: `tdsh_bridge_esp_backend()` on the ESP32 (`ports/esp32c6/main/tdsh_bridge_esp.c`) and `td_tdsh_host_backend()` on the hosts (`ports/common/tdsh_bridge_host.c`).
+The ports supply this: `tdsh_bridge_esp_backend()` on the ESP32 (`ports/esp_idf/app/tdsh_bridge_esp.c`) and `td_tdsh_host_backend()` on the hosts (`ports/common/tdsh_bridge_host.c`).
 
 ### td_terminal_set_backend
 

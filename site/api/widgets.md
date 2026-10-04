@@ -24,7 +24,7 @@ one, then try again.*, so no window opens with missing buttons or lists. An
 app that reads widget fields itself (`w->count`, `w->scroll`) must check the
 pointer first.
 
-The ESP values are set in `ports/esp32c6/components/tinydesk/CMakeLists.txt`; the defaults are in `include/tinydesk/td_config.h`.
+The ESP values are set in `ports/esp_idf/components/tinydesk/CMakeLists.txt`; the defaults are in `include/tinydesk/td_config.h`.
 
 - When the pool is full, every creation function returns `NULL`. Nothing else reports it.
 - Creating a widget on a window that is not open also returns `NULL`.

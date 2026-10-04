@@ -116,7 +116,7 @@ sd.cs        =          # empty value: unset
 
 ### RS-485 lines (Modbus RTU `rtu1`, `rtu2`)
 
-Read by `ports/esp32c6/main/rs485.c` (both ESP ports) and `hwtest rs485`.
+Read by `ports/esp_idf/app/rs485.c` (all ESP ports) and `hwtest rs485`.
 A line exists when all four of its keys are set.
 
 | Key | Meaning |
@@ -167,7 +167,7 @@ shares the W6100's bus (the `eth.*` keys), otherwise also `sd.miso`,
 
 ### Console (classic ESP32 only)
 
-Read by `ports/esp32/main/link_uart.c` at start-up. The ESP32-C6 uses its
+Read by `ports/esp_idf/app/link_uart.c` at start-up. The ESP32-C6 uses its
 built-in USB Serial/JTAG port and has no such keys.
 
 | Key | Default | Meaning |
@@ -234,7 +234,7 @@ The API is declared in `third_party/tdsh/include/tdsh_board.h`:
 | `tdsh_board_parse(text, fn, user)` | Parse text and call `fn` for each setting (no storage). |
 
 The ESP ports pass the built-in text to the shell like this
-(`ports/esp32c6/main/main.c`):
+(`ports/esp_idf/app/main.c`):
 
 ```c
 extern const char s_board_builtin[] asm("_binary_board_builtin_conf_start");

@@ -129,7 +129,6 @@ for a 4 MB board.
 
 ```powershell
 cd ports\esp32
-$env:IDF_COMPONENT_MANAGER = "0"   # optional, see below
 idf.py set-target esp32            # once
 idf.py build
 idf.py -p COM10 -b 921600 flash
@@ -139,7 +138,6 @@ idf.py -p COM10 -b 921600 flash
 
 ```bash
 cd ports/esp32
-export IDF_COMPONENT_MANAGER=0     # optional, see below
 idf.py set-target esp32            # once
 idf.py build
 idf.py -p /dev/ttyUSB0 -b 921600 flash
@@ -148,9 +146,9 @@ idf.py -p /dev/ttyUSB0 -b 921600 flash
 <!-- tabs:end -->
 
 The shell's third-party components (LittleFS, wolfSSL, libsmb2, W6100)
-come from the ESP-IDF component manager. After the ESP32-C6 port has been
-built once, `IDF_COMPONENT_MANAGER=0` makes this port reuse its downloaded
-copies and build offline; without that setting it downloads its own.
+come from the ESP-IDF component manager: the first build of each project
+downloads them into its `managed_components` folder, at the versions
+pinned in TinyDesk Shell's `idf_component.yml`.
 
 The desktop runs on UART0 (the board's USB-UART chip) at **921600 baud
 8N1**. Opening the COM port in PuTTY resets these boards (the chip's

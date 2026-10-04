@@ -14,7 +14,7 @@ Examples use `$` as the prompt of any user and `#` for root.
 |---|---|---|---|
 | `mqtt` | `ports/common/td_proto_cmds.c` | all | any user |
 | `modbus` | `ports/common/td_proto_cmds.c` | all (RTU where the board configuration has RS-485 lines) | any user |
-| `ota` | `ports/esp32c6/main/ota_esp.c` | ESP32-C6, ESP32 | root |
+| `ota` | `ports/esp_idf/app/ota_esp.c` | ESP32-C6, ESP32 | root |
 | `ssh` | TinyDesk Shell | ESP32-C6, ESP32 | `status`, `hostkey`: any user; `hostkey new`: root; `start`, `stop`, `restart`: root, or any user on the local console |
 | `ftp` | TinyDesk Shell | ESP32-C6, ESP32 | as `ssh` (no `hostkey`) |
 | `board` | TinyDesk Shell (`tdsh_commands_espidf.c`) | ESP32-C6, ESP32 | `show`, `get`: any user; `set`, `unset`, `init`: root |
@@ -389,7 +389,7 @@ Errors: `modbus: bad port`, `modbus: bind: ...` (port in use), `modbus: count mu
 
 ## ota
 
-Firmware update (OTA). Available on the ESP32-C6 and the classic ESP32 ports (both build `ports/esp32c6/main/ota_esp.c`). Who: **root only** (`TDSH_CMD_ROOT_ONLY`).
+Firmware update (OTA). Available on the ESP32-C6 and the classic ESP32 ports (both build `ports/esp_idf/app/ota_esp.c`). Who: **root only** (`TDSH_CMD_ROOT_ONLY`).
 
 Help line: `ota <status|official|notify|check|install|cancel|restart|rollback> ...`
 

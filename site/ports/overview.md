@@ -75,8 +75,8 @@ shell on a thread).
 | `apps/` | built-in apps and `td_apps.h` |
 | `proto/` | `td_sock`, `td_mqtt` (+ config file parser), `td_modbus`, `td_tls` |
 | `ports/common/` | host start-up, stdio file system, TinyDesk Shell host bridge, `mqtt`/`modbus` shell commands |
-| `ports/esp32c6/` | ESP-IDF project for the C6 and the shared ESP code in `main/` |
-| `ports/esp32/` | ESP-IDF project for the classic ESP32 (its own link, reuses `esp32c6/main`) |
+| `ports/esp_idf/` | the ESP code shared by the ESP-IDF projects: the application (`app/`) and the TinyDesk component (`components/tinydesk/`) |
+| `ports/esp32c6/`, `ports/esp32/`, `ports/esp32-4mb/` | the ESP-IDF projects for the ESP32-C6, the ESP32 with PSRAM and the 4 MB ESP32: link, partitions, `sdkconfig.defaults` |
 | `ports/windows/`, `ports/posix/` | desktop `main.c` and console HALs |
 | `third_party/tdsh/` | TinyDesk Shell, the git submodule (repository `tinydesk-shell`) |
 | `tests/`, `tools/` | unit tests (ctest), [tools](../tools.md) |

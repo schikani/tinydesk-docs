@@ -14,7 +14,7 @@ protocols. The C tools are built with the host build (`cmake --build build`).
 | `build/lfs_migrate` (`tools/lfs_migrate.c`) | copy a LittleFS image into an image of another size |
 | `tools/make_release.py` | package a release: factory images, web installer manifests, PC programs, checksums |
 | `tools/make_source_zip.py` | the whole project (code, shell, site) in one zip |
-| `ports/esp32c6/serve_bin.py` | serve a firmware `.bin` over HTTP for OTA updates |
+| `tools/serve_bin.py` | serve a firmware `.bin` over HTTP for OTA updates |
 | `ports/esp32c6/build.ps1` | build and flash the C6 with the right ESP-IDF on Windows |
 
 ## serial_bridge.py
@@ -155,7 +155,7 @@ the OTA partition table shrank the storage partition; see the top of
 ## serve_bin.py
 
 ```bash
-python ports/esp32c6/serve_bin.py [build/tinydesk.bin] [-p 8000]
+python tools/serve_bin.py [ports/esp32c6/build/tinydesk.bin] [-p 8000]
 ```
 
 Serves a firmware image on the local network (standard library only) and

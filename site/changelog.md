@@ -7,6 +7,16 @@ that reaches users or changes an API (see [Maintaining these docs](maintaining.m
 Versions follow [Semantic Versioning](https://semver.org/): until 1.0.0 the
 API may still change between minor versions.
 
+## Unreleased
+
+* **Source layout:** the ESP code shared by the three ESP-IDF projects
+  moved out of `ports/esp32c6` into `ports/esp_idf` (the application in
+  `app/`, the TinyDesk component in `components/tinydesk/`); the board
+  projects keep only their link, partitions and settings. The ESP32 and
+  4 MB ESP32 projects download their own third-party components instead
+  of using the C6 project's (no more `IDF_COMPONENT_MANAGER=0`).
+  `serve_bin.py` is now in `tools/`. The firmware is unchanged.
+
 ## 0.1.3 (2026-10-01)
 
 TinyDesk 0.1.3, with TinyDesk Shell 0.1.3.

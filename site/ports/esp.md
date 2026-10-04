@@ -1,10 +1,13 @@
 # ESP-IDF ports (ESP32-C6, ESP32)
 
-Three ESP-IDF 5.3.1 projects share one application: `ports/esp32c6` holds
-the shared code in `main/`; `ports/esp32` builds the same files with its
-own serial link and board settings for ESP32 modules with PSRAM, and
-`ports/esp32-4mb` builds them again, with the ESP32 link, for 4 MB boards
-without PSRAM. TinyDesk Shell runs in its own FreeRTOS task
+Three ESP-IDF 5.3.1 projects share one application. The shared code is in
+`ports/esp_idf`: the application in `app/` (start-up, Telnet, network,
+OTA, RS-485, the shell bridge, the UART link) and the TinyDesk core as
+an ESP-IDF component in `components/tinydesk/`. Each board project holds
+only what differs: `ports/esp32c6` its USB Serial/JTAG link
+(`main/link_usj.c`), `ports/esp32` (ESP32 modules with PSRAM) and
+`ports/esp32-4mb` (4 MB boards without PSRAM) the UART link, and each its
+partitions, `sdkconfig.defaults` and `board.example.conf`. TinyDesk Shell runs in its own FreeRTOS task
 and appears as the Terminal app; the desktop runs in the `tinydesk` task.
 
 ## Board differences
@@ -12,7 +15,7 @@ and appears as the Terminal app; the desktop runs in the `tinydesk` task.
 | | ESP32-C6 (`ports/esp32c6`) | ESP32 with PSRAM (`ports/esp32`) | ESP32, 4 MB (`ports/esp32-4mb`) |
 | --- | --- | --- | --- |
 | Tested on | ESP32-C6-DevKitC-1 (8 MB) | ESP32-WROVER-IE N16R8 | ESP32-WROOM-32 dev board (ESP32-D0WDQ6, 4 MB) |
-| Desktop link | built-in USB Serial/JTAG (`main/link_usj.c`) | UART0, 921600 8N1, via the USB-UART chip (`ports/esp32/main/link_uart.c`, 8 KB RX buffer) | the same `link_uart.c` |
+| Desktop link | built-in USB Serial/JTAG (`ports/esp32c6/main/link_usj.c`) | UART0, 921600 8N1, via the USB-UART chip (`ports/esp_idf/app/link_uart.c`, 8 KB RX buffer) | the same `link_uart.c` |
 | CPU | 1 core, 160 MHz | 2 cores, 240 MHz | 2 cores, 240 MHz |
 | RAM | 452 KB unified (code in IRAM shares it with the heap) | 180 KB internal data RAM + 4 MB PSRAM (of 8 MB) | 180 KB internal data RAM, no PSRAM |
 | Screen limit | 80x25 | 256x96 (buffers in PSRAM) | 80x25 |
@@ -25,7 +28,7 @@ and appears as the Terminal app; the desktop runs in the `tinydesk` task.
 | Software Update, `ota` | yes | yes | no (no second slot): update by flashing |
 | Resets on port open | no | yes, with PuTTY (use the [serial bridge](../guide/terminals.md#esp32-boards-without-resets)) | the same |
 
-## Start-up (`main/main.c`)
+## Start-up (`app/main.c`)
 
 1. `quiet_usb_port()`: detach the ROM's `printf` from USB and UART0, turn
    off the ROM banner for warm resets, raise the log level from WARN to INFO.
@@ -59,8 +62,10 @@ const char *board_hostname(void);             /* the shell's host name */
 const td_mb_serial_t *board_rtu_lines(void);  /* Modbus RTU lines, or NULL */
 ```
 
-A new ESP32-family board needs only this file (plus its `sdkconfig`,
-partitions and project `CMakeLists.txt`); see `ports/esp32` for an example.
+A new ESP32-family board needs only these functions (or the existing
+`link_uart.c`), plus its `sdkconfig.defaults`, partitions and a project
+whose `main/CMakeLists.txt` includes `ports/esp_idf/app/app.cmake`; see
+`ports/esp32-4mb` for the smallest example.
 
 ### HAL and Telnet mux: `hal_mux.h`, `telnet.h`
 
@@ -159,13 +164,14 @@ port fit; SSH itself does not start there for lack of RAM.
 | `CONFIG_SPIRAM*`, `CONFIG_SPIRAM_ALLOW_BSS_SEG_EXTERNAL_MEMORY` (ESP32 with PSRAM) | PSRAM for malloc and static buffers |
 | `CONFIG_ESP_WIFI_*_BUFFER_NUM` (4 MB ESP32) | fewer Wi-Fi buffers in internal RAM |
 
-The TinyDesk component (`ports/esp32c6/components/tinydesk/CMakeLists.txt`)
+The TinyDesk component (`ports/esp_idf/components/tinydesk/CMakeLists.txt`)
 chooses the screen and widget limits from `CONFIG_SPIRAM`. Versions come
 from `PROJECT_VER` in each project's `CMakeLists.txt` (or the `TD_VERSION`
 environment variable), shown by About and Software Update.
 
 ## Building and flashing
 
-See [Getting started](../guide/getting-started.md). The two ESP32 projects
-use the C6 project's `managed_components` with `IDF_COMPONENT_MANAGER=0`.
+See [Getting started](../guide/getting-started.md). Each project downloads
+TinyDesk Shell's pinned third-party components into its own
+`managed_components` on its first build.
 Partition tables: [Configuration files](../shell/config-files.md).

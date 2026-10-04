@@ -66,7 +66,7 @@ void ui_main(void)
 }
 ```
 
-The host ports (`ports/windows/hal_win.c`, `ports/posix/hal_posix.c`) and the ESP-IDF ports (`ports/esp32c6/main/hal_mux.c`, which multiplexes the USB/UART link and Telnet) are complete working examples.
+The host ports (`ports/windows/hal_win.c`, `ports/posix/hal_posix.c`) and the ESP-IDF ports (`ports/esp_idf/app/hal_mux.c`, which multiplexes the USB/UART link and Telnet) are complete working examples.
 
 ## Lifecycle
 
@@ -246,7 +246,7 @@ Notes:
 
 Every static pool in the core is sized in `td_config.h`. Each value except `TD_MIN_COLS` and `TD_MIN_ROWS` is wrapped in `#ifndef`, so it can be overridden from the build system (for example `-DTD_MAX_COLS=100`). Override a value consistently for every translation unit that includes the TinyDesk headers, because several of them size public structures (`td_buffer_t`, `td_renderer_t`, `td_vterm_t`).
 
-The host build (top-level `CMakeLists.txt`, used for the Windows and POSIX ports) uses the defaults. The ESP-IDF component (`ports/esp32c6/components/tinydesk/CMakeLists.txt`) is shared by the ESP32-C6 and classic ESP32 projects and sets `PUBLIC` compile definitions, with different screen limits depending on `CONFIG_SPIRAM`:
+The host build (top-level `CMakeLists.txt`, used for the Windows and POSIX ports) uses the defaults. The ESP-IDF component (`ports/esp_idf/components/tinydesk/CMakeLists.txt`) is shared by the three ESP-IDF projects (ESP32-C6, ESP32, ESP32 4 MB) and sets `PUBLIC` compile definitions, with different screen limits depending on `CONFIG_SPIRAM`:
 
 - **Without PSRAM** (the ESP32-C6 port): the buffers live in internal RAM, which TinyDesk Shell, Wi-Fi and SSH also need, so the screen is limited to 80x25.
 - **With PSRAM** (the classic ESP32 port on an ESP32-WROVER, `CONFIG_SPIRAM=y`; its TinyDesk statics are placed in PSRAM by `ports/esp32/main/extram.lf`): large enough for a maximised PuTTY.

@@ -276,8 +276,8 @@ Keys in the ESP32's `nvs` partition used by TinyDesk and TinyDesk Shell:
 
 | Namespace | Key | Type | Owner | Content |
 |---|---|---|---|---|
-| `tinydesk` | `settings` | blob, 8 bytes | `ports/esp32c6/main/main.c` | Device-default desktop settings (legacy; read only). See [above](#where-the-settings-come-from). |
-| `tinydesk` | `telnet` | u8 | `ports/esp32c6/main/telnet.c` | Telnet remote desktop on port 23: `1` enabled (default when missing), `0` disabled. |
+| `tinydesk` | `settings` | blob, 8 bytes | `ports/esp_idf/app/main.c` | Device-default desktop settings (legacy; read only). See [above](#where-the-settings-come-from). |
+| `tinydesk` | `telnet` | u8 | `ports/esp_idf/app/telnet.c` | Telnet remote desktop on port 23: `1` enabled (default when missing), `0` disabled. |
 | `tdsh_ssh` | `hostkey` | blob, up to 160 bytes | TinyDesk Shell patch (`tdsh_ssh.c`) | This device's SSH host key: ECDSA P-256, DER (SEC1 with the public key, 121 bytes). Made on the first `ssh start`; deleted by `ssh hostkey new`. |
 | `ush_wifi` | `db` | blob | TinyDesk Shell (`tdsh_wifi.c`) | Saved Wi-Fi networks, version 2: magic `0x55535746`, version `2`, count, then 12 entries of `used`, SSID (33 bytes), password (65 bytes) and owner (32 bytes; empty = shared). A version 1 blob (no owners) is converted on first load. |
 | `ush_time` | `auto` | u8 | TinyDesk Shell patch (`tdsh_time.c`) | Automatic (SNTP) time: `1` on (default when missing), `0` off. |

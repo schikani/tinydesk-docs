@@ -144,7 +144,7 @@ Before each RTU request, stale bytes are drained with `read()`. The line is reop
 
 | Port | `td_mb_serial()` | Lines |
 |---|---|---|
-| ESP32-C6, ESP32 (`ports/esp32c6/main/rs485.c`) | the configured lines, or `NULL` | From the [board configuration](../guide/board-config.md): line N exists when `rs485.N.uart`, `.tx`, `.rx` and `.de` are all set. Named from them, e.g. `RS485-1 (UART1: TX16 RX17 DE18)`. |
+| ESP32-C6, ESP32 (`ports/esp_idf/app/rs485.c`) | the configured lines, or `NULL` | From the [board configuration](../guide/board-config.md): line N exists when `rs485.N.uart`, `.tx`, `.rx` and `.de` are all set. Named from them, e.g. `RS485-1 (UART1: TX16 RX17 DE18)`. |
 | Windows, Linux | not set | none |
 
 On the ESP ports, each line runs its UART in RS-485 half-duplex mode (the UART drives DE through its RTS pin). A UART driver is installed only while its line is open; a closed line holds DE low so it never drives its bus. Because the driver is released after 15 s idle, `hwtest rs485` can use the pins again. If `hwtest` holds the UART, `open` fails with `...: <esp error> (in use by hwtest?)`.

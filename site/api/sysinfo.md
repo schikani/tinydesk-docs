@@ -3,7 +3,7 @@
 `td_sysinfo_t` is how a port tells TinyDesk about the platform and hands it optional services: memory and task figures, the system clock and time zone, a filesystem, network control, firmware updates, user accounts and settings storage. The apps only reach the platform through this structure, so they build unchanged on the ESP32 and on the desktop hosts. Every member may be left `NULL` (or 0); the apps then show "n/a", hide a control or show a message.
 
 Header: `include/tinydesk/td_sysinfo.h` (included by `tinydesk/td.h`)
-Sources: `src/td.c` (storage); implementations in `ports/esp32c6/main/main.c`, `net_esp.c`, `ota_esp.c` (also used by the classic ESP32 port in `ports/esp32`), `ports/common/host_main.c` and `ports/common/td_fs_stdio.c`
+Sources: `src/td.c` (storage); implementations in `ports/esp_idf/app/main.c`, `net_esp.c`, `ota_esp.c` (shared by the ESP-IDF projects `ports/esp32c6`, `ports/esp32` and `ports/esp32-4mb`), `ports/common/host_main.c` and `ports/common/td_fs_stdio.c`
 
 ## Threading
 
@@ -81,7 +81,7 @@ typedef struct {
 
 ### Who implements what
 
-| Member | ESP32-C6 / ESP32 (`ports/esp32c6/main/main.c`) | Windows / Linux / macOS host (`ports/common/host_main.c`) |
+| Member | ESP32-C6 / ESP32 (`ports/esp_idf/app/main.c`) | Windows / Linux / macOS host (`ports/common/host_main.c`) |
 |---|---|---|
 | `platform` | board name (`board_platform()`) | `"Windows host"`, `"Linux host"`, `"macOS host"` |
 | `chip` | model, revision and cores from `esp_chip_info()` | `"host CPU"` |
@@ -306,7 +306,7 @@ Network control for the Network app and the taskbar indicator. Every call return
 | `telnet_enable` | no | Turn remote desktop over Telnet on or off. |
 | `telnet_peer` | no | Address of the connected Telnet client, or `NULL`. |
 
-Implementation: `ports/esp32c6/main/net_esp.c` (`net_esp_ops()`), on top of TinyDesk Shell's Wi-Fi and Ethernet modules (so the Network app and TinyDesk Shell share saved networks) and `telnet.c`. Scans and connects run in a worker task with a 6 KiB stack; one job at a time. The host build has no network backend unless one is installed with `td_host_use_net()` (declared in `ports/common/td_host_hal.h`).
+Implementation: `ports/esp_idf/app/net_esp.c` (`net_esp_ops()`), on top of TinyDesk Shell's Wi-Fi and Ethernet modules (so the Network app and TinyDesk Shell share saved networks) and `telnet.c`. Scans and connects run in a worker task with a 6 KiB stack; one job at a time. The host build has no network backend unless one is installed with `td_host_use_net()` (declared in `ports/common/td_host_hal.h`).
 
 ## Software update
 
@@ -400,4 +400,4 @@ The ESP port reads `update-desktop-<board>.json` from the web installer's site (
 
 When `ota` is set, the first six members must be set; the app calls them without checking. The app only lets root start, cancel or roll back; everyone can look.
 
-Implementation: `ports/esp32c6/main/ota_esp.c` (`ota_esp_ops()`), shared with the `ota` shell command. An update is written to the slot that is not running, checked (image format, chip, SHA-256) and made the boot slot. HTTPS is checked against the ESP-IDF certificate bundle. The new version runs on trial after the restart until `ota_esp_boot_ok()` confirms it (30 s after start-up, or on a requested restart); a crash before that makes the bootloader go back. The hosts have no `ota`.
+Implementation: `ports/esp_idf/app/ota_esp.c` (`ota_esp_ops()`), shared with the `ota` shell command. An update is written to the slot that is not running, checked (image format, chip, SHA-256) and made the boot slot. HTTPS is checked against the ESP-IDF certificate bundle. The new version runs on trial after the restart until `ota_esp_boot_ok()` confirms it (30 s after start-up, or on a requested restart); a crash before that makes the bootloader go back. The hosts have no `ota`.
