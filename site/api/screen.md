@@ -184,7 +184,7 @@ Draws the NUL-terminated UTF-8 string `str` on row `y`, starting at column `x`, 
 | `max_cols` | (`td_textn` only) Maximum columns to write; `<= 0` writes nothing. |
 | `fg`, `bg`, `attr` | Colours and attributes for every cell written. |
 
-Returns the number of columns the text occupies (up to `max_cols`), counting cells that were clipped away, so the return value can be used for layout. Control characters, including `\n` and `\t`, are drawn as a single space: the functions never wrap. There is no ellipsis or padding; clear the rest of a field with `td_fill()` if needed. For the display width of a string, use `td_utf8_len()`.
+Returns the number of columns the text occupies (up to `max_cols`), counting cells that were clipped away, so the return value can be used for layout. Control characters, including `\n` and `\t`, are drawn as a single space: the functions never wrap. There is no ellipsis or padding; clear the rest of a field with `td_fill()` if needed. For the display width of a string, use `td_utf8_len()`; for a column of a fixed width, `td_utf8_pad()`.
 
 ### td_box
 
@@ -318,6 +318,25 @@ int td_utf8_len(const char *s);
 ```
 
 Returns the number of code points in the NUL-terminated string `s` (each malformed byte counts as one). Because every code point is one column, this is also the width `td_text()` gives the string.
+
+### td_utf8_pad
+
+```c
+int td_utf8_pad(char *out, size_t cap, const char *s, int cols);
+```
+
+Makes a column of exactly `cols` cells for a list or a table: copies `s` (NULL counts as "") into `out`, at most `cols` code points and never part of one, then pads with spaces to `cols` code points. Returns the bytes written, without the NUL.
+
+- Code points are counted as the screen draws them (`td_utf8_next()`): a malformed byte is one cell, and is copied as it is, so the copy draws the same cells. Strings that are not UTF-8 at all, such as Wi-Fi network names (arbitrary bytes), line up too.
+- Use it instead of `printf`'s `%-32s` or `%.32s`, which count bytes: every extra byte of a multibyte character makes such a column one cell short, and `%.Ns` can cut a character in half.
+- When `out` fills up it stops early, at a character boundary, and still NUL-terminates; with `cap == 0` nothing is written. Room for `cols` cells needs `cols` + the string's length in bytes + 1.
+- Double-width characters (CJK, emoji) count as one cell, as everywhere in TinyDesk (see *Cells and buffers* above); a terminal that draws them two columns wide shifts the rest of that row.
+
+```c
+char ssid[80];
+td_utf8_pad(ssid, sizeof(ssid), ap->ssid, 32);   /* the Network window's SSID column */
+snprintf(item, sizeof(item), "%s %s", ssid, bars);
+```
 
 ### Streaming decoder
 

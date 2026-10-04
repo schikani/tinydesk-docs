@@ -9,6 +9,19 @@ API may still change between minor versions.
 
 ## Unreleased
 
+* **Non-ASCII names line up:** Wi-Fi network names in the Network window,
+  file names in Files and window titles in the Task Manager with
+  characters such as é, ☕ or 中 no longer push the columns after them out
+  of line (the signal bars and *secured* overlapped the name). The columns
+  were padded by bytes; they are now padded by characters, as the screen
+  draws them, and a long name is cut at a character boundary. New
+  `td_utf8_pad()`. Double-width characters still take one cell.
+* **Shell: long command lines** that wrap over several rows are redrawn
+  correctly while you type, delete or move the cursor (TinyDesk Shell);
+  the Terminal window tells the shell its width.
+* **Contributing:** a pre-commit hook formats the C files of every commit
+  with clang-format 16.0.6 (`pip install pre-commit`, then
+  `pre-commit install`), and tinydesk-shell has a `CONTRIBUTING.md`.
 * **Editor:** a file keeps its name when it is saved. On Linux the
   name was lost after the first Ctrl+S, so the next one asked for a
   name again ([#2](https://github.com/schikani/tinydesk/pull/2)).

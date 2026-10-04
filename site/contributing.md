@@ -64,7 +64,8 @@ The shell's changes are listed in its own `CHANGELOG.md`.
 | Docs | update the pages listed in [Maintaining these docs](maintaining.md) and the [changelog](changelog.md) |
 
 GitHub Actions runs the host build, the tests and both firmware builds on
-every push and pull request.
+every push and pull request. For changes to the shell alone, tinydesk-shell
+has its own [CONTRIBUTING.md](https://github.com/schikani/tinydesk-shell/blob/main/CONTRIBUTING.md).
 
 ## Rules that keep the project portable
 
@@ -79,11 +80,23 @@ every push and pull request.
 * C code is formatted with clang-format 16 and the `.clang-format` file
   in the root of `tinydesk` and `tinydesk-shell`: 4 spaces, braces on
   their own lines, one statement per line, each `case` label on its own
-  line. Run `clang-format -i` on the files you change. One way to get
-  it: `pip install clang-format==16.0.6`. ESP-IDF 5.3.1's `esp-clang`
-  tool (installed on request: `idf_tools.py install esp-clang`) includes
-  clang-format 16.0.1. Newer versions format a few lines differently,
-  and CI checks the formatting with 16.0.6.
+  line. Set up formatting once:
+
+  ```bash
+  pip install pre-commit
+  pre-commit install
+  ```
+
+  After this, every commit formats the C files you changed with the right
+  clang-format version automatically. To format manually instead:
+  `pip install clang-format==16.0.6`, then `clang-format -i <files>`. If the
+  format check fails on your pull request, don't worry: I can fix it before
+  merging.
+
+  CI checks the formatting with clang-format 16.0.6, the version the hook
+  uses; newer versions format a few lines differently. ESP-IDF 5.3.1's
+  `esp-clang` tool (installed on request: `idf_tools.py install esp-clang`)
+  includes clang-format 16.0.1.
 
 ## Licence of contributions
 
