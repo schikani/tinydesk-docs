@@ -76,8 +76,11 @@ every push and pull request.
   your own network. `.gitignore` covers the usual files; check
   `git status` before committing.
 * Core code (`src/`, `include/`) stays C11 with screen allocation at initialization and bounded paste-buffer growth at runtime and no platform headers; platform code lives in `ports/`.
-* Match the style of the file you edit; `clang-format` with the repository's
-  settings where present.
+* C code is formatted with `clang-format` (version 16 or later) and the
+  `.clang-format` file in the root of `tinydesk` and `tinydesk-shell`:
+  4 spaces, braces on their own lines, one statement per line, each
+  `case` label on its own line. Run `clang-format -i` on the files you
+  change; ESP-IDF's `esp-clang` tools include it.
 
 ## Licence of contributions
 

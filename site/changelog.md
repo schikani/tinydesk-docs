@@ -16,6 +16,10 @@ API may still change between minor versions.
   4 MB ESP32 projects download their own third-party components instead
   of using the C6 project's (no more `IDF_COMPONENT_MANAGER=0`).
   `serve_bin.py` is now in `tools/`. The firmware is unchanged.
+* **Code style:** the C sources of TinyDesk and TinyDesk Shell are
+  formatted with `clang-format` (`.clang-format` in each repository):
+  braces on their own lines, one statement per line. Layout only; the
+  code is unchanged.
 
 ## 0.1.3 (2026-10-01)
 
