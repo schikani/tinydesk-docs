@@ -1,4 +1,4 @@
-# TinyDesk <small>v0.1.3 · Developer preview</small>
+# TinyDesk <small>v0.1.4 · Developer preview</small>
 
 > A tiny board. A real desktop. Inside your terminal.
 

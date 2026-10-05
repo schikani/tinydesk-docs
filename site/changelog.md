@@ -7,7 +7,9 @@ that reaches users or changes an API (see [Maintaining these docs](maintaining.m
 Versions follow [Semantic Versioning](https://semver.org/): until 1.0.0 the
 API may still change between minor versions.
 
-## Unreleased
+## 0.1.4 (2026-10-05)
+
+TinyDesk 0.1.4, with TinyDesk Shell 0.1.4.
 
 * **Non-ASCII names line up:** Wi-Fi network names in the Network window,
   file names in Files and window titles in the Task Manager with

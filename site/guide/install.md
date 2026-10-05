@@ -70,7 +70,7 @@ esptool.py --chip esp32 -b 460800 write_flash 0x0 tinydesk-shell-VERSION-esp32-f
 ```
 
 `VERSION` is the version in the release's file names (for example
-`tinydesk-desktop-0.1.3-esp32c6-factory.bin`).
+`tinydesk-desktop-0.1.4-esp32c6-factory.bin`).
 
 Add `-p <port>` if esptool picks the wrong one. The image covers everything
 below the file system (bootloader, partition table, NVS, the apps), so NVS
