@@ -396,6 +396,15 @@ Official releases (optional; Software Update shows *Check for official updates* 
 | `auto_check`, `set_auto_check` | The *check daily and notify me* setting (default on). |
 | `notified`, `set_notified` | The version the user was last told about, so each version is announced once. |
 
+Board settings (optional, `NULL`: none):
+
+| Member | What it must do |
+|---|---|
+| `unsaved_settings` | How many board settings (pins) only the running firmware has, built in from its `board.conf`; 0 when none. Firmware built without them, such as an official release, would start without them. |
+| `save_settings` | Save them on the device, so any firmware keeps them; `false` on failure. Describes the outcome in `msg` (`cap` bytes). |
+
+When both are set and `unsaved_settings()` is above 0, Software Update asks before *Install*: *Save and install*, *Install anyway* or *Cancel*. The ESP port uses `tdsh_board_unsaved()` and `tdsh_board_save_builtin()` (`board save`).
+
 The ESP port reads `update-desktop-<board>.json` from the web installer's site (or the board key `update.url`), keeps the setting in NVS (`td_update`) and resolves the feed's `image` relative to the feed. Software Update checks 2 minutes after start-up and then every 24 hours (every 30 minutes while checks fail).
 
 When `ota` is set, the first six members must be set; the app calls them without checking. The app only lets root start, cancel or roll back; everyone can look.

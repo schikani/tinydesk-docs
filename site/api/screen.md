@@ -338,6 +338,17 @@ td_utf8_pad(ssid, sizeof(ssid), ap->ssid, 32);   /* the Network window's SSID co
 snprintf(item, sizeof(item), "%s %s", ssid, bars);
 ```
 
+### td_utf8_copy, td_utf8_skip
+
+```c
+int td_utf8_copy(char *out, size_t cap, const char *s, int cols);
+const char *td_utf8_skip(const char *s, int cols);
+```
+
+`td_utf8_copy()` is `td_utf8_pad()` without the padding: it copies at most `cols` code points of `s` (NULL counts as ""), never part of one, and stops early when `out` is full. Use it instead of `%.Ns` and of `snprintf(out, cap, "%s", s)` when the text may be cut, so a character is never cut in half; pass `INT_MAX` for `cols` to cut only to fit the buffer. It always NUL-terminates when `cap` > 0 and returns the bytes written. Window titles, `td_widget_set_text()`, desktop icon labels and the Delete and Save questions use it.
+
+`td_utf8_skip()` returns the part of `s` after its first `cols` code points (the end of the string if it is shorter), counted as `td_utf8_next()` does: for example the second line of a label.
+
 ### Streaming decoder
 
 ```c

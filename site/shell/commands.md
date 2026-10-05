@@ -17,7 +17,7 @@ Examples use `$` as the prompt of any user and `#` for root.
 | `ota` | `ports/esp_idf/app/ota_esp.c` | ESP32-C6, ESP32 | root |
 | `ssh` | TinyDesk Shell | ESP32-C6, ESP32 | `status`, `hostkey`: any user; `hostkey new`: root; `start`, `stop`, `restart`: root, or any user on the local console |
 | `ftp` | TinyDesk Shell | ESP32-C6, ESP32 | as `ssh` (no `hostkey`) |
-| `board` | TinyDesk Shell (`tdsh_commands_espidf.c`) | ESP32-C6, ESP32 | `show`, `get`: any user; `set`, `unset`, `init`: root |
+| `board` | TinyDesk Shell (`tdsh_commands_espidf.c`) | ESP32-C6, ESP32 | `show`, `get`: any user; `set`, `unset`, `init`, `save`: root |
 | `hwtest` | TinyDesk Shell | ESP32-C6, ESP32 (pins from the board configuration) | root |
 | `lan` | TinyDesk Shell | ESP32-C6, ESP32 (only with `eth.chip = w6100`) | as in TinyDesk Shell |
 | `networks`, `wifiadd`, `wifiremove`, `wificonnect` | TinyDesk Shell | ESP32-C6, ESP32 | any user, with per-user networks |
@@ -399,7 +399,8 @@ usage:
   ota official                  look up the newest official release
   ota notify [on|off]           daily check and notice (on: tell again)
   ota check <url|file>          show the version of an update
-  ota install <url|file>        install it (then: ota restart)
+  ota install [-f] <url|file>   install it (then: ota restart); -f: even with
+                                board settings that only this firmware has
   ota cancel | restart | rollback
 url: http://... or https://... to a TinyDesk .bin; file: a .bin on this device.
 ```
@@ -460,6 +461,8 @@ Version 0.1.1 is available (installed: 0.1.0).
 Version 0.1.1 is installed. Restart to use it.
 # ota restart
 ```
+
+When the board has settings that only the running firmware has (see [Board configuration](../guide/board-config.md?id=updates)), `ota install` refuses and says how many: save them with `board save`, or install anyway with `ota install -f <url|file>`.
 
 The command waits until the job ends, printing progress every 10 %. The job runs in its own task (`td_ota`), so `ota cancel` from another session or the Software Update app stops it (`Cancelled. The installed version is unchanged.`); Ctrl+C does not.
 

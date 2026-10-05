@@ -16,6 +16,18 @@ API may still change between minor versions.
   were padded by bytes; they are now padded by characters, as the screen
   draws them, and a long name is cut at a character boundary. New
   `td_utf8_pad()`. Double-width characters still take one cell.
+* **Board settings and official updates:** firmware built with your own
+  `board.conf` has its pins built in; an official update, built without
+  them, would start without Ethernet, SD card or RS-485. `board save`
+  copies them to `/etc/board.conf`; Software Update offers *Save and
+  install* before it installs, and `ota install` refuses until they are
+  saved (`-f` installs anyway). `board show` says when settings come only
+  from the firmware.
+* **No character cut in half:** desktop icon labels (and the glyph of an
+  item without its own), window titles, text set on widgets and the
+  Delete and Save questions shorten names by whole characters; a
+  non-ASCII name showed a broken character or was cut too short. New
+  `td_utf8_copy()` and `td_utf8_skip()`.
 * **Shell: long command lines** that wrap over several rows are redrawn
   correctly while you type, delete or move the cursor (TinyDesk Shell);
   the Terminal window tells the shell its width.

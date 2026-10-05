@@ -90,6 +90,7 @@ Board configuration: 4 settings (device file /etc/board.conf)
 | `board set <key> <value>` | root | write the key to `/etc/board.conf` (other lines and comments stay as they are) |
 | `board unset <key>` | root | remove the key from `/etc/board.conf`; the built-in value (if any) applies again |
 | `board init` | root | create `/etc/board.conf` from the built-in settings; refuses to overwrite an existing file |
+| `board save` | root | copy every setting that comes only from the firmware (`built-in`) into `/etc/board.conf`, keeping the file's own lines; see [Updates](#updates) |
 
 A line `eth.chip =` (empty value) in `/etc/board.conf` unsets a built-in
 key for this device.
@@ -160,6 +161,23 @@ shares the W6100's bus (the `eth.*` keys), otherwise also `sd.miso`,
 | `sd.automount` | 0 | 1: mount the card at `/sd` at boot. |
 
 ### Updates
+
+Official firmware is built without any board settings. If your pins are
+built into the firmware you run (your own `board.conf`; `board show`
+lists them as `built-in` and says so), firmware built without them, such
+as an official update, starts without them: no Ethernet, SD card or
+RS-485 until they are set again. Save them on the board first:
+
+```text
+# board save
+Saved 19 built-in settings in /etc/board.conf.
+```
+
+Software Update asks before it installs (*Save and install*, *Install
+anyway*, *Cancel*), and `ota install` refuses until they are saved
+(`ota install -f` installs anyway). After `board save` the file decides:
+a later change to your `board.conf` needs `board set` (or removing the
+key from `/etc/board.conf`) to take effect.
 
 | Key | Default | Meaning |
 | --- | --- | --- |
