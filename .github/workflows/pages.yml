@@ -37,7 +37,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  RELEASE_REPO: schikani/tinydesk
+  RELEASE_REPO: tinydesk-project/tinydesk
 
 jobs:
   build:
